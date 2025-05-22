@@ -42,7 +42,7 @@ public:
 
 protected:
 	// reimplemented (iinsp::TSupplierCompWrap)
-	virtual int ProduceObject(imod::TModelWrap<imeas::CSimpleSamplesSequence32>& result) const;
+	virtual iinsp::ISupplier::WorkStatus ProduceObject(imod::TModelWrap<imeas::CSimpleSamplesSequence32>& result) const;
 
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();

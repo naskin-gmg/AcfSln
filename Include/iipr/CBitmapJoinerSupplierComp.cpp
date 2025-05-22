@@ -36,7 +36,7 @@ const i2d::ITransformation2d* CBitmapJoinerSupplierComp::GetLogTransform() const
 
 // reimplemented (iinsp::TSupplierCompWrap)
 
-int CBitmapJoinerSupplierComp::ProduceObject(ProductType& result) const
+iinsp::ISupplier::WorkStatus CBitmapJoinerSupplierComp::ProduceObject(ProductType& result) const
 {
 	if (!m_bitmapsProviderCompPtr.IsValid()){
 		return WS_FAILED;
@@ -86,7 +86,7 @@ bool CBitmapJoinerSupplierComp::EnsureBitmapCreated(ProductType& result) const
 	}
 
 	if (!result.second.IsValid()){
-		result.second.SetPtr(m_bitmapCompFact.CreateInstance());
+		result.second.FromUnique(m_bitmapCompFact.CreateInstance());
 	}
 
 	return result.second.IsValid();

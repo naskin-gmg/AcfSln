@@ -48,7 +48,7 @@ public:
 	CFileAcquisitionComp();
 
 	// reimplemented (iproc::IProcessor)
-	virtual int DoProcessing(
+	virtual iproc::IProcessor::TaskState DoProcessing(
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,
 				istd::IChangeable* outputPtr,

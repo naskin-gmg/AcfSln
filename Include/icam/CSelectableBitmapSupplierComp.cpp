@@ -37,7 +37,7 @@ const i2d::ICalibration2d* CSelectableBitmapSupplierComp::GetCalibration() const
 
 // reimplemented (iinsp::TSupplierCompWrap)
 
-int CSelectableBitmapSupplierComp::ProduceObject(ProductType& result) const
+iinsp::ISupplier::WorkStatus CSelectableBitmapSupplierComp::ProduceObject(ProductType& result) const
 {
 	result.first.Reset();
 	result.second.Reset();
@@ -61,7 +61,9 @@ int CSelectableBitmapSupplierComp::ProduceObject(ProductType& result) const
 	}
 
 	if (!result.second.IsValid()){
-		result.second.SetPtr(m_bitmapCompFact.CreateInstance());
+		iimg::IBitmapUniquePtr bitmapInstancePtr = m_bitmapCompFact.CreateInstance();
+
+		result.second.FromUnique(bitmapInstancePtr);
 		if (!result.second.IsValid()){
 			SendErrorMessage(0, "Bitmap instance could not be created");
 

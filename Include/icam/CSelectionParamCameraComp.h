@@ -32,15 +32,15 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (iipr::IBitmapAcquisition)
-	virtual istd::CIndex2d GetBitmapSize(const iprm::IParamsSet* paramsPtr) const override;
+	virtual istd::CIndex2d GetBitmapSize(const iprm::IParamsSet* paramsPtr) const;
 
 	// reimplemented (iproc::IProcessor)
-	virtual int GetProcessorState(const iprm::IParamsSet* paramsPtr) const override;
+	virtual iproc::IProcessor::ProcessorState GetProcessorState(const iprm::IParamsSet* paramsPtr) const;
 	virtual bool AreParamsAccepted(
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,
 				const istd::IChangeable* outputPtr) const override;
-	virtual int DoProcessing(
+	virtual iproc::IProcessor::TaskState DoProcessing(
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,
 				istd::IChangeable* outputPtr,
@@ -50,7 +50,7 @@ public:
 				const istd::IPolymorphic* inputPtr,
 				istd::IChangeable* outputPtr,
 				ibase::IProgressManager* progressManagerPtr = NULL) override;
-	virtual int WaitTaskFinished(
+	virtual iproc::IProcessor::TaskState WaitTaskFinished(
 					int taskId = -1,
 					double timeoutTime = -1,
 					bool killOnTimeout = true) override;
@@ -66,15 +66,15 @@ protected:
 		JoinParamsSet(const iprm::IParamsSet* origParamsPtr, const iprm::IParamsSet* selectedParamsPtr);
 
 		// reimplemented (iprm::IParamsSet)
-		virtual Ids GetParamIds(bool editableOnly = false) const override;
-		virtual const iser::ISerializable* GetParameter(const QByteArray& id) const override;
-		virtual iser::ISerializable* GetEditableParameter(const QByteArray& id) override;
+		virtual Ids GetParamIds(bool editableOnly = false) const;
+		virtual const iser::ISerializable* GetParameter(const QByteArray& id) const;
+		virtual iser::ISerializable* GetEditableParameter(const QByteArray& id);
 
 		// reimplemented (iser::IObject)
-		virtual QByteArray GetFactoryId() const override;
+		virtual QByteArray GetFactoryId() const;
 
 		// reimplemented (iser::ISerializable)
-		virtual bool Serialize(iser::IArchive& archive) override;
+		virtual bool Serialize(iser::IArchive& archive);
 
 	private:
 		const iprm::IParamsSet* m_origParamsPtr;

@@ -1,9 +1,9 @@
 #include <icam/CExposureParamsComp.h>
 
 
+// ACF includes
 #include <istd/CChangeNotifier.h>
 #include <istd/TRange.h>
-
 #include <iser/CArchiveTag.h>
 
 
@@ -12,7 +12,7 @@ namespace icam
 
 
 CExposureParamsComp::CExposureParamsComp()
-:	m_shutterTime(0.001), m_delayTime(0), m_eenDelayTime(0)
+	:m_shutterTime(0.001), m_delayTime(0), m_eenDelayTime(0), m_gain(0)
 {
 }
 
@@ -34,7 +34,7 @@ double CExposureParamsComp::GetShutterTime() const
 bool CExposureParamsComp::SetShutterTime(double time)
 {
 	if (m_exposureConstraintsCompPtr.IsValid()){
-		istd::CRange range = m_exposureConstraintsCompPtr->GetShutterTimeRange();
+		istd::CRange range = m_exposureConstraintsCompPtr->GetShutterTimeRange(GetCurrentCameraIndex());
 
 		if (!range.Contains(time)){
 			return false;
@@ -60,7 +60,7 @@ double CExposureParamsComp::GetDelayTime() const
 bool CExposureParamsComp::SetDelayTime(double time)
 {
 	if (m_exposureConstraintsCompPtr.IsValid()){
-		istd::CRange range = m_exposureConstraintsCompPtr->GetDelayTimeRange();
+		istd::CRange range = m_exposureConstraintsCompPtr->GetDelayTimeRange(GetCurrentCameraIndex());
 
 		if (!range.Contains(time)){
 			return false;
@@ -86,7 +86,7 @@ double CExposureParamsComp::GetEenDelay() const
 bool CExposureParamsComp::SetEenDelay(double time)
 {
 	if (m_exposureConstraintsCompPtr.IsValid()){
-		istd::CRange range = m_exposureConstraintsCompPtr->GetEenDelayRange();
+		istd::CRange range = m_exposureConstraintsCompPtr->GetEenDelayRange(GetCurrentCameraIndex());
 		if (!range.Contains(time)){
 			return false;
 		}
@@ -102,6 +102,36 @@ bool CExposureParamsComp::SetEenDelay(double time)
 }
 
 
+int CExposureParamsComp::GetGainValue() const
+{
+	return m_gain;
+}
+
+
+bool CExposureParamsComp::SetGainValue(int gain)
+{
+	if (m_exposureConstraintsCompPtr.IsValid()) {
+		istd::CIntRange range = m_exposureConstraintsCompPtr->GetGainRange(GetCurrentCameraIndex());
+		if (!range.Contains(gain)) {
+			return false;
+		}
+	}
+
+	if (gain!= m_gain) {
+		istd::CChangeNotifier notifier(this);
+
+		m_gain = gain;
+	}
+
+	return true;
+}
+
+int CExposureParamsComp::GetCurrentCameraIndex() const
+{
+	return m_cameraSelectionCompPtr.IsValid() ? m_cameraSelectionCompPtr->GetSelectedOptionIndex() : 0;
+}
+
+
 // reimplemented (iser::ISerializable)
 
 bool CExposureParamsComp::Serialize(iser::IArchive& archive)
@@ -109,6 +139,7 @@ bool CExposureParamsComp::Serialize(iser::IArchive& archive)
 	static iser::CArchiveTag shutterTimeTag("ShutterTime", "Shutter time in seconds", iser::CArchiveTag::TT_LEAF);
 	static iser::CArchiveTag delayTimeTag("DelayTime", "Delay of shutter in seconds", iser::CArchiveTag::TT_LEAF);
 	static iser::CArchiveTag eenDelayTimeTag("EenDelayTime", "Delay of exposure enabled signal in seconds", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag gainTag("Gain", "Gain in dB", iser::CArchiveTag::TT_LEAF);
 
 	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this);
 	Q_UNUSED(notifier);
@@ -127,6 +158,10 @@ bool CExposureParamsComp::Serialize(iser::IArchive& archive)
 	retVal = retVal && archive.Process(m_eenDelayTime);
 	retVal = retVal && archive.EndTag(eenDelayTimeTag);
 
+	retVal = retVal && archive.BeginTag(gainTag);
+	retVal = retVal && archive.Process(m_gain);
+	retVal = retVal && archive.EndTag(gainTag);
+
 	return retVal;
 }
 
@@ -141,6 +176,27 @@ void CExposureParamsComp::OnComponentCreated()
 
 	Q_ASSERT(m_defaultShutterTimeAttrPtr.IsValid());	// isObligatory is set
 	m_shutterTime = *m_defaultShutterTimeAttrPtr;
+
+	Q_ASSERT(m_defaultGainAttrPtr.IsValid());	// isObligatory is set
+	m_gain = *m_defaultGainAttrPtr;
+
+	if (m_cameraSelectionModelCompPtr.IsValid()) {
+		m_cameraSelectionModelCompPtr->AttachObserver(this);
+	}
+}
+
+void CExposureParamsComp::OnComponentDestroyed()
+{
+	if (m_cameraSelectionModelCompPtr.IsValid()) {
+		m_cameraSelectionModelCompPtr->DetachObserver(this);
+	}
+
+	BaseClass::OnComponentDestroyed();
+}
+
+void CExposureParamsComp::OnUpdate(const istd::IChangeable::ChangeSet& /*changeSet*/)
+{
+	istd::CChangeNotifier notifier(this);
 }
 
 

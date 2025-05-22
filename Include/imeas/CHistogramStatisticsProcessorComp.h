@@ -31,16 +31,16 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (iproc::IProcessor)
-	virtual int DoProcessing(
+	virtual iproc::IProcessor::TaskState DoProcessing(
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,
 				istd::IChangeable* outputPtr,
-				ibase::IProgressManager* progressManagerPtr = NULL);
+				ibase::IProgressManager* progressManagerPtr = NULL) override;
 
 	// reimplemented (imeas::IDataSequenceStatisticsProcessor)
-	virtual int CalculateDataStatistics(
+	virtual iproc::IProcessor::TaskState CalculateDataStatistics(
 				const imeas::IDataSequence& dataSequence,
-				imeas::IDataSequenceStatistics& dataStatistics) const;
+				imeas::IDataSequenceStatistics& dataStatistics) const override;
 
 private:
 	bool CalculateChannelStatistics(const imeas::IDataSequence& input, int inputIndex, imeas::CSimpleDataStatistics& dataStatistics) const;

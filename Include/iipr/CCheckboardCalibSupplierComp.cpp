@@ -316,7 +316,7 @@ bool CCheckboardCalibSupplierComp::CalculateCalibration(const iimg::IBitmap& ima
 
 // reimplemented (iinsp::TSupplierCompWrap)
 
-int CCheckboardCalibSupplierComp::ProduceObject(ProductType& result) const
+iinsp::ISupplier::WorkStatus CCheckboardCalibSupplierComp::ProduceObject(ProductType& result) const
 {
 	if (!m_bitmapProviderCompPtr.IsValid()){
 		return WS_FAILED;

@@ -59,7 +59,7 @@ const i2d::ICalibration2d* CPositionFromImageSupplierComp::GetCalibration() cons
 
 // reimplemented (iinsp::TSupplierCompWrap)
 
-int CPositionFromImageSupplierComp::ProduceObject(ProductType& result) const
+iinsp::ISupplier::WorkStatus CPositionFromImageSupplierComp::ProduceObject(ProductType& result) const
 {
 	result.ResetFeatures();
 

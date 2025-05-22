@@ -3,12 +3,9 @@
 
 // Qt includes
 #include <QtCore/QtGlobal>
-#if QT_VERSION >= 0x050000
 #include <QtCore/QtMath>
-#else
-#include <QtCore/qmath.h>
-#endif
 #include <QtGui/QPainter>
+#include <QElapsedTimer>
 
 // ACF includes
 #include <istd/CChangeNotifier.h>
@@ -54,12 +51,11 @@ void CPerspectiveCalibrationShape::Draw(QPainter& drawContext) const
 	const i2d::ICalibration2d* calibPtr = GetCalibration();
 	if (calibPtr == NULL){
 		BaseClass::Draw(drawContext);
-
 		return;
 	}
 
 	if (IsDisplayConnected()){
-		iview::IViewRulersAccessor*  rulersAccessorPtr = NULL;
+		iview::IViewRulersAccessor* rulersAccessorPtr = NULL;
 		iview::IVisualCalibrationInfo* calibInfoPtr = NULL;
 		iview::IDisplay* displayPtr = GetDisplayPtr();
 		while (displayPtr != NULL){
@@ -71,6 +67,7 @@ void CPerspectiveCalibrationShape::Draw(QPainter& drawContext) const
 			}
 			displayPtr = displayPtr->GetParentDisplayPtr();
 		}
+
 		if (calibInfoPtr != NULL){
 			if (!calibInfoPtr->IsGridInMm()){
 				BaseClass::Draw(drawContext);
@@ -129,6 +126,19 @@ void CPerspectiveCalibrationShape::Draw(QPainter& drawContext) const
 				if (argumentAreaPtr != NULL){
 					bounds = *argumentAreaPtr;
 				}
+				else {
+					double viewScale = GetViewToScreenTransform().GetDeformMatrix().GetApproxScale();
+
+					if (viewScale <= 0)
+						viewScale = 1;
+					else if (viewScale > 1)
+						//viewScale = qSqrt(viewScale);
+						viewScale = 2;
+					else
+						viewScale = 1 / viewScale;
+
+					bounds = i2d::CRectangle(-1000 * viewScale, -1000 * viewScale, 10000 * viewScale, 10000 * viewScale);
+				}
 
 				i2d::CVector2d viewLeftCenter;
 				calibPtr->GetInvPositionAt(bounds.GetLeftCenter(), viewLeftCenter);
@@ -143,7 +153,7 @@ void CPerspectiveCalibrationShape::Draw(QPainter& drawContext) const
 
 				double viewScale = GetViewToScreenTransform().GetDeformMatrix().GetApproxScale();
 
-				int levels[2];
+				int levels[2] = { 2,20 };
 				double minGridDistance = calibInfoPtr->GetMinGridDistance() * perspScale / viewScale;
 				double grid = qPow(10.0, qCeil(log10(minGridDistance)));
 				if (grid * 0.5 < minGridDistance){
@@ -152,12 +162,15 @@ void CPerspectiveCalibrationShape::Draw(QPainter& drawContext) const
 				}
 				else{
 					grid *= 0.5;
-					levels[0] = 2;
-					levels[1] = 20;
 				}
 
 				int firstIndex = int(qFloor(bounds.GetLeft() / grid));
 				int lastIndex = int(qCeil(bounds.GetRight() / grid));
+
+				const int STEP_FACTOR = 1000;	// no more than N lines
+				int step = 1;
+				if (lastIndex - firstIndex > STEP_FACTOR)
+					step = (lastIndex - firstIndex) / STEP_FACTOR;
 
 				drawContext.save();
 				drawContext.setPen(colorSchema.GetPen(iview::IColorSchema::SP_GUIDELINE3));
@@ -165,8 +178,10 @@ void CPerspectiveCalibrationShape::Draw(QPainter& drawContext) const
 				const QPen& level0Pen = colorSchema.GetPen(iview::IColorSchema::SP_GUIDELINE2);
 				const QPen& level1Pen = colorSchema.GetPen(iview::IColorSchema::SP_GUIDELINE1);
 
-				int index;
-				for (index = firstIndex; index <= lastIndex; ++index){
+				QElapsedTimer tm;
+				tm.start();
+
+				for (int index = firstIndex; index <= lastIndex; index += step){
 					i2d::CLine2d logLine(index * grid, bounds.GetTop(), index * grid, bounds.GetBottom());
 					QPointF point1;
 					QPointF point2;
@@ -213,12 +228,20 @@ void CPerspectiveCalibrationShape::Draw(QPainter& drawContext) const
 							}
 						}
 					}
+
+					// force break after 100 ms
+					if (tm.elapsed() > 100)
+						break;
 				}
 
 				firstIndex = int(qFloor(bounds.GetTop() / grid));
 				lastIndex = int(qCeil(bounds.GetBottom() / grid));
 
-				for (index = firstIndex; index <= lastIndex; ++index){
+				step = 1;
+				if (lastIndex - firstIndex > STEP_FACTOR)
+					step = (lastIndex - firstIndex) / STEP_FACTOR;
+
+				for (int index = firstIndex; index <= lastIndex; index += step){
 					i2d::CLine2d logLine(bounds.GetLeft(), index * grid, bounds.GetRight(), index * grid);
 					QPointF point1;
 					QPointF point2;
@@ -265,6 +288,10 @@ void CPerspectiveCalibrationShape::Draw(QPainter& drawContext) const
 							}
 						}
 					}
+
+					// force break after 200 ms
+					if (tm.elapsed() > 200)
+						break;
 				}
 
 				drawContext.restore();

@@ -20,6 +20,7 @@ public:
 	void SetSupportedProperties(const iprm::IOptionsList* featureListPtr);
 
 	// reimplemented (IBlobFilterParams)
+	virtual bool IsValueAcceptedByFilter(const int filterIdx, const double& value) const override;
 	virtual const iprm::IOptionsList* GetSupportedProperties() const override;
 	virtual bool IsFiltersEnabled() const override;
 	virtual void SetFiltersEnabled(bool enabled = true) override;
@@ -36,7 +37,7 @@ public:
 	// reimplemented (i2d::ICalibrationProvider)
 	virtual bool Serialize(iser::IArchive& archive) override;
 
-private:
+protected:
 	typedef QList<Filter> FilterList;
 	FilterList m_filters;
 

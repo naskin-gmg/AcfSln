@@ -31,7 +31,7 @@ public:
 
 protected:
 	// reimplemented (iipr::CMultiLineSupplierCompBase)
-	virtual int ProduceObject(ProductType& result) const;
+	virtual iinsp::ISupplier::WorkStatus ProduceObject(ProductType& result) const;
 
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();

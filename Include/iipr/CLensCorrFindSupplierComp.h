@@ -99,7 +99,7 @@ protected:
 	void UpdateHoughSpace(const i2d::CVector2d& point1, const i2d::CVector2d& point2, double weight, const i2d::CVector2d& imageCenter, ialgo::CHoughSpace2d& space) const;
 
 	// reimplemented (iinsp::TSupplierCompWrap)
-	virtual int ProduceObject(ProductType& result) const override;
+	virtual iinsp::ISupplier::WorkStatus ProduceObject(ProductType& result) const;
 
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated() override;

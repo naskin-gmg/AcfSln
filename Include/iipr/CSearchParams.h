@@ -37,15 +37,18 @@ public:
 	virtual void SetScaleEnabled(bool isScaleEnabled);
 
 	// reimplemented (iser::ISerializable)
-	virtual bool Serialize(iser::IArchive & archive) override;
+	virtual bool Serialize(iser::IArchive& archive) override;
+
+	// reimplemented (istd::IChangeable)
+	virtual bool CopyFrom(const istd::IChangeable& object, istd::IChangeable::CompatibilityMode /*mode*/ = CM_WITHOUT_REFS) override;
 
 protected:
 	istd::CRange m_angleRange;
 	istd::CRange m_scaleRange;
-	int m_nominalModelsCount;
-	double m_minScore;
-	bool m_isRotationEnabled;
-	bool m_isScaleEnabled;
+	int m_nominalModelsCount = -1;
+	double m_minScore = 0.6;
+	bool m_isRotationEnabled = false;
+	bool m_isScaleEnabled = false;
 };
 
 

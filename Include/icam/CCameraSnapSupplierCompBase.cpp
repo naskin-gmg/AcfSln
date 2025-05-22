@@ -1,4 +1,6 @@
 #include <icam/CCameraSnapSupplierCompBase.h>
+#include <icam/CCameraCommand.h>
+
 
 
 namespace icam
@@ -18,8 +20,8 @@ int CCameraSnapSupplierCompBase::DoSnap(const iprm::IParamsSet* snapParamsPtr, i
 		return iproc::IProcessor::TS_INVALID;
 	}
 
-
-	return m_bitmapAcquisitionCompPtr->DoProcessing(snapParamsPtr, NULL, &snapBitmap);
+	icam::CCameraCommand getLastImage(icam::ICameraCommand::CI_READ_LAST_IN_BUFFER);
+	return m_bitmapAcquisitionCompPtr->DoProcessing(snapParamsPtr, &getLastImage, &snapBitmap);
 }
 
 

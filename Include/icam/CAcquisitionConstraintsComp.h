@@ -41,15 +41,18 @@ public:
 		I_ASSIGN(m_maxDelayTimeAttrPtr, "MaxDelayTime", "Maximal delay time for this device", true, 0.0);
 		I_ASSIGN(m_minEenDelayAttrPtr, "MinEenDelay", "Minimal EEN-delay for this device", true, 0.0);
 		I_ASSIGN(m_maxEenDelayAttrPtr, "MaxEenDelay", "Maximal EEN-delay for this device", true, 0.0);
+		I_ASSIGN(m_minGainAttrPtr, "MinGain", "Minimal gain for this device", true, 0);
+		I_ASSIGN(m_maxGainAttrPtr, "MaxGain", "Maximal gain for this device", true, 0);
 	I_END_COMPONENT;
 
 	// reimplemented (icam::IExposureConstraints)
-	virtual bool IsTriggerModeSupported(int triggerMode) const;
+	virtual bool IsTriggerModeSupported(int triggerMode) const override;
 
 	// reimplemented (icam::IExposureConstraints)
-	virtual istd::CRange GetShutterTimeRange() const;
-	virtual istd::CRange GetDelayTimeRange() const;
-	virtual istd::CRange GetEenDelayRange() const;
+	virtual istd::CRange GetShutterTimeRange(int cameraIndex) const override;
+	virtual istd::CRange GetDelayTimeRange(int cameraIndex) const override;
+	virtual istd::CRange GetEenDelayRange(int cameraIndex) const override;
+	virtual istd::CIntRange GetGainRange(int cameraIndex) const override;
 
 private:
 	I_ATTR(bool, m_isNoAcquisitionSupportedAttrPtr);
@@ -64,6 +67,8 @@ private:
 	I_ATTR(double, m_maxDelayTimeAttrPtr);
 	I_ATTR(double, m_minEenDelayAttrPtr);
 	I_ATTR(double, m_maxEenDelayAttrPtr);
+	I_ATTR(int, m_minGainAttrPtr);
+	I_ATTR(int, m_maxGainAttrPtr);
 };
 
 

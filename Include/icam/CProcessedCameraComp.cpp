@@ -25,12 +25,12 @@ int CProcessedCameraComp::BeginTask(
 		m_preProcessorCompPtr->BeginTask(workingParamsPtr, inputPtr, outputPtr, progressManagerPtr);
 	}
 
-	int retVal = TS_OK;
+	int retVal = -1;
 	if (m_slaveCameraCompPtr.IsValid()){
 		retVal = BaseClass::BeginTask(paramsPtr, inputPtr, outputPtr, progressManagerPtr);
 	}
 
-	if (m_postProcessorCompPtr.IsValid()){
+	if (m_postProcessorCompPtr.IsValid() && BaseClass::GetTaskState(retVal) == TS_OK){
 		m_postProcessorCompPtr->InitProcessor(workingParamsPtr);
 
 		m_postProcessorCompPtr->BeginTask(workingParamsPtr, outputPtr, outputPtr, progressManagerPtr);
@@ -40,7 +40,7 @@ int CProcessedCameraComp::BeginTask(
 }
 
 
-int CProcessedCameraComp::DoProcessing(
+iproc::IProcessor::TaskState CProcessedCameraComp::DoProcessing(
 		const iprm::IParamsSet* paramsPtr,
 		const istd::IPolymorphic* inputPtr,
 		istd::IChangeable* outputPtr,
@@ -56,12 +56,12 @@ int CProcessedCameraComp::DoProcessing(
 		m_preProcessorCompPtr->DoProcessing(workingParamsPtr, inputPtr, outputPtr, progressManagerPtr);
 	}
 
-	int retVal = TS_OK;
+	iproc::IProcessor::TaskState retVal = TS_OK;
 	if (m_slaveCameraCompPtr.IsValid()){
 		retVal = BaseClass::DoProcessing(paramsPtr, inputPtr, outputPtr, progressManagerPtr);
 	}
 
-	if (m_postProcessorCompPtr.IsValid()){
+	if (m_postProcessorCompPtr.IsValid() && retVal == TS_OK){
 		m_postProcessorCompPtr->InitProcessor(workingParamsPtr);
 
 		m_postProcessorCompPtr->DoProcessing(workingParamsPtr, outputPtr, outputPtr, progressManagerPtr);

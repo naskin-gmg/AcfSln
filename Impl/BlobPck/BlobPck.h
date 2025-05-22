@@ -11,6 +11,7 @@
 #include <iblob/CPreciseBlobProcessorComp.h>
 
 #include <iblobgui/CBlobFilterParamsGuiComp.h>
+#include <iblobgui/CBlobFeaturesSupplierGuiComp.h>
 
 
 /**
@@ -24,6 +25,7 @@ typedef icomp::TModelCompWrap<iblob::CBlobFilterParamsComp> BlobFilterParams;
 typedef iblob::CPreciseBlobProcessorComp PreciseBlobProcessor;
 
 typedef iblobgui::CBlobFilterParamsGuiComp BlobFilterParamsGui;
+typedef iblobgui::CBlobFeaturesSupplierGuiComp BlobFeaturesSupplierGui;
 
 
 } // namespace BlobPck

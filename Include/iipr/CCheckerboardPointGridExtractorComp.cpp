@@ -63,14 +63,14 @@ struct LinesConsumer: virtual public iipr::IFeaturesConsumer
 
 // reimplemented (iipr::IImageToFeatureProcessor)
 
-int CCheckerboardPointGridExtractorComp::DoExtractFeatures(
+iproc::IProcessor::TaskState CCheckerboardPointGridExtractorComp::DoExtractFeatures(
 			const iprm::IParamsSet* paramsPtr,
 			const iimg::IBitmap& image,
 			IFeaturesConsumer& results,
 			ibase::IProgressManager* /*progressManagerPtr*/)
 {
 	LinesConsumer processedLines;
-	if (m_lineFinderCompPtr->DoExtractFeatures(paramsPtr, image, processedLines) != iproc::IProcessor::TS_OK){
+	if (m_lineFinderCompPtr->DoExtractFeatures(paramsPtr, image, processedLines) != iproc::IProcessor::TS_OK) {
 		SendErrorMessage(0, QObject::tr("LineFinder is undefined"));
 		return TS_INVALID;
 	}
@@ -356,7 +356,7 @@ int CCheckerboardPointGridExtractorComp::DoExtractFeatures(
 
 // reimplemented (iproc::IProcessor)
 
-int CCheckerboardPointGridExtractorComp::DoProcessing(
+iproc::IProcessor::TaskState CCheckerboardPointGridExtractorComp::DoProcessing(
 	const iprm::IParamsSet* paramsPtr,
 	const istd::IPolymorphic* inputPtr,
 	istd::IChangeable* outputPtr,

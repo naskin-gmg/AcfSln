@@ -7,7 +7,7 @@ namespace icam
 
 // protected methods
 
-iimg::IBitmap* CSnapBitmapSupplierComp::CreateBitmap() const
+iimg::IBitmapUniquePtr CSnapBitmapSupplierComp::CreateBitmap() const
 {
 	if (m_bitmapCompFact.IsValid()){
 		return m_bitmapCompFact.CreateInstance();

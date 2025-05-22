@@ -18,6 +18,7 @@
 #include <iipr/CExtremumCaliperProcessorComp.h>
 #include <iipr/CExtremumCaliperSupplierComp.h>
 #include <iipr/CLineProjectionProcessorComp.h>
+#include <iipr/CBilinearLineProjectionProcessorComp.h>
 #include <iipr/CCircleFindProcessorComp.h>
 #include <iipr/CDelegatedBitmapSupplierComp.h>
 #include <iipr/CProcessedBitmapSupplierComp.h>
@@ -31,6 +32,7 @@
 #include <iipr/CImageHistogramProcessorComp.h>
 #include <iipr/CCircleFinderParamsComp.h>
 #include <iipr/CImagePolarTransformProcessorComp.h>
+#include <iipr/CImageCopyProcessorComp.h>
 #include <iipr/CImageCropProcessorComp.h>
 #include <iipr/CImageCropDecalibrateProcessorComp.h>
 #include <iipr/CImageInterpolationParamsComp.h>
@@ -73,6 +75,8 @@
 #include <iipr/CColorBalanceProcessorComp.h>
 #include <iipr/CSearchConstraintsComp.h>
 
+#include <iipr/CSelectProcessedBitmapSupplierComp.h>
+
 /**
 	System-independent image processing package.
 */
@@ -89,6 +93,7 @@ typedef iipr::CExtremumCaliperProcessorComp ExtremumCaliperProcessor;
 typedef icomp::TModelCompWrap<
 			iipr::CExtremumCaliperSupplierComp> ExtremumCaliperSupplier;
 typedef iipr::CLineProjectionProcessorComp LineProjectionProcessor;
+typedef iipr::CBilinearLineProjectionProcessorComp BilinearLineProjectionProcessor;
 typedef iipr::CCircleFindProcessorComp CircleFindProcessor;
 typedef icomp::TMakeComponentWrap<
 			imod::TModelWrap<iipr::CFeaturesContainer>,
@@ -107,6 +112,7 @@ typedef icomp::TModelCompWrap<iipr::TProcessedBitmapSupplierComp<iimg::CBitmap> 
 typedef iipr::CRectDerivativeProcessorComp RectDerivativeProcessor;
 typedef iipr::CImageHistogramProcessorComp ImageHistogramProcessor;
 typedef iipr::CImagePolarTransformProcessorComp ImagePolarTransformProcessor;
+typedef iipr::CImageCopyProcessorComp ImageCopyProcessor;
 typedef iipr::CImageCropProcessorComp ImageCropProcessor;
 typedef iipr::CImageCropDecalibrateProcessorComp ImageCropDecalibrateProcessor;
 typedef iipr::CRingPatternGeneratorComp RingPatternGenerator;
@@ -154,6 +160,9 @@ typedef icomp::TModelCompWrap<iipr::CPerspectiveCalibrationSupplierComp> Perspec
 
 typedef iipr::CColorBalanceProcessorComp ColorBalanceProcessor;
 typedef iipr::CSearchConstraintsComp SearchConstraints;
+
+
+typedef icomp::TModelCompWrap<iipr::CSelectProcessedBitmapSupplierComp> SelectProcessedBitmapSupplier;
 
 } // namespace IprPck
 

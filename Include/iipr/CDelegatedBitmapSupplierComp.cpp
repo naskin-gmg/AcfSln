@@ -45,7 +45,7 @@ const i2d::ICalibration2d* CDelegatedBitmapSupplierComp::GetCalibration() const
 
 // reimplemented (iinsp::ISupplier)
 
-int CDelegatedBitmapSupplierComp::GetWorkStatus() const
+iinsp::ISupplier::WorkStatus CDelegatedBitmapSupplierComp::GetWorkStatus() const
 {
 	if (m_bitmapSupplierCompPtr.IsValid()){
 		return m_bitmapSupplierCompPtr->GetWorkStatus();
@@ -101,7 +101,7 @@ void CDelegatedBitmapSupplierComp::ClearWorkResults()
 }
 
 
-const ilog::IMessageContainer* CDelegatedBitmapSupplierComp::GetWorkMessages(int containerType) const
+const ilog::IMessageContainer* CDelegatedBitmapSupplierComp::GetWorkMessages(MessageContainerType containerType) const
 {
 	if (m_bitmapSupplierCompPtr.IsValid()){
 		return m_bitmapSupplierCompPtr->GetWorkMessages(containerType);

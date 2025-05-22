@@ -26,10 +26,14 @@ public:
 				icam::IExposureParams> BaseClass;
 
 	I_BEGIN_COMPONENT(CExposureParamsGuiComp);
+		I_ASSIGN(m_exposureLimitAttrPtr, "ExposureLimit", "Limit Exposure if necessary, [usec]", false, 1000);
+		I_ASSIGN(m_fixedLabelSizeAttrPtr, "FixedLabelSize", "Fix label sizes to the value", false, 100);
+		I_ASSIGN(m_hideUnusedParamsAttrPtr, "HideUnusedParams", "By default, unused params are hidden. If set to false, they will be greyed out.", true, true);
 	I_END_COMPONENT;
 
 protected:
 	// reimplemented (iqtgui::TGuiObserverWrap)
+	virtual void OnGuiCreated();
 	virtual void OnGuiModelAttached();
 	virtual void OnGuiModelDetached();
 	virtual void UpdateModel() const;
@@ -37,6 +41,14 @@ protected:
 
 protected Q_SLOTS:
 	void OnParamsChanged(double value);
+	void OnParamsChanged(int value);
+
+private:
+	void AdjustVisibility();
+
+	I_ATTR(int, m_exposureLimitAttrPtr);
+	I_ATTR(int, m_fixedLabelSizeAttrPtr);
+	I_ATTR(bool, m_hideUnusedParamsAttrPtr);
 };
 
 

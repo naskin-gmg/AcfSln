@@ -140,7 +140,7 @@ void CColorPatternComparatorComp::OnModelChanged(int /*modelId*/, const istd::IC
 
 // reimplemented (iinsp::TSupplierCompWrap)
 
-int CColorPatternComparatorComp::ProduceObject(ProductType& result) const
+iinsp::ISupplier::WorkStatus CColorPatternComparatorComp::ProduceObject(ProductType& result) const
 {
 	result.SetValues(imath::CVarVector());
 

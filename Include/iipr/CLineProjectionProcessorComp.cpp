@@ -256,7 +256,7 @@ bool CLineProjectionProcessorComp::DoProjection(
 
 // reimplemented (iproc::IProcessor)
 
-int CLineProjectionProcessorComp::DoProcessing(
+iproc::IProcessor::TaskState CLineProjectionProcessorComp::DoProcessing(
 			const iprm::IParamsSet* paramsPtr,
 			const istd::IPolymorphic* inputPtr,
 			istd::IChangeable* outputPtr,

@@ -56,6 +56,9 @@ protected:
 	// reimplemented (imod::IObserver)
 	virtual void AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet);
 
+Q_SIGNALS:
+	void OnSupplierParamsChangedSignal();
+
 protected Q_SLOTS:
 	void on_ProcessButton_clicked();
 	void on_SaveDataButton_clicked();

@@ -25,14 +25,14 @@ public:
 
 protected:
 	// reimplemented (CSnapBitmapSupplierCompBase)
-	virtual iimg::IBitmap* CreateBitmap() const;
+	virtual iimg::IBitmapUniquePtr CreateBitmap() const;
 };
 
 
 // reimplemented (CSnapBitmapSupplierCompBase)
 
 template<typename Bitmap>
-iimg::IBitmap* TSnapBitmapSupplierComp<Bitmap>::CreateBitmap() const
+iimg::IBitmapUniquePtr TSnapBitmapSupplierComp<Bitmap>::CreateBitmap() const
 {
 	return new BitmapType;
 }

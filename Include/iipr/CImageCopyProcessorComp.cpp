@@ -60,8 +60,55 @@ bool DoCopyTemplate(
 }
 
 
+
 /**
-	Template copy funtion.
+	Template copy function with conversion.
+*/
+template <	typename InputPixelType,
+	typename OutputPixelType>
+bool DoCopyTemplate(
+	const iimg::IBitmap& inputImage,
+	const iimg::CScanlineMask& resultMask,
+	iimg::IBitmap& outputImage,
+	std::function< OutputPixelType(const InputPixelType&)> f)
+{
+	istd::CIndex2d imageSize = outputImage.GetImageSize();
+
+	if (imageSize.IsSizeEmpty()) {
+		return false;
+	}
+
+	istd::CIntRange lineRange(0, imageSize.GetX());
+
+	for (int y = 0; y < imageSize.GetY(); ++y) {
+		const istd::CIntRanges* outputRangesPtr = resultMask.GetPixelRanges(y);
+		if (outputRangesPtr != NULL) {
+			const InputPixelType* inputLinePtr = static_cast<const InputPixelType*>(inputImage.GetLinePtr(y));
+
+			OutputPixelType* outputLinePtr = static_cast<OutputPixelType*>(outputImage.GetLinePtr(y));
+
+			istd::CIntRanges::RangeList rangeList;
+			outputRangesPtr->GetAsList(lineRange, rangeList);
+			for (istd::CIntRanges::RangeList::ConstIterator iter = rangeList.constBegin();
+				iter != rangeList.constEnd();
+				++iter) {
+				const istd::CIntRange& rangeH = *iter;
+
+				for (int x = rangeH.GetMinValue(); x < rangeH.GetMaxValue(); ++x) {
+					auto pixelValue = inputLinePtr[x];
+
+					outputLinePtr[x] = f(pixelValue);
+				}
+			}
+		}
+	}
+
+	return true;
+}
+
+
+/**
+	Template copy function (same pixel type).
 */
 template <typename PixelType>
 bool DoFastCopyTemplate(
@@ -114,10 +161,8 @@ bool CImageCopyProcessorComp::DoImageCopy(
 		outputPixelFormat = inputPixelFormat;
 	}
 
-	istd::CIndex2d imageSize = inputImage.GetImageSize();
-	if (!outputImage.CreateBitmap(
-				outputPixelFormat,
-				imageSize)){
+	istd::CIndex2d imageSizeIn = inputImage.GetImageSize();
+	if (!outputImage.CreateBitmap(outputPixelFormat, imageSizeIn)){
 		if (loggerPtr != NULL){
 			loggerPtr->SendLogMessage(istd::IInformationProvider::IC_ERROR, 0, QObject::tr("Could not create output image"), QObject::tr("ImageCopyProcessor"));
 		}
@@ -220,6 +265,52 @@ bool CImageCopyProcessorComp::DoImageCopy(
 
 		case iimg::IBitmap::PF_FLOAT64:
 			return DoCopyTemplate<float, double, double>(inputImage, resultMask, outputImage);
+
+		case iimg::IBitmap::PF_GRAY:
+		{
+			float x_min = std::numeric_limits<float>::max();
+			float x_max = std::numeric_limits<float>::min();
+
+			istd::CIndex2d imageSizeOut = outputImage.GetImageSize();
+			if (imageSizeOut.IsSizeEmpty()) {
+				return true;
+			}
+
+			istd::CIntRange lineRange(0, imageSizeOut.GetX());
+
+			for (int y = 0; y < imageSizeOut.GetY(); ++y) {
+				const istd::CIntRanges* outputRangesPtr = resultMask.GetPixelRanges(y);
+				if (outputRangesPtr != NULL) {
+					auto inputLinePtr = static_cast<const float*>(inputImage.GetLinePtr(y));
+					//auto outputLinePtr = static_cast<quint8*>(outputImage.GetLinePtr(y));
+
+					istd::CIntRanges::RangeList rangeList;
+					outputRangesPtr->GetAsList(lineRange, rangeList);
+					for (istd::CIntRanges::RangeList::ConstIterator iter = rangeList.constBegin();
+						iter != rangeList.constEnd();
+						++iter) {
+						const istd::CIntRange& rangeH = *iter;
+
+						for (int x = rangeH.GetMinValue(); x < rangeH.GetMaxValue(); ++x) {
+							auto pixelValue = inputLinePtr[x];
+
+							if (!std::isnan(pixelValue)) {
+								if (pixelValue > x_max) x_max = pixelValue;
+								else if (pixelValue < x_min) x_min = pixelValue;
+							}
+						}
+					}
+				}
+			}
+
+			float d = x_max - x_min;
+			if (d == 0) d = 1;
+
+			return DoCopyTemplate<float, quint8>(inputImage, resultMask, outputImage, [&](float x)
+			{
+				return std::isnan(x) ? 255 : quint8((x - x_min) / d * 255.0);
+			});
+		}
 
 		default:
 			break;

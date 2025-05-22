@@ -68,6 +68,12 @@ i2d::CVector2d CObjectFeature::GetScale() const
 }
 
 
+void CObjectFeature::SetScale(const i2d::CVector2d& scale)
+{
+	m_scale = scale;
+}
+
+
 QByteArray CObjectFeature::GetObjectId() const
 {
 	return m_objectId;

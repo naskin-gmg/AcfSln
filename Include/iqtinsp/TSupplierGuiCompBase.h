@@ -9,6 +9,7 @@
 
 // ACF-Solutions includes
 #include <iqtinsp/TCommonSupplierGuiCompBase.h>
+#include <icalib/TCalibrationFactory.h>
 
 
 namespace iqtinsp
@@ -27,6 +28,9 @@ public:
 	I_BEGIN_BASE_COMPONENT(TSupplierGuiCompBase);
 		I_ASSIGN(m_paramsSetExtenderCompPtr, "ParamsSceneExtender", "Scene extender for the parameter editors", false, "ParamsSceneExtender");
 		I_ASSIGN(m_viewCalibrationModeAttrPtr, "ViewCalibrationMode", "Control when calibration from supplier will be set to view\n\t0 - never use calibration\n\t1 - only indirect (used as slave)\n\t2 - allways set calibration if available", true, 0);
+		I_ASSIGN(m_showParamShapesIfSlaveAttrPtr, "ShowParamsIfSlave", "Show parameter shapes if you are slave extender", true, false);
+		I_ASSIGN(m_useVerticalSpacerAttrPtr, "UseVerticalSpacer", "Insert vertical spacer to shrunk the space at the bottom", true, false);
+		I_ASSIGN(m_showResultStatusFrameAttrPtr, "ShowResultStatusFrame", "If enabled, show result status group box on the bottom of the view", true, false);
 	I_END_COMPONENT;
 
 	TSupplierGuiCompBase();
@@ -39,6 +43,9 @@ protected:
 	using BaseClass::GetObservedObject;
 	typedef typename BaseClass::Shapes Shapes;
 
+	// Reimplement it to show/hide results.
+	virtual void ShowResultsBox(bool /*show*/) {}
+
 	/**
 		Extract calibration provider from the observed object.
 	*/
@@ -50,7 +57,7 @@ protected:
 	// reimplemented (iqt2d::TViewExtenderCompBase)
 	virtual void CreateShapes(int sceneId, Shapes& result);
 
-private:
+protected:
 	/**
 		Control mode of calibration.
 	*/
@@ -73,6 +80,10 @@ private:
 	I_REF(iqt2d::IViewExtender, m_paramsSetExtenderCompPtr);
 
 	I_ATTR(int, m_viewCalibrationModeAttrPtr);
+	I_ATTR(bool, m_showParamShapesIfSlaveAttrPtr);
+
+	I_ATTR(bool, m_useVerticalSpacerAttrPtr);
+	I_ATTR(bool, m_showResultStatusFrameAttrPtr);
 
 	typedef QMap<const iqt2d::IViewProvider*, istd::TDelPtr<i2d::ICalibration2d> > ProviderToCalibrationMap;
 	ProviderToCalibrationMap m_providerToCalibrationMap;
@@ -103,7 +114,9 @@ void TSupplierGuiCompBase<UI>::AddItemsToScene(iqt2d::IViewProvider* providerPtr
 
 				const i2d::ICalibration2d* calibrationPtr = calibrationProviderPtr->GetCalibration();
 				if (calibrationPtr != NULL){
-					calibrationCopyPtr.SetCastedOrRemove(calibrationPtr->CloneMe());
+					//calibrationCopyPtr.SetCastedOrRemove(calibrationPtr->CloneMe());
+					auto clonePtr = icalib::FactorizeFrom(calibrationPtr);
+					calibrationCopyPtr.SetCastedOrRemove(clonePtr);
 				}
 
 				viewPtr->SetDisplayCalibration(calibrationCopyPtr.GetPtr());
@@ -115,7 +128,9 @@ void TSupplierGuiCompBase<UI>::AddItemsToScene(iqt2d::IViewProvider* providerPtr
 
 	BaseClass::AddItemsToScene(providerPtr, flags);
 
-	if ((flags & iqt2d::IViewExtender::SF_DIRECT) != 0){
+	bool showSlaveParams = *m_showParamShapesIfSlaveAttrPtr;
+
+	if (showSlaveParams || (flags & iqt2d::IViewExtender::SF_DIRECT) != 0){
 		if (m_paramsSetExtenderCompPtr.IsValid()){
 			m_paramsSetExtenderCompPtr->AddItemsToScene(providerPtr, flags);
 		}
@@ -126,17 +141,19 @@ void TSupplierGuiCompBase<UI>::AddItemsToScene(iqt2d::IViewProvider* providerPtr
 template <class UI>
 void TSupplierGuiCompBase<UI>::RemoveItemsFromScene(iqt2d::IViewProvider* providerPtr)
 {
-	if (		m_providerToCalibrationMap.contains(providerPtr) &&
-				(*m_viewCalibrationModeAttrPtr >= VCM_ALWAYS)){
+	//if (		m_providerToCalibrationMap.contains(providerPtr) &&
+	//			(*m_viewCalibrationModeAttrPtr >= VCM_ALWAYS)){
+
+	if (m_providerToCalibrationMap.contains(providerPtr)) {
 		iview::CCalibratedViewBase* viewPtr = dynamic_cast<iview::CCalibratedViewBase*>(providerPtr->GetView());
 		const i2d::ICalibration2d* calibrationPtr = m_providerToCalibrationMap[providerPtr].GetPtr();
 
 		if ((viewPtr != NULL) && (calibrationPtr != NULL) && (viewPtr->GetCalibration() == calibrationPtr)){
 			viewPtr->SetDisplayCalibration(NULL);
 		}
-	}
 
-	m_providerToCalibrationMap.remove(providerPtr);
+		m_providerToCalibrationMap.remove(providerPtr);
+	}
 
 	if (m_paramsSetExtenderCompPtr.IsValid()){
 		m_paramsSetExtenderCompPtr->RemoveItemsFromScene(providerPtr);

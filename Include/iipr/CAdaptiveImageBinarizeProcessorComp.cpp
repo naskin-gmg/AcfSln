@@ -16,7 +16,7 @@ namespace iipr
 
 // reimplemented (iproc::IProcessor)
 
-int CAdaptiveImageBinarizeProcessorComp::DoProcessing(
+iproc::IProcessor::TaskState CAdaptiveImageBinarizeProcessorComp::DoProcessing(
 				const iprm::IParamsSet* /*paramsPtr*/,
 				const istd::IPolymorphic* inputPtr,
 				istd::IChangeable* outputPtr,

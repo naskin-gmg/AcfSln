@@ -76,7 +76,7 @@ bool CWavSamplesLoaderComp::IsOperationSupported(
 }
 
 
-int CWavSamplesLoaderComp::LoadFromFile(
+ifile::IFilePersistence::OperationState CWavSamplesLoaderComp::LoadFromFile(
 			istd::IChangeable& /*data*/,
 			const QString& /*filePath*/,
 			ibase::IProgressManager* /*progressManagerPtr*/) const
@@ -85,7 +85,7 @@ int CWavSamplesLoaderComp::LoadFromFile(
 }
 
 
-int CWavSamplesLoaderComp::SaveToFile(
+ifile::IFilePersistence::OperationState CWavSamplesLoaderComp::SaveToFile(
 			const istd::IChangeable& data,
 			const QString& filePath,
 			ibase::IProgressManager* /*progressManagerPtr*/) const
@@ -99,7 +99,7 @@ int CWavSamplesLoaderComp::SaveToFile(
 		return OS_FAILED;
 	}
 
-	int retVal = OS_FAILED;
+	ifile::IFilePersistence::OperationState retVal = OS_FAILED;
 
 	const IDataSequence* sequencePtr = dynamic_cast<const IDataSequence*>(&data);
 	Q_ASSERT(sequencePtr != NULL);

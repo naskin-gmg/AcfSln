@@ -189,13 +189,13 @@ bool CCalibratedCameraComp::WriteImageResolution(iimg::IBitmap& bitmap, double r
 
 // reimplemented (iproc::IProcessor)
 
-int CCalibratedCameraComp::DoProcessing(
+iproc::IProcessor::TaskState CCalibratedCameraComp::DoProcessing(
 			const iprm::IParamsSet* paramsPtr,
 			const istd::IPolymorphic* inputPtr,
 			istd::IChangeable* outputPtr,
 			ibase::IProgressManager* progressManagerPtr)
 {
-	int retVal = BaseClass::DoProcessing(paramsPtr, inputPtr, outputPtr, progressManagerPtr);
+	iproc::IProcessor::TaskState retVal = BaseClass::DoProcessing(paramsPtr, inputPtr, outputPtr, progressManagerPtr);
 	if (retVal == TS_OK)
 	{
 		iprm::TParamsPtr<imeas::INumericValue> scaleParamPtr(paramsPtr, *m_scaleParamIdAttrPtr);

@@ -69,7 +69,7 @@ bool CColorBalanceProcessorComp::ProcessImage(
 
 	int inputPixelComponentCount = inputImage.GetComponentsCount();
 
-	if ((inputFormat == iimg::IBitmap::PixelFormat::PF_RGB) || (inputFormat == iimg::IBitmap::PixelFormat::PF_RGB24)){
+	if (inputFormat == iimg::IBitmap::PixelFormat::PF_RGB24){
 
 		for (int y = 0; y < imageSize.GetY(); ++y){
 			quint8* inputImageLinePtr = (quint8*)inputImage.GetLinePtr(y);
@@ -91,7 +91,7 @@ bool CColorBalanceProcessorComp::ProcessImage(
 			}
 		}
 	}
-	else{
+	else if (inputFormat == iimg::IBitmap::PixelFormat::PF_RGB || inputFormat == iimg::IBitmap::PixelFormat::PF_RGBA) {
 		for (int y = 0; y < imageSize.GetY(); ++y){
 			quint8* inputImageLinePtr = (quint8*)inputImage.GetLinePtr(y);
 			quint8* outputImageLinePtr = (quint8*)outputImage.GetLinePtr(y);
@@ -101,19 +101,21 @@ bool CColorBalanceProcessorComp::ProcessImage(
 				quint8* outPixelPtr = outputImageLinePtr + x * inputPixelComponentCount;
 
 
-				double red = (redWeight * pixelPtr[0]) /256 ;
+				double red = (redWeight * pixelPtr[2]) / 256;
 				double green = (greenWeight * pixelPtr[1]) / 256;
-				double blue = (blueWeight * pixelPtr[2]) / 256;
+				double blue = (blueWeight * pixelPtr[0]) / 256;
 
 				double factor = GetReductionFactor(red, green, blue);
 
-				outPixelPtr[0] = qMin(int(factor * red), 255);
+				outPixelPtr[0] = qMin(int(factor * blue), 255);
 				outPixelPtr[1] = qMin(int(factor * green), 255);
-				outPixelPtr[2] = qMin(int(factor * blue), 255);
+				outPixelPtr[2] = qMin(int(factor * red), 255);
 				outPixelPtr[3] = pixelPtr[3];
 			}
 		}
 	}
+	else
+		return false;
 
 
 	return true;

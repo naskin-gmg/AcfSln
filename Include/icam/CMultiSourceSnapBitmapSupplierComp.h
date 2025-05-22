@@ -40,12 +40,15 @@ public:
 	CMultiSourceSnapBitmapSupplierComp();
 
 protected:
+	bool SetSelectedCamera(int cameraIndex) const;
+	IBitmapAcquisition* GetSelectedCamera(int* selectedIndexPtr = NULL) const;
+
 	// reimplemented (CSnapBitmapSupplierCompBase)
-	virtual iimg::IBitmap* CreateBitmap() const override;
-	virtual int DoSnap(const iprm::IParamsSet* snapParamsPtr, iimg::IBitmap& snapBitmap) const override;
+	virtual iimg::IBitmapUniquePtr CreateBitmap() const;
+	virtual int DoSnap(const iprm::IParamsSet* snapParamsPtr, iimg::IBitmap& snapBitmap) const;
 
 	// reimplemented (iinsp::TSupplierCompWrap)
-	virtual bool InitializeWork() override;
+	virtual bool InitializeWork();
 
 private:
 	class CameraList: virtual public iprm::IOptionsList
@@ -56,12 +59,12 @@ private:
 		void SetParent(CMultiSourceSnapBitmapSupplierComp* parentPtr);
 
 		// reimplemented (iprm::IOptionsList)
-		virtual int GetOptionsFlags() const override;
-		virtual int GetOptionsCount() const override;
-		virtual QString GetOptionName(int index) const override;
-		virtual QString GetOptionDescription(int index) const override;
-		virtual QByteArray GetOptionId(int index) const override;
-		virtual bool IsOptionEnabled(int index) const override;
+		virtual int GetOptionsFlags() const;
+		virtual int GetOptionsCount() const;
+		virtual QString GetOptionName(int index) const;
+		virtual QString GetOptionDescription(int index) const;
+		virtual QByteArray GetOptionId(int index) const;
+		virtual bool IsOptionEnabled(int index) const;
 		
 	private:
 		CMultiSourceSnapBitmapSupplierComp* m_parentPtr;
@@ -72,8 +75,6 @@ private:
 	{
 		return &component.m_cameraList;
 	}
-
-	IBitmapAcquisition* GetSelectedCamera(int* slectedIndexPtr = NULL) const;
 
 private:
 	I_FACT(iimg::IBitmap, m_bitmapCompFact);

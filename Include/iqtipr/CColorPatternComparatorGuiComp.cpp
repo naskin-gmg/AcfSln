@@ -13,6 +13,11 @@
 namespace iqtipr
 {
 
+CColorPatternComparatorGuiComp::CColorPatternComparatorGuiComp()
+{
+	connect(this, SIGNAL(OnSupplierParamsChangedSignal()), SLOT(on_TestButton_clicked()), Qt::QueuedConnection);
+}
+
 
 // protected slots
 
@@ -122,7 +127,7 @@ void CColorPatternComparatorGuiComp::UpdateGui(const istd::IChangeable::ChangeSe
 void CColorPatternComparatorGuiComp::OnSupplierParamsChanged()
 {
 	if (IsGuiCreated() && AutoUpdateButton->isChecked()){
-		QTimer::singleShot(1, this, SLOT(on_TestButton_clicked()));
+		emit OnSupplierParamsChangedSignal();
 	}
 }
 

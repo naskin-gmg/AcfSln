@@ -140,7 +140,7 @@ bool CExtremumCaliperProcessorComp::DoCaliper(
 
 // reimplemented (iproc::IProcessor)
 
-int CExtremumCaliperProcessorComp::DoProcessing(
+iproc::IProcessor::TaskState CExtremumCaliperProcessorComp::DoProcessing(
 			const iprm::IParamsSet* paramsPtr,
 			const istd::IPolymorphic* inputPtr,
 			istd::IChangeable* outputPtr,

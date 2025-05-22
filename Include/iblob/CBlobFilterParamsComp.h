@@ -25,6 +25,7 @@ public:
 		I_REGISTER_INTERFACE(istd::IChangeable);
 		I_ASSIGN(m_supportedPropertiesCompPtr, "SupportedProperties", "Provides list of features supported for filtering", true, "SupportedProperties");
 		I_ASSIGN(m_calibrationCompPtr, "Calibration", "Calibration associated with this object", false, "Calibration");
+		I_ASSIGN_MULTI_0(m_defaultAvailablePropertiesAttrPtr, "DefaultProperties", "Default available properties", false);
 	I_END_COMPONENT;
 
 	// reimplemented (i2d::ICalibrationProvider)
@@ -37,6 +38,7 @@ protected:
 private:
 	I_REF(iprm::IOptionsList, m_supportedPropertiesCompPtr);
 	I_REF(i2d::ICalibration2d, m_calibrationCompPtr);
+	I_MULTIATTR(QByteArray, m_defaultAvailablePropertiesAttrPtr);
 };
 
 

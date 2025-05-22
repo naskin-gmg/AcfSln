@@ -1,5 +1,4 @@
-#ifndef iqtinsp_TCommonSupplierGuiCompBase_included
-#define iqtinsp_TCommonSupplierGuiCompBase_included
+#pragma once
 
 
 // Qt includes
@@ -21,6 +20,7 @@
 #include <iinsp/ISupplier.h>
 #include <iqtgui/IGuiObject.h>
 #include <iqtgui/TDesignerGuiObserverCompBase.h>
+#include <iqtgui/TMakeStateIconWrapper.h>
 
 // ACF-Solutions includes
 #include <iqtinsp/iqtinsp.h>
@@ -31,10 +31,10 @@ namespace iqtinsp
 
 
 template <class UI>
-class TCommonSupplierGuiCompBase: public iqtgui::TDesignerGuiObserverCompBase<UI, iinsp::ISupplier>
+class TCommonSupplierGuiCompBase: public iqtgui::StateIconWrapper< iqtgui::TDesignerGuiObserverCompBase<UI, iinsp::ISupplier> >
 {
 public:
-	typedef iqtgui::TDesignerGuiObserverCompBase<UI, iinsp::ISupplier> BaseClass;
+	typedef iqtgui::StateIconWrapper< iqtgui::TDesignerGuiObserverCompBase<UI, iinsp::ISupplier> > BaseClass;
 
 	I_BEGIN_BASE_COMPONENT(TCommonSupplierGuiCompBase);
 		I_ASSIGN(m_paramsLoaderCompPtr, "ParamsLoader", "Loads and saves parameters from and to file", false, "ParamsLoader");
@@ -167,7 +167,7 @@ TCommonSupplierGuiCompBase<UI>::TCommonSupplierGuiCompBase()
 	m_statusObserver(this),
 	m_areParamsEditable(false)
 {
-	BaseClass::SetStatusIcon(QIcon(":/Icons/StateUnknown"));
+	BaseClass::SetStatusIcon(this->GetIcon(":/Icons/StateUnknown"));
 	BaseClass::SetStatusText("Not yet processed");
 }
 
@@ -288,58 +288,54 @@ bool TCommonSupplierGuiCompBase<UI>::DoTest()
 template <class UI>
 void TCommonSupplierGuiCompBase<UI>::UpdateVisualStatus()
 {
-	QString statusText = "";
-	static QIcon unknownIcon(":/Icons/StateUnknown");
-	static QIcon warningIcon(":/Icons/StateWarning");
-	static QIcon invalidIcon(":/Icons/StateInvalid");
-	static QIcon okIcon(":/Icons/StateOk");
-
-	QIcon statusIcon = unknownIcon;
-
-	QString description;
+	QIcon statusIcon = this->GetCategoryIcon(istd::IInformationProvider::IC_NONE);
+	QString statusText, description;
 
 	const iinsp::ISupplier* supplierPtr = BaseClass::GetObservedObject();
 	if (supplierPtr != NULL){
 		const istd::IInformationProvider* infoProviderPtr = dynamic_cast<const istd::IInformationProvider*>(supplierPtr);
 		if (infoProviderPtr == NULL){
-			infoProviderPtr =  CompCastPtr<const istd::IInformationProvider>(supplierPtr);
+			infoProviderPtr = CompCastPtr<const istd::IInformationProvider>(supplierPtr);
 		}
 
-		int category = (infoProviderPtr == NULL) ? istd::IInformationProvider::IC_INFO : infoProviderPtr->GetInformationCategory();
+		auto category = (infoProviderPtr == NULL) ? istd::IInformationProvider::IC_INFO : infoProviderPtr->GetInformationCategory();
 
 		int workStatus = supplierPtr->GetWorkStatus();
 
 		switch (workStatus){
+		case iinsp::ISupplier::WS_CANCELED:
+			statusText = QObject::tr("Processing canceled by user");
+			break;
+
 		case iinsp::ISupplier::WS_LOCKED:
 			statusText = QObject::tr("Locked");
 			break;
 
 		case iinsp::ISupplier::WS_OK:
+			statusIcon = this->GetCategoryIcon(category);
+
 			switch (category){
 				case istd::IInformationProvider::IC_WARNING:
 					statusText = QObject::tr("Processing completed with warnings");
-					statusIcon = warningIcon;
 					break;
 
 				case istd::IInformationProvider::IC_ERROR:
 					statusText = QObject::tr("Processing completed with errors");
-					statusIcon = invalidIcon;
+					break;
+
+				case istd::IInformationProvider::IC_CRITICAL:
+					statusText = QObject::tr("Processing completed with system errors");
 					break;
 
 				default:
 					statusText = QObject::tr("Processing completed without errors");
-					statusIcon = okIcon;
 					break;
 				}
 			break;
 
-		case iinsp::ISupplier::WS_CANCELED:
-			statusText = QObject::tr("Processing canceled by user");
-			break;
-
 		case iinsp::ISupplier::WS_FAILED:
 			statusText = QObject::tr("Processing not possible");
-			statusIcon = invalidIcon;
+			statusIcon = this->GetCategoryIcon(istd::IInformationProvider::IC_CRITICAL);
 			break;
 
 		default:
@@ -408,7 +404,7 @@ void TCommonSupplierGuiCompBase<UI>::OnGuiModelAttached()
 		statusModelPtr->AttachObserver(&m_statusObserver);
 	}
 
-	BaseClass::SetStatusIcon(QIcon(":/Icons/StateUnknown"));
+	BaseClass::SetStatusIcon(this->GetIcon(":/Icons/StateUnknown"));
 }
 
 
@@ -499,8 +495,5 @@ void TCommonSupplierGuiCompBase<UI>::StatusObserver::OnUpdate(const istd::IChang
 
 
 } // namespace iqtinsp
-
-
-#endif // !iqtinsp_TCommonSupplierGuiCompBase_included
 
 

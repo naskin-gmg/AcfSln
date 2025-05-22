@@ -17,6 +17,19 @@ namespace iipr
 CPointGridFeature::CPointGridFeature()
 	:BaseClass()
 {
+	m_charucoIds.clear();
+}
+
+
+bool CPointGridFeature::AddChaurcoIds(const std::vector<int>& ids)
+{
+	m_charucoIds = ids;
+	return true;
+}
+
+const std::vector<int>& CPointGridFeature::GetCharucoIds() const
+{
+	return m_charucoIds;
 }
 
 

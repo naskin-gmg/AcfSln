@@ -30,17 +30,20 @@ void CMessageBasedViewExtenderComp::AddItemsToScene(iqt2d::IViewProvider* provid
 
 	m_shapeMessages[providerPtr] = m_messageContainerCompPtr->GetMessages();
 
-	ilog::IMessageContainer::Messages& messages = m_shapeMessages[providerPtr];
+	const ilog::IMessageContainer::Messages& messages = m_shapeMessages[providerPtr];
 
-	for (int i = 0; i < messages.count(); i++){
-		const ilog::IMessageConsumer::MessagePtr& messagePtr = messages.at(i);
+	int messageIndex = int(messages.size()) - 1;
+	for (ilog::IMessageContainer::Messages::const_iterator it = messages.begin(); it != messages.end(); it++) {
+		const ilog::IMessageConsumer::MessagePtr messagePtr = *it;
 
-		if (!IsMessageAccepted(*messagePtr.GetPtr())){
+		if (!IsMessageAccepted(*messagePtr)){
+			messageIndex--;
 			continue;
 		}
 
 		Shape shapeInfo;
-		shapeInfo.messageIndex = messages.count() - 1 - i;
+		shapeInfo.messageIndex = messageIndex;
+		messageIndex--;
 
 		const ilog::CExtMessage* extMessagePtr = dynamic_cast<const ilog::CExtMessage*>(messagePtr.GetPtr());
 		if (extMessagePtr != NULL){
@@ -56,6 +59,11 @@ void CMessageBasedViewExtenderComp::AddItemsToScene(iqt2d::IViewProvider* provid
 					viewPtr->ConnectShape(shapePtr.GetPtr());
 
 					shapeInfo.shapePtr = shapePtr;
+
+					const QString& objectDescription = extMessagePtr->GetAttachedObjectDescription(objectIndex);
+					if (!objectDescription.isEmpty()) {
+						shapePtr->SetToolTip(objectDescription);
+					}
 
 					m_shapes[providerPtr].push_back(shapeInfo);
 				}

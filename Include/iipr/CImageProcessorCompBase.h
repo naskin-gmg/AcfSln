@@ -71,14 +71,15 @@ public:
 		I_ASSIGN(m_outputPixelTypeAttrPtr, "OutputPixelType", "Type of output pixel if not defined over parameters:\n\t0 - As input\n\t1 - Mono\n\t2 - Grayscale\n\t3 - RGB\n\t4 - RGBA\n\t5 - RGB24\n\t6 - Grayscale 16\n\t7 - Grayscale 32\n\t8 - Float 32\n\t9 - Float 64", true, 0);
 		I_ASSIGN(m_outputPixelTypeIdAttrPtr, "OutputPixelTypeId", "ID of output pixel type in parameter set (type iprm::ISelectionParam)", false, "OutputPixelType");
 		I_ASSIGN(m_defaultOutputPixelTypeParamCompPtr, "DefaultOutputPixelType", "Default output pixel type if not defined in parameter set", false, "DefaultOutputPixelType");
+		I_ASSIGN(m_useInputCalibrationAttrPtr, "UseInputCalibration", "If enabled, the calibration of the input image will be overtaken for the output", true, true);
 	I_END_COMPONENT;
 
 	// reimplemented (iproc::IProcessor)
-	virtual int DoProcessing(
+	virtual iproc::IProcessor::TaskState DoProcessing(
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,
 				istd::IChangeable* outputPtr,
-				ibase::IProgressManager* progressManagerPtr = NULL);
+				ibase::IProgressManager* progressManagerPtr = NULL) override;
 
 protected:
 	BackgroundFillMode GetBackgroundMode(const iprm::IParamsSet* paramsPtr) const;
@@ -99,6 +100,7 @@ private:
 	I_ATTR(int, m_backgroundModeAttrPtr);
 	I_ATTR(int, m_outputPixelTypeAttrPtr);
 	I_ATTR(QByteArray, m_outputPixelTypeIdAttrPtr);
+	I_ATTR(bool, m_useInputCalibrationAttrPtr);
 	I_REF(iprm::ISelectionParam, m_defaultOutputPixelTypeParamCompPtr);
 };
 

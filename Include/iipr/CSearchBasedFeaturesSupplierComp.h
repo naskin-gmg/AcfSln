@@ -43,41 +43,51 @@ public:
 		I_ASSIGN(m_globalCalibrationPtr, "GlobalCalibration", "Setup the supplier global calibration", false, "GlobalCalibration");
 		I_ASSIGN(m_searchParamsManagerParamIdAttrPtr, "SearchParamsManagerParameterId", "ID of the parameter manager used for multi search", false, "SearchParamsManagerParamId");
 		I_ASSIGN(m_searchParamsIdAttrPtr, "SearchParamsId", "ID of standard search parameters", true, "SearchParamsId");
+		I_ASSIGN(m_anyNumberOfModelsAllowedAttr, "AnyNumberOfModelsAllowed", "If true and the nominal number of models is < 0, no error is generated on model search failure", true, false);
 	I_END_COMPONENT;
 
 	CSearchBasedFeaturesSupplierComp();
 
 	// reimplemented (i2d::IMultiCalibrationProvider)
-	virtual const iprm::IOptionsList* GetCalibrationSelectionContraints() const override;
-	virtual int GetCalibrationsCount() const override;
-	virtual const i2d::ICalibration2d* GetCalibration(int calibrationIndex) const override;
+	virtual const iprm::IOptionsList* GetCalibrationSelectionContraints() const;
+	virtual int GetCalibrationsCount() const;
+	virtual const i2d::ICalibration2d* GetCalibration(int calibrationIndex) const;
 
 	// reimplemented (iipr::IFeaturesProvider)
-	virtual int GetFeaturesCount() const override;
-	virtual const imeas::INumericValue& GetFeature(int index) const override;
+	virtual int GetFeaturesCount() const;
+	virtual const imeas::INumericValue& GetFeature(int index) const;
 
 	// reimplemented (istd::IInformationProvider)
-	virtual QDateTime GetInformationTimeStamp() const override;
-	virtual istd::IInformationProvider::InformationCategory GetInformationCategory() const override;
-	virtual int GetInformationId() const override;
-	virtual QString GetInformationDescription() const override;
-	virtual QString GetInformationSource() const override;
-	virtual int GetInformationFlags() const override;
+	virtual QDateTime GetInformationTimeStamp() const;
+	virtual istd::IInformationProvider::InformationCategory GetInformationCategory() const;
+	virtual int GetInformationId() const;
+	virtual QString GetInformationDescription() const;
+	virtual QString GetInformationSource() const;
+	virtual int GetInformationFlags() const;
 
 protected:
 	virtual istd::IInformationProvider::InformationCategory EvaluateResults(int featuresCount, int nominalModelsCount, QString& searchResultText) const;
+	
+	iinsp::ISupplier::WorkStatus SearchOneParamsSet(const iprm::IParamsSet* paramsPtr,
+					const iimg::IBitmap* bitmapPtr,
+					CFeaturesContainer& oneSearchResult,
+					istd::IInformationProvider::InformationCategory& informationCategory,
+					const QString& sourceName) const;
+	bool IsNegativeModelFound(const imeas::INumericValue* featurePtr, const QString& sourceName) const;
+	iinsp::ISupplier::WorkStatus LabelAndStoreResult(CFeaturesContainer& from, CFeaturesContainer& to, const QString& sourceName) const;
+	void UpdateCalibrationList(const CFeaturesContainer& results) const;
 
 	// reimplemented (iinsp::TSupplierCompWrap)
-	virtual bool InitializeWork() override;
-	virtual int ProduceObject(CFeaturesContainer& result) const override;
+	virtual bool InitializeWork();
+	virtual iinsp::ISupplier::WorkStatus ProduceObject(CFeaturesContainer& result) const;
 
 	// reimplemented (icomp::CComponentBase)
-	virtual void OnComponentCreated() override;
-	virtual void OnComponentDestroyed() override;
+	virtual void OnComponentCreated();
+	virtual void OnComponentDestroyed();
 
 private:
 
-	class CalibrationList: virtual public iprm::IOptionsList
+	class CalibrationList : virtual public iprm::IOptionsList
 	{
 	public:
 		CalibrationList();
@@ -85,12 +95,12 @@ private:
 		void SetParentPtr(CSearchBasedFeaturesSupplierComp* parentPtr);
 
 		// reimplemented (iprm::IOptionsList)
-		virtual int GetOptionsFlags() const override;
-		virtual int GetOptionsCount() const override;
-		virtual QString GetOptionName(int index) const override;
-		virtual QString GetOptionDescription(int index) const override;
-		virtual QByteArray GetOptionId(int index) const override;
-		virtual bool IsOptionEnabled(int index) const override;
+		virtual int GetOptionsFlags() const;
+		virtual int GetOptionsCount() const;
+		virtual QString GetOptionName(int index) const;
+		virtual QString GetOptionDescription(int index) const;
+		virtual QByteArray GetOptionId(int index) const;
+		virtual bool IsOptionEnabled(int index) const;
 
 	private:
 		CSearchBasedFeaturesSupplierComp* m_parentPtr;
@@ -105,7 +115,8 @@ private:
 	I_REF(i2d::ICalibration2d, m_globalCalibrationPtr);
 	I_ATTR(QByteArray, m_searchParamsManagerParamIdAttrPtr);
 	I_ATTR(QByteArray, m_searchParamsIdAttrPtr);
-	
+	I_ATTR(bool, m_anyNumberOfModelsAllowedAttr);
+
 	struct CalibrationInfo
 	{
 		icalib::CAffineCalibration2d calibration;

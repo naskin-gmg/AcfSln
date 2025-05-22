@@ -23,14 +23,14 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (iipr::IImageToFeatureProcessor)
-	virtual int DoExtractFeatures(
+	virtual iproc::IProcessor::TaskState DoExtractFeatures(
 		const iprm::IParamsSet* paramsPtr,
 		const iimg::IBitmap& image,
 		IFeaturesConsumer& results,
 		ibase::IProgressManager* progressManagerPtr = NULL)  override;
 
 	// reimplemented (iproc::IProcessor)
-	virtual int DoProcessing(
+	virtual iproc::IProcessor::TaskState DoProcessing(
 		const iprm::IParamsSet* paramsPtr,
 		const istd::IPolymorphic* inputPtr,
 		istd::IChangeable* outputPtr,

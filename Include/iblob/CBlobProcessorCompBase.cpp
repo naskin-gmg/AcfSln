@@ -16,7 +16,7 @@ static QByteArray circularityFeatureId("Circularity");
 
 // reimplemented (iipr::IImageToFeatureProcessor)
 
-int CBlobProcessorCompBase::DoExtractFeatures(
+iproc::IProcessor::TaskState CBlobProcessorCompBase::DoExtractFeatures(
 			const iprm::IParamsSet* paramsPtr,
 			const iimg::IBitmap& image,
 			iipr::IFeaturesConsumer& results,
@@ -34,21 +34,15 @@ int CBlobProcessorCompBase::DoExtractFeatures(
 		if (logToPhysicalTransformPtr != NULL){
 			transformedRegionPtr.SetCastedOrRemove<istd::IChangeable>(aoiPtr->CloneMe());
 			if (transformedRegionPtr.IsValid()){
-				const i2d::ICalibration2d* calibrationPtr = transformedRegionPtr->GetCalibration();
-				if (calibrationPtr != NULL){
-					transformedRegionPtr->Transform(*calibrationPtr);
-
-					transformedRegionPtr->SetCalibration(NULL);
-				}
-
-				aoiPtr.SetPtr(transformedRegionPtr.GetPtr());
+				transformedRegionPtr->SetCalibration(nullptr);
+				transformedRegionPtr->Transform(*logToPhysicalTransformPtr);
 			}
 		}
 	}
 
 	iprm::TParamsPtr<iblob::IBlobFilterParams> filterParamsPtr(paramsPtr, m_filterParamsIdAttrPtr, m_defaultFilterParamsCompPtr);
 
-	bool retVal = CalculateBlobs(paramsPtr, filterParamsPtr.GetPtr(), aoiPtr.GetPtr(), image, results);
+	bool retVal = CalculateBlobs(paramsPtr, filterParamsPtr.GetPtr(), transformedRegionPtr.GetPtr(), image, results);
 
 	return retVal ? TS_OK: TS_INVALID;
 }
@@ -56,7 +50,7 @@ int CBlobProcessorCompBase::DoExtractFeatures(
 
 // reimplemented (iproc::IProcessor)
 
-int CBlobProcessorCompBase::DoProcessing(
+iproc::IProcessor::TaskState CBlobProcessorCompBase::DoProcessing(
 			const iprm::IParamsSet* paramsPtr,
 			const istd::IPolymorphic* inputPtr,
 			istd::IChangeable* outputPtr,
@@ -91,19 +85,19 @@ bool CBlobProcessorCompBase::IsBlobAcceptedByFilter(const iblob::IBlobFilterPara
 			const iblob::IBlobFilterParams::Filter& filter = filterParams.GetFilterAt(filterIndex);
 
 			if (filter.featureId == areaFeatureId){
-				if (!IsValueAcceptedByFilter(filter, area)){
+				if (!filterParams.IsValueAcceptedByFilter(filterIndex, area)){
 					return false;
 				}
 			}
 
 			if (filter.featureId == perimeterFeatureId){
-				if (!IsValueAcceptedByFilter(filter, perimeter)){
+				if (!filterParams.IsValueAcceptedByFilter(filterIndex, perimeter)){
 					return false;
 				}
 			}
 
 			if (filter.featureId == circularityFeatureId){
-				if (!IsValueAcceptedByFilter(filter, circularity)){
+				if (!filterParams.IsValueAcceptedByFilter(filterIndex, circularity)){
 					return false;
 				}
 			}
@@ -111,53 +105,6 @@ bool CBlobProcessorCompBase::IsBlobAcceptedByFilter(const iblob::IBlobFilterPara
 	}
 
 	return true;
-}
-
-
-// provate static methods
-
-bool CBlobProcessorCompBase::IsValueAcceptedByFilter(const iblob::IBlobFilterParams::Filter& filter, double value)
-{
-	bool isGreater = value > filter.valueRange.GetMinValue();
-	bool isLess = value > filter.valueRange.GetMinValue();
-	bool isEqual = qFuzzyCompare(value, filter.valueRange.GetMinValue());
-	bool isGreaterEqual = isGreater || isEqual;
-	bool isLessEqual = isLess || isEqual;
-
-	switch (filter.condition){
-	case iblob::IBlobFilterParams::FC_EQUAL:
-		return (filter.operation == iblob::IBlobFilterParams::FO_INCLUDE)? isEqual: !isEqual;
-
-	case iblob::IBlobFilterParams::FC_NOT_EQUAL:
-		return (filter.operation == iblob::IBlobFilterParams::FO_INCLUDE)? !isEqual: isEqual;
-
-	case iblob::IBlobFilterParams::FC_BETWEEN:
-		{
-			bool valueInRange = filter.valueRange.Contains(value);
-			return (filter.operation == iblob::IBlobFilterParams::FO_INCLUDE)? valueInRange: !valueInRange;
-		}
-
-	case iblob::IBlobFilterParams::FC_OUTSIDE:
-		{
-			bool valueInRange = filter.valueRange.Contains(value);
-			return (filter.operation == iblob::IBlobFilterParams::FO_INCLUDE)? !valueInRange: valueInRange;
-		}
-
-	case iblob::IBlobFilterParams::FC_GREATER:
-		return (filter.operation == iblob::IBlobFilterParams::FO_INCLUDE)? isGreater: !isGreater;
-
-	case iblob::IBlobFilterParams::FC_GREATER_EQUAL:
-		return (filter.operation == iblob::IBlobFilterParams::FO_INCLUDE)? isGreaterEqual: !isGreaterEqual;
-
-	case iblob::IBlobFilterParams::FC_LESS:
-		return (filter.operation == iblob::IBlobFilterParams::FO_INCLUDE)? isLess: !isLess;
-
-	case iblob::IBlobFilterParams::FC_LESS_EQUAL:
-		return (filter.operation == iblob::IBlobFilterParams::FO_INCLUDE)? isLessEqual: !isLessEqual;
-
-	default:
-		return true;
-	}
 }
 
 

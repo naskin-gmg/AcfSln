@@ -26,14 +26,14 @@ public:
 
 protected:
 	// reimplemented (CProcessedBitmapSupplierBase)
-	virtual iimg::IBitmap* CreateBitmap() const;
+	virtual iimg::IBitmapUniquePtr CreateBitmap() const;
 };
 
 
 // reimplemented (CProcessedBitmapSupplierBase)
 
 template<typename Bitmap>
-iimg::IBitmap* TProcessedBitmapSupplierComp<Bitmap>::CreateBitmap() const
+iimg::IBitmapUniquePtr TProcessedBitmapSupplierComp<Bitmap>::CreateBitmap() const
 {
 	return new BitmapType;
 }

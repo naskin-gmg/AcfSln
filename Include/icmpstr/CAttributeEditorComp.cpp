@@ -1065,10 +1065,10 @@ bool CAttributeEditorComp::SetAttributeToItem(
 			}
 
 			ilog::IMessageContainer::Messages messages = messageContainer.GetMessages();
-			for (		ilog::IMessageContainer::Messages::ConstIterator messageIter = messages.constBegin();
-						messageIter != messages.constEnd();
+			for (		ilog::IMessageContainer::Messages::const_iterator messageIter = messages.cbegin();
+						messageIter != messages.cend();
 						++messageIter){
-				const ilog::IMessageConsumer::MessagePtr& messagePtr = *messageIter;
+				const ilog::IMessageConsumer::MessagePtr messagePtr = *messageIter;
 				if (messagePtr.IsValid()){
 					consistencyInfoText += "\n";
 

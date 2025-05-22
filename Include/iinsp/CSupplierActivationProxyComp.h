@@ -39,24 +39,24 @@ public:
 	CSupplierActivationProxyComp();
 
 	// reimplemented (iinsp::IEnableableSupplier)
-	virtual bool SetSupplierEnabled(bool isEnabled = true);
-	virtual bool IsSupplierEnabled() const;
-	virtual bool IsStateFixed() const;
+	virtual bool SetSupplierEnabled(bool isEnabled = true) override;
+	virtual bool IsSupplierEnabled() const override;
+	virtual bool IsStateFixed() const override;
 
 	// reimplemented (iinsp::ISupplier)
-	virtual int GetWorkStatus() const;
-	virtual imod::IModel* GetWorkStatusModel() const;
-	virtual void InvalidateSupplier();
-	virtual void EnsureWorkInitialized();
-	virtual void EnsureWorkFinished();
-	virtual void ClearWorkResults();
-	virtual const ilog::IMessageContainer* GetWorkMessages(int messageType) const;
-	virtual iprm::IParamsSet* GetModelParametersSet() const;
+	virtual iinsp::ISupplier::WorkStatus GetWorkStatus() const override;
+	virtual imod::IModel* GetWorkStatusModel() const override;
+	virtual void InvalidateSupplier() override;
+	virtual void EnsureWorkInitialized() override;
+	virtual void EnsureWorkFinished() override;
+	virtual void ClearWorkResults() override;
+	virtual const ilog::IMessageContainer* GetWorkMessages(MessageContainerType messageType) const override;
+	virtual iprm::IParamsSet* GetModelParametersSet() const override;
 
 protected:
 	// reimplemented (icomp::CComponentBase)
-	virtual void OnComponentCreated();
-	virtual void OnComponentDestroyed();
+	virtual void OnComponentCreated() override;
+	virtual void OnComponentDestroyed() override;
 
 private:
 	I_REF(iinsp::ISupplier, m_slaveSupplierCompPtr);

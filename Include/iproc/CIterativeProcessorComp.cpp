@@ -14,7 +14,7 @@ namespace iproc
 
 // reimplemented (iproc::IProcessor)
 
-int CIterativeProcessorComp::DoProcessing(
+iproc::IProcessor::TaskState CIterativeProcessorComp::DoProcessing(
 			const iprm::IParamsSet* paramsPtr,
 			const istd::IPolymorphic* inputPtr,
 			istd::IChangeable* outputPtr,
@@ -30,7 +30,7 @@ int CIterativeProcessorComp::DoProcessing(
 		return TS_INVALID;
 	}
 
-	int retVal = TS_INVALID;
+	iproc::IProcessor::TaskState retVal = TS_INVALID;
 
 	iprm::TParamsPtr<iprm::ISelectionParam> processorParamsPtr(paramsPtr, *m_paramsIdAttrPtr);
 	if (processorParamsPtr.IsValid() && m_slaveProcessorCompPtr.IsValid()){
@@ -132,14 +132,14 @@ bool CIterativeProcessorComp::IsOptionEnabled(int /*index*/) const
 
 // protected methods
 
-int CIterativeProcessorComp::ProcessSlave(
+iproc::IProcessor::TaskState CIterativeProcessorComp::ProcessSlave(
 			const iprm::IParamsSet* paramsPtr,
 			const istd::IPolymorphic* inputPtr,
 			istd::IChangeable* outputPtr)
 {
 	Q_ASSERT(m_slaveProcessorCompPtr.IsValid());
 
-	int retVal = TS_INVALID;
+	iproc::IProcessor::TaskState retVal = TS_INVALID;
 
 	int taskId = m_slaveProcessorCompPtr->BeginTask(paramsPtr, inputPtr, outputPtr);
 	if (taskId >= 0){

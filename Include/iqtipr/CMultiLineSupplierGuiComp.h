@@ -31,6 +31,9 @@ public:
 
 	CMultiLineSupplierGuiComp();
 
+signals:
+	void OnSupplierParamsChangedSignal();
+
 protected Q_SLOTS:
 	void on_TestButton_clicked();
 

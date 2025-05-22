@@ -42,7 +42,7 @@ public:
 
 protected:
 	// reimplemented (iinsp::TSupplierCompWrap)
-	virtual int ProduceObject(CEdgeLineContainer& result) const;
+	virtual iinsp::ISupplier::WorkStatus ProduceObject(CEdgeLineContainer& result) const;
 
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();

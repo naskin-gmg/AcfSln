@@ -440,7 +440,7 @@ bool CImageCropDecalibrateProcessorComp::CalcCalibration(
 
 // reimplemented (iproc::IProcessor)
 
-int CImageCropDecalibrateProcessorComp::DoProcessing(
+iproc::IProcessor::TaskState CImageCropDecalibrateProcessorComp::DoProcessing(
 			const iprm::IParamsSet* paramsPtr,
 			const istd::IPolymorphic* inputPtr,
 			istd::IChangeable* outputPtr,

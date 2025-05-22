@@ -68,7 +68,7 @@ protected:
 	virtual void OnModelChanged(int modelId, const istd::IChangeable::ChangeSet& changeSet);
 
 	// reimplemented (iinsp::TSupplierCompWrap)
-	virtual int ProduceObject(ProductType& result) const;
+	virtual iinsp::ISupplier::WorkStatus ProduceObject(ProductType& result) const;
 
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();

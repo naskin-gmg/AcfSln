@@ -54,14 +54,14 @@ public:
 	virtual bool DoLinesProcessing(
 				const iprm::IParamsSet* paramsPtr,
 				const CEdgeLineContainer& edgeLines,
-				CEdgeLineContainer& result) const;
+				CEdgeLineContainer& result) const override;
 
 	// reimplemented (iproc::IProcessor)
-	virtual int DoProcessing(
+	virtual iproc::IProcessor::TaskState DoProcessing(
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,
 				istd::IChangeable* outputPtr,
-				ibase::IProgressManager* progressManagerPtr = NULL);
+				ibase::IProgressManager* progressManagerPtr = NULL) override;
 
 	// reimplemented (imeas::INumericConstraints)
 	virtual const iprm::IOptionsList& GetValueListInfo() const;

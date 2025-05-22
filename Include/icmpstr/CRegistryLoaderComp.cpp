@@ -82,7 +82,7 @@ bool CRegistryLoaderComp::IsOperationSupported(
 }
 
 
-int CRegistryLoaderComp::LoadFromFile(
+ifile::IFilePersistence::OperationState CRegistryLoaderComp::LoadFromFile(
 			istd::IChangeable& data,
 			const QString& filePath,
 			ibase::IProgressManager* /*progressManagerPtr*/) const
@@ -163,7 +163,7 @@ int CRegistryLoaderComp::LoadFromFile(
 }
 
 
-int CRegistryLoaderComp::SaveToFile(
+ifile::IFilePersistence::OperationState CRegistryLoaderComp::SaveToFile(
 			const istd::IChangeable& data,
 			const QString& filePath,
 			ibase::IProgressManager* /*progressManagerPtr*/) const

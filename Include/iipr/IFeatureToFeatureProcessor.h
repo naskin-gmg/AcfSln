@@ -20,9 +20,9 @@ class IFeatureToFeatureProcessor: virtual public iproc::IProcessor
 public:
 	/**
 		Specialization of processing interface for extraction of features from image.
-		\return				state of this processor \sa iproc::IProcessor::ProcessorState.
+		\return				state of this processor \sa iproc::IProcessor::TaskState.
 	*/
-	virtual int DoConvertFeatures(
+	virtual iproc::IProcessor::TaskState DoConvertFeatures(
 				const iprm::IParamsSet* paramsPtr,
 				const IFeaturesProvider& container,
 				IFeaturesConsumer& results) = 0;

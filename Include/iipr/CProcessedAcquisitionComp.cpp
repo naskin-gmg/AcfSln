@@ -22,7 +22,7 @@ istd::CIndex2d CProcessedAcquisitionComp::GetBitmapSize(const iprm::IParamsSet* 
 
 // reimplemented iproc::TSyncProcessorWrap<icam::IBitmapAcquisition>
 
-int CProcessedAcquisitionComp::DoProcessing(
+iproc::IProcessor::TaskState CProcessedAcquisitionComp::DoProcessing(
 			const iprm::IParamsSet* paramsPtr,
 			const istd::IPolymorphic* inputPtr,
 			istd::IChangeable* outputPtr,
@@ -45,16 +45,16 @@ int CProcessedAcquisitionComp::DoProcessing(
 
 	istd::CChangeNotifier outputNotifier(outputBitmapPtr);
 
-	int retVal = m_slaveAcquisitionCompPtr->DoProcessing(paramsPtr, inputPtr, outputBitmapPtr);
+	iproc::IProcessor::TaskState retVal = m_slaveAcquisitionCompPtr->DoProcessing(paramsPtr, inputPtr, outputBitmapPtr);
 	if (retVal == TS_OK){
 		if (m_processorCompPtr.IsValid()){
-			istd::TDelPtr<iimg::IBitmap> tempBitmapPtr(m_bitmapFactCompPtr.CreateInstance());
-			if (!tempBitmapPtr.IsValid()){
+			iimg::IBitmapUniquePtr tempBitmapPtr(m_bitmapFactCompPtr.CreateInstance());
+			if (!tempBitmapPtr.IsValid()) {
 				SendErrorMessage(0, "Temporary bitmap could not be created");
 
 				return TS_INVALID;
 			}
-
+			
 			retVal = m_processorCompPtr->DoProcessing(paramsPtr, outputBitmapPtr, tempBitmapPtr.GetPtr());
 			if (retVal == TS_OK){
 				if (!outputBitmapPtr->CopyFrom(*tempBitmapPtr)){
@@ -65,6 +65,14 @@ int CProcessedAcquisitionComp::DoProcessing(
 	}
 
 	return retVal;
+}
+
+
+void CProcessedAcquisitionComp::InitProcessor(const iprm::IParamsSet * paramsPtr)
+{
+	if (m_slaveAcquisitionCompPtr.IsValid()) {
+		m_slaveAcquisitionCompPtr->InitProcessor(paramsPtr);
+	}
 }
 
 

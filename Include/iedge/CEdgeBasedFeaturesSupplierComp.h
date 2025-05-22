@@ -77,7 +77,7 @@ public:
 protected:
 	// reimplemented (iinsp::TSupplierCompWrap)
 	virtual bool InitializeWork();
-	virtual int ProduceObject(ProductType& result) const;
+	virtual iinsp::ISupplier::WorkStatus ProduceObject(ProductType& result) const;
 
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();

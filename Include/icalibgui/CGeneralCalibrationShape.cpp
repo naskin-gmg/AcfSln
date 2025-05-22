@@ -122,9 +122,10 @@ void CGeneralCalibrationShape::Draw(QPainter& drawContext) const
 			}
 		}
 		else if (!clientProjectedBounds.IsEmpty()){
-			bounds = clientProjectedBounds;		}
+			bounds = clientProjectedBounds;		
+		}
 		else{
-			bounds = i2d::CRectangle(-1000, -1000, 2000, 2000);
+			bounds = i2d::CRectangle(-1000, -1000, 10000, 10000);
 		}
 
 		i2d::CRectangle smallBounds(bounds.GetLeftTop() * 0.25 + bounds.GetRightBottom() * 0.75, bounds.GetLeftTop() * 0.75 + bounds.GetRightBottom() * 0.25);

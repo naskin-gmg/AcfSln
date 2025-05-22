@@ -26,12 +26,12 @@ namespace icam
 	Implementation of bitmap supplier based on selection of the underlayed bitmap provider.
 */
 class CBitmapSupplierMultiplexerComp:
-			public iinsp::TSupplierCompWrap< QPair<istd::TDelPtr<const i2d::ICalibration2d>, istd::TDelPtr<iimg::IBitmap> > >,
+			public iinsp::TSupplierCompWrap< QPair<istd::TDelPtr<const i2d::ICalibration2d>, iimg::IBitmapSharedPtr > >,
 			virtual public iimg::IBitmapProvider,
 			virtual public i2d::ICalibrationProvider
 {
 public:
-	typedef iinsp::TSupplierCompWrap< QPair<istd::TDelPtr<const i2d::ICalibration2d>,  istd::TDelPtr<iimg::IBitmap> > > BaseClass;
+	typedef iinsp::TSupplierCompWrap< QPair<istd::TDelPtr<const i2d::ICalibration2d>,  iimg::IBitmapSharedPtr > > BaseClass;
 
 	I_BEGIN_COMPONENT(CBitmapSupplierMultiplexerComp);
 		I_REGISTER_INTERFACE(iimg::IBitmapProvider);
@@ -46,18 +46,18 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (iimg::IBitmapProvider)
-	virtual const iimg::IBitmap* GetBitmap() const;
+	virtual const iimg::IBitmap* GetBitmap() const override;
 
 	// reimplemented (i2d::ICalibrationProvider)
-	virtual const i2d::ICalibration2d* GetCalibration() const;
+	virtual const i2d::ICalibration2d* GetCalibration() const override;
 
 protected:
 	// reimplemented (iinsp::TSupplierCompWrap)
-	virtual int ProduceObject(ProductType& result) const;
+	virtual iinsp::ISupplier::WorkStatus ProduceObject(ProductType& result) const override;
 
 	// reimplemented (icomp::CComponentBase)
-	virtual void OnComponentCreated();
-	virtual void OnComponentDestroyed();
+	virtual void OnComponentCreated() override;
+	virtual void OnComponentDestroyed() override;
 
 private:
 	I_FACT(iimg::IBitmap, m_bitmapCompFact);

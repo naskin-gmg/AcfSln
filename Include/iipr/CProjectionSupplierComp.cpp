@@ -19,7 +19,7 @@ const imeas::IDataSequence* CProjectionSupplierComp::GetDataSequence() const
 
 // reimplemented (iinsp::TSupplierCompWrap)
 
-int CProjectionSupplierComp::ProduceObject(ProductType& result) const
+iinsp::ISupplier::WorkStatus CProjectionSupplierComp::ProduceObject(ProductType& result) const
 {
 	if (		m_bitmapProviderCompPtr.IsValid() &&
 				m_projectionProcessorCompPtr.IsValid()){

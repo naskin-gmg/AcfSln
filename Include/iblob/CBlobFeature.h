@@ -43,6 +43,18 @@ public:
 	virtual bool CopyFrom(const IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS) override;
 	virtual istd::IChangeable* CloneMe(CompatibilityMode mode = CM_WITHOUT_REFS) const override;
 
+	// reimplemented (i2d::IObject2d)
+	virtual void SetCalibration(const i2d::ICalibration2d* calibrationPtr, bool releaseFlag = false) override;
+	virtual i2d::CRectangle GetBoundingBox() const override;
+	virtual bool Transform(
+		const i2d::ITransformation2d& transformation,
+		i2d::ITransformation2d::ExactnessMode mode = i2d::ITransformation2d::EM_NONE,
+		double* errorFactorPtr = NULL) override;
+	virtual bool InvTransform(
+		const i2d::ITransformation2d& transformation,
+		i2d::ITransformation2d::ExactnessMode mode = i2d::ITransformation2d::EM_NONE,
+		double* errorFactorPtr = NULL) override;
+
 private:
 	double m_area;
 	double m_perimeter;

@@ -109,11 +109,15 @@ void CPatternTeachingControllerGuiComp::UpdateGui(const istd::IChangeable::Chang
 		PatternInfoLabel->setProperty("Status", "Ok");
 	}
 
-	// view
+	// viewObeserver
 	if (m_patternViewObserverCompPtr.IsValid()){
 		imod::IModel* patternModelPtr = const_cast<imod::IModel*>(dynamic_cast<const imod::IModel*>(objectPtr->GetPatternObject()));
 		if (patternModelPtr != NULL){
 			if (!patternModelPtr->IsAttached(m_patternViewObserverCompPtr.GetPtr())){
+				auto* patternObserverPtr = dynamic_cast<imod::CSingleModelObserverBase*>(m_patternViewObserverCompPtr.GetPtr());
+				if (patternObserverPtr != nullptr){
+					patternObserverPtr->EnsureModelDetached();
+				}
 				patternModelPtr->AttachObserver(m_patternViewObserverCompPtr.GetPtr());
 			}
 

@@ -33,8 +33,11 @@ public:
 	virtual const CEdgeLineContainer* GetEdgesContainer() const;
 
 protected:
+
+	void SerializeContours(const CEdgeLineContainer& result) const;
+
 	// reimplemented (iinsp::TSupplierCompWrap)
-	virtual int ProduceObject(CEdgeLineContainer& result) const;
+	virtual iinsp::ISupplier::WorkStatus ProduceObject(CEdgeLineContainer& result) const;
 
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();

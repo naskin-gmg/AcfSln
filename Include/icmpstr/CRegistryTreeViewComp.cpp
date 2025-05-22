@@ -182,8 +182,8 @@ QTreeWidgetItem* CRegistryTreeViewComp::AddRegistryElementItem(
 
 			ilog::CMessageContainer::Messages messages = messageContainer.GetMessages();
 			QString messageText;
-			for (int messageIndex = 0; messageIndex < messages.count(); messageIndex++){
-				messageText += messages[messageIndex]->GetInformationDescription();
+			for (ilog::CMessageContainer::Messages::iterator it = messages.begin(); it != messages.end(); it++) {
+				messageText += (*it)->GetInformationDescription();
 				messageText += '\n';
 			}
 

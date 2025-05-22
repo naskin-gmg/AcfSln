@@ -40,7 +40,7 @@ protected:
 	bool CalculateCalibration(const iimg::IBitmap& image, icalib::CPerspectiveCalibration2d& result) const;
 
 	// reimplemented (iinsp::TSupplierCompWrap)
-	virtual int ProduceObject(ProductType& result) const;
+	virtual iinsp::ISupplier::WorkStatus ProduceObject(ProductType& result) const;
 
 private:
 	I_REF(iimg::IBitmapProvider, m_bitmapProviderCompPtr);

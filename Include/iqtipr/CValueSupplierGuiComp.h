@@ -36,6 +36,9 @@ public:
 	
 	CValueSupplierGuiComp();
 
+signals:
+	void OnSupplierParamsChangedSignal();
+
 protected Q_SLOTS:
 	void on_TestButton_clicked();
 	void on_LoadParamsButton_clicked();

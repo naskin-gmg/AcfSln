@@ -54,9 +54,9 @@ bool CSupplierActivationProxyComp::IsStateFixed() const
 
 // reimplemented (iinsp::ISupplier)
 
-int CSupplierActivationProxyComp::GetWorkStatus() const
+iinsp::ISupplier::WorkStatus CSupplierActivationProxyComp::GetWorkStatus() const
 {
-	int retVal = WS_INVALID;
+	iinsp::ISupplier::WorkStatus retVal = WS_INVALID;
 
 	if (m_slaveSupplierCompPtr.IsValid() && IsSupplierEnabled()){
 		retVal = m_slaveSupplierCompPtr->GetWorkStatus();
@@ -108,7 +108,7 @@ void CSupplierActivationProxyComp::ClearWorkResults()
 }
 
 
-const ilog::IMessageContainer* CSupplierActivationProxyComp::GetWorkMessages(int containerType) const
+const ilog::IMessageContainer* CSupplierActivationProxyComp::GetWorkMessages(MessageContainerType containerType) const
 {
 	if (m_slaveSupplierCompPtr.IsValid() && IsSupplierEnabled()){
 		return m_slaveSupplierCompPtr->GetWorkMessages(containerType);

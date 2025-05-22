@@ -45,7 +45,7 @@ protected:
 		}
 
 		bool isSnapOk;
-		istd::TDelPtr<iimg::IBitmap> bitmapPtr;
+		iimg::IBitmapSharedPtr bitmapPtr;
 	};
 
 	typedef QVector<ImageInfo> ImageList;

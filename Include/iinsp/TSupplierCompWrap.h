@@ -25,7 +25,7 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (iinsp::CSupplierCompBase)
-	virtual int ProcessWorkOutput();
+	virtual iinsp::ISupplier::WorkStatus ProcessWorkOutput() override;
 
 	// reimplemented (iinsp::ISupplier)
 	virtual void ClearWorkResults();
@@ -41,7 +41,7 @@ protected:
 		Produce single object.
 		\return	work status. \sa iinsp::WorkStatus
 	*/
-	virtual int ProduceObject(Product& result) const = 0;
+	virtual iinsp::ISupplier::WorkStatus ProduceObject(Product& result) const = 0;
 
 protected:
 	istd::TDelPtr<Product> m_productPtr;
@@ -52,7 +52,7 @@ protected:
 
 // reimplemented (iinsp::CSupplierCompBase)
 template <class Product>
-int TSupplierCompWrap<Product>::ProcessWorkOutput()
+iinsp::ISupplier::WorkStatus TSupplierCompWrap<Product>::ProcessWorkOutput()
 {
 	if (!m_productPtr.IsValid()){
 		m_productPtr.SetPtr(new Product());

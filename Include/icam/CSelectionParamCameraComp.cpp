@@ -21,7 +21,7 @@ istd::CIndex2d CSelectionParamCameraComp::GetBitmapSize(const iprm::IParamsSet* 
 
 // reimplemented (iproc::IProcessor)
 
-int CSelectionParamCameraComp::GetProcessorState(const iprm::IParamsSet* paramsPtr) const
+iproc::IProcessor::ProcessorState CSelectionParamCameraComp::GetProcessorState(const iprm::IParamsSet* paramsPtr) const
 {
 	ParamSetPtr extParamsPtr(CreateParamsSet(paramsPtr));
 
@@ -43,7 +43,7 @@ bool CSelectionParamCameraComp::AreParamsAccepted(
 }
 
 
-int CSelectionParamCameraComp::DoProcessing(
+iproc::IProcessor::TaskState CSelectionParamCameraComp::DoProcessing(
 			const iprm::IParamsSet* paramsPtr,
 			const istd::IPolymorphic* inputPtr,
 			istd::IChangeable* outputPtr,
@@ -51,11 +51,12 @@ int CSelectionParamCameraComp::DoProcessing(
 {
 	ParamSetPtr extParamsPtr(CreateParamsSet(paramsPtr));
 
-	return BaseClass::DoProcessing(
+	return extParamsPtr != NULL ? BaseClass::DoProcessing(
 				extParamsPtr.GetPtr(),
 				inputPtr,
 				outputPtr,
-				progressManagerPtr);
+				progressManagerPtr)
+		: TS_INVALID;
 }
 
 
@@ -67,11 +68,12 @@ int CSelectionParamCameraComp::BeginTask(
 {
 	ParamSetPtr extParamsPtr(CreateParamsSet(paramsPtr));
 
-	int taskId = BaseClass::BeginTask(
+	int taskId = extParamsPtr != NULL ? BaseClass::BeginTask(
 				extParamsPtr.GetPtr(),
 				inputPtr,
 				outputPtr,
-				progressManagerPtr);
+				progressManagerPtr) 
+		: -1;
 
 	if (taskId >= 0){
 		m_paramsMap[taskId].TakeOver(extParamsPtr);
@@ -81,12 +83,12 @@ int CSelectionParamCameraComp::BeginTask(
 }
 
 
-int CSelectionParamCameraComp::WaitTaskFinished(
+iproc::IProcessor::TaskState CSelectionParamCameraComp::WaitTaskFinished(
 				int taskId,
 				double timeoutTime,
 				bool killOnTimeout)
 {
-	int retVal = BaseClass::WaitTaskFinished(
+	iproc::IProcessor::TaskState retVal = BaseClass::WaitTaskFinished(
 				taskId,
 				timeoutTime,
 				killOnTimeout);
@@ -146,7 +148,11 @@ const iprm::IParamsSet* CSelectionParamCameraComp::CreateParamsSet(const iprm::I
 		}
 	}
 
-	return new JoinParamsSet(paramsPtr, selectedParamsPtr);
+	if (selectedParamsPtr != NULL) {
+		return new JoinParamsSet(paramsPtr, selectedParamsPtr);
+	}
+
+	return NULL;
 }
 
 

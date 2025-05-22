@@ -46,11 +46,11 @@ public:
 				const QString* filePathPtr,
 				int flags,
 				bool beQuiet) const;
-	virtual int LoadFromFile(
+	virtual OperationState LoadFromFile(
 				istd::IChangeable& data,
 				const QString& filePath = QString(),
 				ibase::IProgressManager* progressManagerPtr = NULL) const;
-	virtual int SaveToFile(
+	virtual OperationState SaveToFile(
 				const istd::IChangeable& data,
 				const QString& filePath = QString(),
 				ibase::IProgressManager* progressManagerPtr = NULL) const;

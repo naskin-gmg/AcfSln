@@ -27,6 +27,60 @@ void CBlobFilterParams::SetSupportedProperties(const iprm::IOptionsList* feature
 
 // reimplemented (IBlobFilterParams)
 
+bool CBlobFilterParams::IsValueAcceptedByFilter(const int filterIdx, const double & value) const
+{
+	if (filterIdx < 0 || filterIdx >= m_filters.size()) {
+		return false;
+	}
+	const auto& filter = m_filters[filterIdx];
+
+	bool isGreater = value > filter.valueRange.GetMinValue();
+	bool isLess = value < filter.valueRange.GetMinValue();
+	bool isEqual = qFuzzyCompare(value, filter.valueRange.GetMinValue());
+	bool isGreaterEqual = isGreater || isEqual;
+	bool isLessEqual = isLess || isEqual;
+
+	switch (filter.condition) {
+	case iblob::IBlobFilterParams::FC_EQUAL:
+		return (filter.operation == iblob::IBlobFilterParams::FO_INCLUDE) ? isEqual : !isEqual;
+
+	case iblob::IBlobFilterParams::FC_NOT_EQUAL:
+		return (filter.operation == iblob::IBlobFilterParams::FO_INCLUDE) ? !isEqual : isEqual;
+
+	case iblob::IBlobFilterParams::FC_BETWEEN:
+	{
+		if (!filter.valueRange.IsValid())
+			return false;
+		bool valueInRange = filter.valueRange.Contains(value);
+		return (filter.operation == iblob::IBlobFilterParams::FO_INCLUDE) ? valueInRange : !valueInRange;
+	}
+
+	case iblob::IBlobFilterParams::FC_OUTSIDE:
+	{
+		if (!filter.valueRange.IsValid())
+			return false;
+		bool valueInRange = filter.valueRange.Contains(value);
+		return (filter.operation == iblob::IBlobFilterParams::FO_INCLUDE) ? !valueInRange : valueInRange;
+	}
+
+	case iblob::IBlobFilterParams::FC_GREATER:
+		return (filter.operation == iblob::IBlobFilterParams::FO_INCLUDE) ? isGreater : !isGreater;
+
+	case iblob::IBlobFilterParams::FC_GREATER_EQUAL:
+		return (filter.operation == iblob::IBlobFilterParams::FO_INCLUDE) ? isGreaterEqual : !isGreaterEqual;
+
+	case iblob::IBlobFilterParams::FC_LESS:
+		return (filter.operation == iblob::IBlobFilterParams::FO_INCLUDE) ? isLess : !isLess;
+
+	case iblob::IBlobFilterParams::FC_LESS_EQUAL:
+		return (filter.operation == iblob::IBlobFilterParams::FO_INCLUDE) ? isLessEqual : !isLessEqual;
+
+	default:
+		return true;
+	}
+}
+
+
 const iprm::IOptionsList* CBlobFilterParams::GetSupportedProperties() const
 {
 	return m_supportedFeaturesListPtr;
@@ -105,6 +159,31 @@ const i2d::ICalibration2d* CBlobFilterParams::GetCalibration() const
 }
 
 
+// helper
+
+bool SerializeEnableFlag(iser::IArchive& archive, bool& filtersEnabled)
+{
+	static iser::CArchiveTag filterEnabledTag("BlobFilteringEnabled", "Blob filter enabled", iser::CArchiveTag::TT_LEAF);
+
+	if (archive.IsStoring()) {
+		archive.BeginTag(filterEnabledTag);
+		archive.Process(filtersEnabled);
+		archive.EndTag(filterEnabledTag);
+		return true;
+	}
+
+	// read & skip if needed
+	bool ok1 = archive.BeginTag(filterEnabledTag);
+	bool ok2 = archive.Process(filtersEnabled);
+
+	if (!ok1 || !ok2) {
+		filtersEnabled = true;	// enabled by default
+	}
+
+	return archive.EndTag(filterEnabledTag);
+}
+
+
 // reimplemented (iser::ISerializable)
 
 bool CBlobFilterParams::Serialize(iser::IArchive& archive)
@@ -116,14 +195,9 @@ bool CBlobFilterParams::Serialize(iser::IArchive& archive)
 	static iser::CArchiveTag filterOperationTag("FilterOperation", "Filter operation", iser::CArchiveTag::TT_LEAF, &filterTag);
 	static iser::CArchiveTag valueRangeTag("ValueRange", "Filter's value range", iser::CArchiveTag::TT_GROUP, &filterTag);
 
-	bool retVal = true;
-
 	istd::CChangeNotifier notifier(archive.IsStoring() ? NULL : this);
 
-	static iser::CArchiveTag filterEnabledTag("BlobFilteringEnabled", "Blob filter enabled", iser::CArchiveTag::TT_LEAF);
-	retVal = retVal && archive.BeginTag(filterEnabledTag);
-	retVal = retVal && archive.Process(m_filtersEnabled);
-	retVal = retVal && archive.EndTag(filterEnabledTag);
+	bool retVal = SerializeEnableFlag(archive, m_filtersEnabled);
 
 	int filterCount = m_filters.count();
 	retVal = retVal && archive.BeginMultiTag(filtersTag, filterTag, filterCount);

@@ -41,7 +41,7 @@ public:
 	virtual bool Login(const QString& userName, const QString& password) = 0;
 
 	/**
-		Log in user.
+		Log out user.
 		\return	true, if logout successful.
 	*/
 	virtual bool Logout() = 0;

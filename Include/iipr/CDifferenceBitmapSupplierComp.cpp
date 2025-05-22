@@ -59,7 +59,7 @@ bool CDifferenceBitmapSupplierComp::EnsureBitmapCreated(ProductType& result) con
 	}
 
 	if (!result.second.IsValid()){
-		result.second.SetPtr(m_bitmapCompFact.CreateInstance());
+		result.second.FromUnique(m_bitmapCompFact.CreateInstance());
 	}
 
 	return result.second.IsValid();
@@ -68,7 +68,7 @@ bool CDifferenceBitmapSupplierComp::EnsureBitmapCreated(ProductType& result) con
 
 // reimplemented (iinsp::TSupplierCompWrap)
 
-int CDifferenceBitmapSupplierComp::ProduceObject(ProductType& result) const
+iinsp::ISupplier::WorkStatus CDifferenceBitmapSupplierComp::ProduceObject(ProductType& result) const
 {
 	if (!m_firstBitmapProviderCompPtr.IsValid() || !m_secondBitmapProviderCompPtr.IsValid()){
 		return WS_FAILED;

@@ -35,20 +35,20 @@ public:
 	virtual bool DoCaliper(
 				const imeas::IDataSequence& derivative,
 				const ICaliperParams* paramsPtr,
-				IFeaturesConsumer& results);
+				IFeaturesConsumer& results) override;
 
 	// reimplemented (iproc::IProcessor)
-	virtual int DoProcessing(
+	virtual iproc::IProcessor::TaskState DoProcessing(
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,
 				istd::IChangeable* outputPtr,
-				ibase::IProgressManager* progressManagerPtr = NULL);
+				ibase::IProgressManager* progressManagerPtr = NULL) override;
 
 	// reimplemented (iipr::IFeatureToProjectionMapper)
 	virtual bool GetProjectionPosition(
 				const imeas::INumericValue& feature,
 				const iprm::IParamsSet* paramsPtr,
-				double& result) const;
+				double& result) const override;
 
 private:
 	I_ATTR(QByteArray, m_caliperParamsIdAttrPtr);

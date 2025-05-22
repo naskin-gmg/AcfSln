@@ -61,10 +61,14 @@ public:
 		I_REGISTER_INTERFACE(ISupplier);
 		I_REGISTER_SUBELEMENT(TaskLog);
 		I_REGISTER_SUBELEMENT_INTERFACE(TaskLog, ilog::IMessageConsumer, ExtractTaskLog);
+		I_REGISTER_SUBELEMENT_INTERFACE(TaskLog, ilog::IMessageContainer, ExtractTaskLog);
+		I_REGISTER_SUBELEMENT_INTERFACE(TaskLog, imod::IModel, ExtractTaskLog);
 		I_REGISTER_SUBELEMENT_INTERFACE(TaskLog, istd::IPolymorphic, ExtractTaskLog);
 		I_REGISTER_SUBELEMENT(TempMessages);
 		I_REGISTER_SUBELEMENT_INTERFACE(TempMessages, ilog::IMessageConsumer, ExtractTempMessages);
 		I_REGISTER_SUBELEMENT_INTERFACE(TempMessages, istd::IPolymorphic, ExtractTempMessages);
+		I_REGISTER_SUBELEMENT_INTERFACE(TempMessages, ilog::IMessageContainer, ExtractTempMessages);
+		I_REGISTER_SUBELEMENT_INTERFACE(TempMessages, imod::IModel, ExtractTempMessages);
 		I_ASSIGN(m_diagnosticNameAttrPtr, "DiagnosticName", "Name of this supplier for diagnostic, if it is not set, no diagnostic log message will be send", false, "");
 		I_ASSIGN(m_paramsSetCompPtr, "ParamsSet", "Parameters set describing model parameter used to produce results", false, "ParamsSet");
 		I_ASSIGN_TO(m_paramsSetModelCompPtr, m_paramsSetCompPtr, false);
@@ -74,13 +78,13 @@ public:
 	CSupplierCompBase();
 
 	// reimplemented (iinsp::ISupplier)
-	virtual int GetWorkStatus() const override;
+	virtual iinsp::ISupplier::WorkStatus GetWorkStatus() const override;
 	virtual imod::IModel* GetWorkStatusModel() const override;
 	virtual void InvalidateSupplier() override;
 	virtual void EnsureWorkInitialized() override;
 	virtual void EnsureWorkFinished() override;
 	virtual void ClearWorkResults() override;
-	virtual const ilog::IMessageContainer* GetWorkMessages(int containerType) const override;
+	virtual const ilog::IMessageContainer* GetWorkMessages(MessageContainerType containerType) const override;
 	virtual iprm::IParamsSet* GetModelParametersSet() const override;
 
 protected:
@@ -101,11 +105,11 @@ protected:
 	public:
 		Status();
 
-		int GetSupplierState() const;
-		void SetSupplierState(int state);
+		iinsp::ISupplier::WorkStatus GetSupplierState() const;
+		void SetSupplierState(iinsp::ISupplier::WorkStatus state);
 
 	private:
-		int m_state;
+		iinsp::ISupplier::WorkStatus m_state;
 	};
 
 	typedef imod::TModelWrap<Status> StatusModel;
@@ -156,13 +160,16 @@ protected:
 								If this container is not supported, message object will be deleted.
 	*/
 	virtual void AddMessage(const istd::IInformationProvider* messagePtr, int containerType = MCT_RESULTS) const;
+	
+	// helper method with simpler interface
+	void AddMessage(istd::IInformationProvider::InformationCategory category, const QString& text, int id = 0, int containerType = MCT_RESULTS) const;
 
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated() override;
 	virtual void OnComponentDestroyed() override;
 
 	// abstract methods
-	virtual int ProcessWorkOutput() = 0;
+	virtual iinsp::ISupplier::WorkStatus ProcessWorkOutput() = 0;
 
 	typedef imod::TModelWrap<ilog::CMessageContainer> MessageContainer;
 	mutable MessageContainer m_messageContainers[MTC_LAST + 1];
@@ -224,7 +231,7 @@ private:
 	iprm::IParamsSet* m_paramsSetPtr;
 
 	StatusModel m_workStatus;
-	int m_lastWorkState;
+	iinsp::ISupplier::WorkStatus m_lastWorkState;
 	bool m_isInputValid;
 
 	bool m_areParametersValid;

@@ -37,15 +37,20 @@ public:
 
 	/**
 		Get group number this user belongs.
-		\return number of group, or -1 if this user is disabled.
+		\return number of group, or <= 0 if this user is disabled.
 	*/
 	int GetUserGroup() const;
 
 	/**
 		Set group number this user belongs.
-		\param	group	group number, or -1 if this user is disabled.
+		\param	group	group number, or <= 0 if this user is disabled.
 	*/
 	void SetUserGroup(int group);
+
+	/**
+	* Checks if user is enabled.
+	*/
+	bool IsEnabled() const;
 
 	/**
 		Set password of this user.

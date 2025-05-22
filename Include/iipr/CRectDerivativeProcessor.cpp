@@ -95,7 +95,7 @@ bool CRectDerivativeProcessor::DoDerivativeProcessing(const imeas::IDataSequence
 
 // reimplemented (iproc::IProcessor)
 
-int CRectDerivativeProcessor::DoProcessing(
+iproc::IProcessor::TaskState CRectDerivativeProcessor::DoProcessing(
 			const iprm::IParamsSet* paramsPtr,
 			const istd::IPolymorphic* inputPtr,
 			istd::IChangeable* outputPtr,

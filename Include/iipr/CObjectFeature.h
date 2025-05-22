@@ -30,6 +30,7 @@ public:
 
 	double GetAngle() const;
 	i2d::CVector2d GetScale() const;
+	void SetScale(const i2d::CVector2d& scale);
 
 	QByteArray GetObjectId() const;
 	void SetObjectId(const QByteArray& objectId);

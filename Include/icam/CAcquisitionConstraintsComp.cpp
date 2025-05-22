@@ -45,7 +45,7 @@ bool CAcquisitionConstraintsComp::IsTriggerModeSupported(int triggerMode) const
 
 // reimplemented (icam::IExposureConstraints)
 
-istd::CRange CAcquisitionConstraintsComp::GetShutterTimeRange() const
+istd::CRange CAcquisitionConstraintsComp::GetShutterTimeRange(int /*cameraIndex*/) const
 {
 	Q_ASSERT(m_minShutterTimeAttrPtr.IsValid());
 	Q_ASSERT(m_maxShutterTimeAttrPtr.IsValid());
@@ -54,7 +54,7 @@ istd::CRange CAcquisitionConstraintsComp::GetShutterTimeRange() const
 }
 
 
-istd::CRange CAcquisitionConstraintsComp::GetDelayTimeRange() const
+istd::CRange CAcquisitionConstraintsComp::GetDelayTimeRange(int /*cameraIndex*/) const
 {
 	Q_ASSERT(m_minDelayTimeAttrPtr.IsValid());
 	Q_ASSERT(m_maxDelayTimeAttrPtr.IsValid());
@@ -63,12 +63,21 @@ istd::CRange CAcquisitionConstraintsComp::GetDelayTimeRange() const
 }
 
 
-istd::CRange CAcquisitionConstraintsComp::GetEenDelayRange() const
+istd::CRange CAcquisitionConstraintsComp::GetEenDelayRange(int /*cameraIndex*/) const
 {
 	Q_ASSERT(m_minEenDelayAttrPtr.IsValid());
 	Q_ASSERT(m_maxEenDelayAttrPtr.IsValid());
 
 	return istd::CRange(*m_minEenDelayAttrPtr, *m_maxEenDelayAttrPtr);
+}
+
+
+istd::CIntRange CAcquisitionConstraintsComp::GetGainRange(int /*cameraIndex*/) const
+{
+	Q_ASSERT(m_minGainAttrPtr.IsValid());
+	Q_ASSERT(m_maxGainAttrPtr.IsValid());
+
+	return istd::CIntRange(*m_minGainAttrPtr, *m_maxGainAttrPtr);
 }
 
 

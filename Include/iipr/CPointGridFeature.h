@@ -16,6 +16,8 @@ public:
 	typedef TWeightedFeatureWrap<icalib::CPointGrid> BaseClass;
 
 	CPointGridFeature();
+	bool AddChaurcoIds(const std::vector<int>& ids);
+	const std::vector<int>& GetCharucoIds() const;
 
 	// reimplemented (imeas::INumericValue)
 	virtual bool IsValueTypeSupported(ValueTypeId valueTypeId) const override;
@@ -23,6 +25,9 @@ public:
 
 	// reimplemented (istd::IChangeable)
 	virtual istd::IChangeable* CloneMe(CompatibilityMode mode = CM_WITHOUT_REFS) const override;
+
+private:
+	std::vector<int> m_charucoIds;
 };
 
 

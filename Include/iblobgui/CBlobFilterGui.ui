@@ -6,11 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>612</width>
-    <height>38</height>
+    <width>273</width>
+    <height>73</height>
    </rect>
   </property>
-  <layout class="QHBoxLayout" name="horizontalLayout">
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="windowTitle">
+   <string notr="true"/>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
    <property name="leftMargin">
     <number>0</number>
    </property>
@@ -24,111 +33,139 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="QComboBox" name="ParameterCombo">
-     <property name="sizeAdjustPolicy">
-      <enum>QComboBox::AdjustToContentsOnFirstShow</enum>
-     </property>
-     <property name="minimumContentsLength">
-      <number>10</number>
-     </property>
-    </widget>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="0" column="0">
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QComboBox" name="ParameterCombo">
+         <property name="sizeAdjustPolicy">
+          <enum>QComboBox::AdjustToContentsOnFirstShow</enum>
+         </property>
+         <property name="minimumContentsLength">
+          <number>10</number>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="ConditionCombo">
+         <property name="sizeAdjustPolicy">
+          <enum>QComboBox::AdjustToMinimumContentsLength</enum>
+         </property>
+         <property name="minimumContentsLength">
+          <number>10</number>
+         </property>
+         <item>
+          <property name="text">
+           <string>Between</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Outside</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Equal</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Not Equal</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Greater</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Greater Or Equal</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Less</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Less Or Equal</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="0" column="1" rowspan="2">
+      <widget class="QToolButton" name="RemoveButton">
+       <property name="icon">
+        <iconset resource="../../../Acf/Include/iqtgui/iqtgui.qrc">
+         <normaloff>:/Icons/Delete</normaloff>:/Icons/Delete</iconset>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <widget class="QDoubleSpinBox" name="Value1SpinBox">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="maximum">
+          <double>100000.000000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="AndLabel">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>and</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QDoubleSpinBox" name="Value2SpinBox">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="maximum">
+          <double>100000.000000000000000</double>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
    </item>
    <item>
-    <widget class="QComboBox" name="ConditionCombo">
-     <property name="sizeAdjustPolicy">
-      <enum>QComboBox::AdjustToMinimumContentsLength</enum>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
      </property>
-     <property name="minimumContentsLength">
-      <number>10</number>
+     <property name="sizeType">
+      <enum>QSizePolicy::MinimumExpanding</enum>
      </property>
-     <item>
-      <property name="text">
-       <string>Between</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Outside</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Equal</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Not Equal</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Greater</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Greater Or Equal</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Less</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Less Or Equal</string>
-      </property>
-     </item>
-    </widget>
-   </item>
-   <item>
-    <widget class="QDoubleSpinBox" name="Value1SpinBox">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>12</height>
+      </size>
      </property>
-     <property name="maximum">
-      <double>10000.000000000000000</double>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QLabel" name="AndLabel">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="text">
-      <string>and</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QDoubleSpinBox" name="Value2SpinBox">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="maximum">
-      <double>10000.000000000000000</double>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QToolButton" name="RemoveButton">
-     <property name="icon">
-      <iconset resource="../../../Acf/Include/iqtgui/iqtgui.qrc">
-       <normaloff>:/Icons/Delete</normaloff>:/Icons/Delete</iconset>
-     </property>
-    </widget>
+    </spacer>
    </item>
   </layout>
  </widget>

@@ -74,7 +74,7 @@ public:
 		\return	work status defined in iinsp::ISupplier::WorkStatus.
 		\sa GetWorkStatusModel
 	*/
-	virtual int GetWorkStatus() const = 0;
+	virtual WorkStatus GetWorkStatus() const = 0;
 
 	/**
 		Get access to the status model of the supplier.
@@ -111,7 +111,7 @@ public:
 		If the supplier doesn't support list of messages, it returns NULL.
 		\param	containerType	type of message container, \sa MessageContainerType.
 	*/
-	virtual const ilog::IMessageContainer* GetWorkMessages(int containerType) const = 0;
+	virtual const ilog::IMessageContainer* GetWorkMessages(MessageContainerType containerType) const = 0;
 
 	/**
 		Get parameter set using by this supplier.
@@ -120,6 +120,10 @@ public:
 	*/
 	virtual iprm::IParamsSet* GetModelParametersSet() const = 0;
 };
+
+
+typedef istd::TUniqueInterfacePtr<iinsp::ISupplier> ISupplierUniquePtr;
+typedef istd::TSharedInterfacePtr<iinsp::ISupplier> ISupplierSharedPtr;
 
 
 } // namespace iinsp

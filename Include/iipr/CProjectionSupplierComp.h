@@ -38,7 +38,7 @@ public:
 
 protected:
 	// reimplemented (iinsp::TSupplierCompWrap)
-	virtual int ProduceObject(imeas::CGeneralDataSequence& result) const;
+	virtual iinsp::ISupplier::WorkStatus ProduceObject(imeas::CGeneralDataSequence& result) const;
 
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();

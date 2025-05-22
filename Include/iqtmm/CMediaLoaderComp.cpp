@@ -53,7 +53,7 @@ bool CMediaLoaderComp::IsOperationSupported(
 }
 
 
-int CMediaLoaderComp::LoadFromFile(
+ifile::IFilePersistence::OperationState CMediaLoaderComp::LoadFromFile(
 			istd::IChangeable& data,
 			const QString& filePath,
 			ibase::IProgressManager* /*progressManagerPtr*/) const
@@ -77,7 +77,7 @@ int CMediaLoaderComp::LoadFromFile(
 }
 
 
-int CMediaLoaderComp::SaveToFile(
+ifile::IFilePersistence::OperationState CMediaLoaderComp::SaveToFile(
 			const istd::IChangeable&/* data*/,
 			const QString&/* filePath*/,
 			ibase::IProgressManager* /*progressManagerPtr*/) const

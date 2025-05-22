@@ -89,7 +89,7 @@ bool CCrossCorrelationProcessorComp::CalculateCorrelation(
 
 // reimplemented (iproc::IProcessor)
 
-int CCrossCorrelationProcessorComp::DoProcessing(
+iproc::IProcessor::TaskState CCrossCorrelationProcessorComp::DoProcessing(
 				const iprm::IParamsSet* /*paramsPtr*/,
 				const istd::IPolymorphic* inputPtr,
 				istd::IChangeable* outputPtr,

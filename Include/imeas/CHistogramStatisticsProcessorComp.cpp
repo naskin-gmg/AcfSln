@@ -23,7 +23,7 @@ namespace imeas
 
 // reimplemented (iproc::IProcessor)
 
-int CHistogramStatisticsProcessorComp::DoProcessing(
+iproc::IProcessor::TaskState CHistogramStatisticsProcessorComp::DoProcessing(
 				const iprm::IParamsSet* /*paramsPtr*/,
 				const istd::IPolymorphic* inputPtr,
 				istd::IChangeable* outputPtr,
@@ -49,7 +49,7 @@ int CHistogramStatisticsProcessorComp::DoProcessing(
 
 // reimplemented (imeas::IDataSequenceStatisticsProcessor)
 
-int CHistogramStatisticsProcessorComp::CalculateDataStatistics(
+iproc::IProcessor::TaskState CHistogramStatisticsProcessorComp::CalculateDataStatistics(
 			const imeas::IDataSequence& dataSequence,
 			imeas::IDataSequenceStatistics& dataStatistics) const
 {

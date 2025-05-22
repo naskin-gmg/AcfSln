@@ -7,11 +7,20 @@
     <x>0</x>
     <y>0</y>
     <width>285</width>
-    <height>100</height>
+    <height>151</height>
    </rect>
   </property>
   <layout class="QGridLayout">
-   <property name="margin">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
     <number>0</number>
    </property>
    <item row="0" column="0">
@@ -23,11 +32,14 @@
    </item>
    <item row="0" column="1">
     <widget class="QDoubleSpinBox" name="ShutterTimeSB">
+     <property name="decimals">
+      <number>0</number>
+     </property>
      <property name="maximum">
       <double>1000.000000000000000</double>
      </property>
      <property name="singleStep">
-      <double>0.010000000000000</double>
+      <double>5.000000000000000</double>
      </property>
     </widget>
    </item>
@@ -46,7 +58,7 @@
       </size>
      </property>
      <property name="text">
-      <string>ms</string>
+      <string>[us]</string>
      </property>
     </widget>
    </item>
@@ -59,11 +71,14 @@
    </item>
    <item row="1" column="1">
     <widget class="QDoubleSpinBox" name="DelayTimeSB">
+     <property name="decimals">
+      <number>0</number>
+     </property>
      <property name="maximum">
       <double>1000.000000000000000</double>
      </property>
      <property name="singleStep">
-      <double>0.010000000000000</double>
+      <double>5.000000000000000</double>
      </property>
     </widget>
    </item>
@@ -82,7 +97,7 @@
       </size>
      </property>
      <property name="text">
-      <string>ms</string>
+      <string>[us]</string>
      </property>
     </widget>
    </item>
@@ -95,11 +110,14 @@
    </item>
    <item row="2" column="1">
     <widget class="QDoubleSpinBox" name="EenDelayTimeSB">
+     <property name="decimals">
+      <number>0</number>
+     </property>
      <property name="maximum">
       <double>1000.000000000000000</double>
      </property>
      <property name="singleStep">
-      <double>0.010000000000000</double>
+      <double>5.000000000000000</double>
      </property>
     </widget>
    </item>
@@ -118,9 +136,38 @@
       </size>
      </property>
      <property name="text">
-      <string>ms</string>
+      <string>[us]</string>
      </property>
     </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QLabel" name="GainLabel">
+     <property name="text">
+      <string>Gain</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="2">
+    <widget class="QLabel" name="GainUnitLabel">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>32</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>[dB]</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1">
+    <widget class="QSpinBox" name="GainSB"/>
    </item>
   </layout>
  </widget>

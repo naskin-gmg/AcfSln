@@ -61,7 +61,7 @@ bool CSvgBitmapLoaderComp::IsOperationSupported(
 }
 
 
-int CSvgBitmapLoaderComp::LoadFromFile(
+ifile::IFilePersistence::OperationState CSvgBitmapLoaderComp::LoadFromFile(
 			istd::IChangeable& data,
 			const QString& filePath,
 			ibase::IProgressManager* /*progressManagerPtr*/) const
@@ -107,7 +107,7 @@ int CSvgBitmapLoaderComp::LoadFromFile(
 }
 
 
-int CSvgBitmapLoaderComp::SaveToFile(
+ifile::IFilePersistence::OperationState CSvgBitmapLoaderComp::SaveToFile(
 			const istd::IChangeable&/* data*/,
 			const QString&/* filePath*/,
 			ibase::IProgressManager* /*progressManagerPtr*/) const

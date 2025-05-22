@@ -12,6 +12,8 @@
 // ACF includes
 #include <istd/TDelPtr.h>
 #include <iview/CImageShape.h>
+#include <iimg/CBitmap.h>
+#include <icam/CCameraCommand.h>
 
 
 namespace iqtcam
@@ -22,7 +24,7 @@ CSnapImageGuiComp::CSnapImageGuiComp()
 :	m_paramsObserver(this)
 {
 	m_timer.setSingleShot(true);
-	QObject::connect(&m_timer, SIGNAL(timeout()), this, SLOT(OnTimerReady()));
+	QObject::connect(&m_timer, SIGNAL(timeout()), this, SLOT(OnTimerReady()), Qt::QueuedConnection);
 }
 
 
@@ -55,10 +57,19 @@ bool CSnapImageGuiComp::SnapImage()
 	bool retVal = false;
 
 	if (m_bitmapAcquisitionCompPtr.IsValid() && m_bitmapCompPtr.IsValid()){
-		int taskId = m_bitmapAcquisitionCompPtr->BeginTask(m_paramsSetCompPtr.GetPtr(), NULL, m_bitmapCompPtr.GetPtr());
+		icam::CCameraCommand readLast = icam::CCameraCommand(icam::ICameraCommand::CI_READ_LAST_IN_BUFFER);
+		int taskId = m_bitmapAcquisitionCompPtr->BeginTask(m_paramsSetCompPtr.GetPtr(), &readLast, m_bitmapCompPtr.GetPtr());
 		if (taskId >= 0){
 			retVal = m_bitmapAcquisitionCompPtr->WaitTaskFinished(-1, 1) != icam::IBitmapAcquisition::TS_INVALID;
 		}
+	}
+
+	if (!retVal && m_bitmapCompPtr.IsValid()) {
+		QPixmap errorPixmap(":/Icons/Error");
+		QImage errorImage = errorPixmap.toImage();
+		errorImage.setText("Error", "Error");
+		iimg::CBitmap errorBmp(errorImage);
+		m_bitmapCompPtr->CopyFrom(errorBmp);
 	}
 
 	UpdateButtonsState();
@@ -202,6 +213,10 @@ void CSnapImageGuiComp::on_SnapImageButton_clicked()
 	}
 	else{
 		SnapImage();
+
+		if (m_bitmapAcquisitionCompPtr.IsValid()) {
+			m_bitmapAcquisitionCompPtr->InitProcessor(m_paramsSetCompPtr.GetPtr());//stop camera
+		}
 	}
 }
 
@@ -275,6 +290,10 @@ void CSnapImageGuiComp::OnIntervalSnap(bool checked)
 
 		SnapImageButton->setChecked(false);
 		SnapImageButton->setCheckable(false);
+
+		if (m_bitmapAcquisitionCompPtr.IsValid()) {
+			m_bitmapAcquisitionCompPtr->InitProcessor(m_paramsSetCompPtr.GetPtr());//stop camera
+		}
 	}
 }
 
@@ -299,7 +318,11 @@ void CSnapImageGuiComp::OnSnapOnChanges(bool checked)
 void CSnapImageGuiComp::OnTimerReady()
 {
 	SnapImage();
-	m_timer.start();
+
+	if (IntervalSnapButton->isChecked())
+		m_timer.start(40); // 40 ms before the next snap
+	else if (m_bitmapAcquisitionCompPtr.IsValid())
+		m_bitmapAcquisitionCompPtr->InitProcessor(m_paramsSetCompPtr.GetPtr()); //stop camera
 }
 
 

@@ -62,6 +62,11 @@ public:
 		\return	true, if success.
 	*/
 	virtual bool SetEenDelay(double time) = 0;
+
+	virtual int GetGainValue() const = 0;
+	virtual bool SetGainValue(int gain) = 0;
+
+	virtual int GetCurrentCameraIndex() const = 0;
 };
 
 

@@ -11,11 +11,7 @@ namespace iipr
 
 const ISearchConstraints* CSearchParamsComp::GetSearchConstraints() const
 {
-	if (m_searchConstraintsCompPtr.IsValid()){
-		return m_searchConstraintsCompPtr.GetPtr();
-	}
-
-	return NULL;
+	return m_searchConstraintsCompPtr.IsValid() ? m_searchConstraintsCompPtr.GetPtr() : nullptr;
 }
 
 
@@ -28,6 +24,19 @@ void CSearchParamsComp::OnComponentCreated()
 	BaseClass::OnComponentCreated();
 
 	SetNominalModelsCount(*m_defaultModelOccuranceAttrPtr);
+
+	if (!m_defaultMinRotationAngleAttrPtr.IsValid() || !m_defaultMaxRotationAngleAttrPtr.IsValid())
+		return;
+
+	auto searchConstraints = GetSearchConstraints();
+	const double minAngle = searchConstraints
+		? std::max(*m_defaultMinRotationAngleAttrPtr, searchConstraints->GetRotationRangeConstraints().GetMinValue())
+		: *m_defaultMinRotationAngleAttrPtr;
+	const double maxAngle = searchConstraints
+		? std::min(*m_defaultMaxRotationAngleAttrPtr, searchConstraints->GetRotationRangeConstraints().GetMaxValue())
+		: *m_defaultMaxRotationAngleAttrPtr;
+
+	SetRotationRange(istd::CRange{ minAngle, maxAngle });
 }
 
 

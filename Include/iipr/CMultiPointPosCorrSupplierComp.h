@@ -49,7 +49,7 @@ protected:
 	iipr::IImageToFeatureProcessor* GetCompatibleProcessor(const iprm::IParamsSet* paramsSetPtr) const;
 
 	// reimplemented (iinsp::TSupplierCompWrap)
-	virtual int ProduceObject(ProductType& result) const;
+	virtual iinsp::ISupplier::WorkStatus ProduceObject(ProductType& result) const;
 
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();

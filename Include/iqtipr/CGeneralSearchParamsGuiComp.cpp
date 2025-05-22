@@ -19,14 +19,14 @@ void CGeneralSearchParamsGuiComp::OnGuiModelAttached()
 {
 	BaseClass::OnGuiModelAttached();
 
-	connect(MinScoreSB, SIGNAL(valueChanged(int)), this, SLOT(OnParamsChanged()));
-	connect(ModelOccurenceSB, SIGNAL(valueChanged(int)), this, SLOT(OnParamsChanged()));
-	connect(MinRotationSB, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged()));
-	connect(MaxRotationSB, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged()));
-	connect(MinScaleSB, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged()));
-	connect(MaxScaleSB, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged()));
-	connect(ScalingCB, SIGNAL(toggled(bool)), this, SLOT(OnParamsChanged()));
-	connect(RotationCB, SIGNAL(toggled(bool)), this, SLOT(OnParamsChanged()));
+	connect(MinScoreSB, qOverload<int>(&QSpinBox::valueChanged), this, &CGeneralSearchParamsGuiComp::OnParamsChanged);
+	connect(OccurrenceSB, qOverload<int>(&QSpinBox::valueChanged), this, &CGeneralSearchParamsGuiComp::OnParamsChanged);
+	connect(MinRotationSB, qOverload<double>(&QDoubleSpinBox::valueChanged), this, &CGeneralSearchParamsGuiComp::OnParamsChanged);
+	connect(MaxRotationSB, qOverload<double>(&QDoubleSpinBox::valueChanged), this, &CGeneralSearchParamsGuiComp::OnParamsChanged);
+	connect(MinScaleSB, qOverload<double>(&QDoubleSpinBox::valueChanged), this, &CGeneralSearchParamsGuiComp::OnParamsChanged);
+	connect(MaxScaleSB, qOverload<double>(&QDoubleSpinBox::valueChanged), this, &CGeneralSearchParamsGuiComp::OnParamsChanged);
+	connect(ScalingCB, &QCheckBox::toggled, this, &CGeneralSearchParamsGuiComp::OnParamsChanged);
+	connect(RotationCB, &QCheckBox::toggled, this, &CGeneralSearchParamsGuiComp::OnParamsChanged);
 }
 
 
@@ -41,7 +41,7 @@ void CGeneralSearchParamsGuiComp::UpdateModel() const
 
 	objectPtr->SetMinScore(MinScoreSB->value() / 100.0);
 
-	objectPtr->SetNominalModelsCount(ModelOccurenceSB->value());
+	objectPtr->SetNominalModelsCount(OccurrenceSB->value());
 
 	if (RotationCB->isChecked()){
 		objectPtr->SetRotationRange(istd::CRange(MinRotationSB->value(), MaxRotationSB->value()));
@@ -66,7 +66,7 @@ void CGeneralSearchParamsGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& 
 	iipr::ISearchParams* objectPtr = GetObservedObject();
 	if (objectPtr != NULL){
 		MinScoreSB->setValue(objectPtr->GetMinScore() * 100);
-		ModelOccurenceSB->setValue(objectPtr->GetNominalModelsCount());
+		OccurrenceSB->setValue(objectPtr->GetNominalModelsCount());
 		MinRotationSB->setValue(objectPtr->GetRotationRange().GetMinValue());
 		MaxRotationSB->setValue(objectPtr->GetRotationRange().GetMaxValue());
 		MinScaleSB->setValue(objectPtr->GetScaleRange().GetMinValue());
@@ -75,14 +75,14 @@ void CGeneralSearchParamsGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& 
 		const iipr::ISearchConstraints* constraintsPtr = objectPtr->GetSearchConstraints();
 		if (constraintsPtr != NULL){
 			const istd::CIntRange& modelCountRange = constraintsPtr->GetResultsCountConstraints();
-			ModelOccurenceSB->setRange(modelCountRange.GetMinValue(), modelCountRange.GetMaxValue());
-			ModelOccurenceSB->setSpecialValueText(modelCountRange.GetMinValue() < 0 ? tr("All") : "");
+			OccurrenceSB->setRange(modelCountRange.GetMinValue(), modelCountRange.GetMaxValue());
+			OccurrenceSB->setSpecialValueText(modelCountRange.GetMinValue() < 0 ? tr("All") : "");
 
 			int supportedFlags = constraintsPtr->GetSearchSupportedFlags();
 			if ((supportedFlags & iipr::ISearchConstraints::SSF_ROTATION) != 0){
 				const istd::CRange& range = constraintsPtr->GetRotationRangeConstraints();
-				MinRotationSB->setRange(range.GetMinValue(), range.GetMaxValue());
-				MaxRotationSB->setRange(range.GetMinValue(), range.GetMaxValue());
+				MinRotationSB->setRange(std::max(range.GetMinValue(), MinRotationSB->minimum()), std::min(MinRotationSB->maximum(), range.GetMaxValue()));
+				MaxRotationSB->setRange(std::max(range.GetMinValue(), MaxRotationSB->minimum()), std::min(MaxRotationSB->maximum(), range.GetMaxValue()));
 
 				RotationCB->setChecked(!objectPtr->GetRotationRange().IsEmpty());
 			}
@@ -105,11 +105,35 @@ void CGeneralSearchParamsGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& 
 				MaxScaleSB->setEnabled(false);
 			}
 		}
+		else {
+			RotationCB->setChecked(!objectPtr->GetRotationRange().IsEmpty());
+			ScalingCB->setChecked(!objectPtr->GetScaleRange().IsEmpty());
+		}
 	}
 }
 
 
 // reimplemented (iqtgui::CGuiComponentBase)
+
+void CGeneralSearchParamsGuiComp::OnGuiCreated()
+{
+	BaseClass::OnGuiCreated();
+
+	OccurrenceLabel->setVisible(!*m_hideOccurrenceAttrPtr);
+	OccurrenceSB->setVisible(!*m_hideOccurrenceAttrPtr);
+
+	ScalingCB->setVisible(!*m_hideScalingAttrPtr);
+	ScalingLabelFrom->setVisible(!*m_hideScalingAttrPtr);
+	ScalingLabelTo->setVisible(!*m_hideScalingAttrPtr);
+	MinScaleSB->setVisible(!*m_hideScalingAttrPtr);
+	MaxScaleSB->setVisible(!*m_hideScalingAttrPtr);
+
+	RotationCB->setVisible(!*m_hideRotationAttrPtr);
+	RotationLabelFrom->setVisible(!*m_hideRotationAttrPtr);
+	RotationLabelTo->setVisible(!*m_hideRotationAttrPtr);
+	MinRotationSB->setVisible(!*m_hideRotationAttrPtr);
+	MaxRotationSB->setVisible(!*m_hideRotationAttrPtr);
+}
 
 void CGeneralSearchParamsGuiComp::OnGuiRetranslate()
 {

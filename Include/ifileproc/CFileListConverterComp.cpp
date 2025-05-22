@@ -15,9 +15,9 @@ namespace ifileproc
 
 // public methods
 
-// reimplemented (iproc:IProcessor)
+// reimplemented (iproc::IProcessor)
 
-int CFileListConverterComp::DoProcessing(
+iproc::IProcessor::TaskState CFileListConverterComp::DoProcessing(
 			const iprm::IParamsSet* paramsPtr,
 			const istd::IPolymorphic* inputPtr,
 			istd::IChangeable* outputPtr,

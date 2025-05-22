@@ -19,20 +19,23 @@ public:
 		Get range of posible shutter time (exposure time) values.
 		\return	range of shutter time, or empty range is this time cannot be controlled.
 	*/
-	virtual istd::CRange GetShutterTimeRange() const = 0;
+	virtual istd::CRange GetShutterTimeRange(int cameraIndex) const = 0;
 
 	/**
 		Get range of posible delay time values.
 		Delay time is time between trigger and exposure begin.
 		\return	range of delay time, or empty range is this time cannot be controlled.
 	*/
-	virtual istd::CRange GetDelayTimeRange() const = 0;
+	virtual istd::CRange GetDelayTimeRange(int cameraIndex) const = 0;
 
 	/**
 		Get range of posible exposure enabled (EEN) signal delay time values.
 		\return	range of delay time, or empty range is this time cannot be controlled.
 	*/
-	virtual istd::CRange GetEenDelayRange() const = 0;
+	virtual istd::CRange GetEenDelayRange(int cameraIndex) const = 0;
+
+	// Gain range
+	virtual istd::CIntRange GetGainRange(int cameraIndex) const = 0;
 };
 
 

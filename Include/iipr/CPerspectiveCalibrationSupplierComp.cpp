@@ -130,7 +130,7 @@ bool CPerspectiveCalibrationSupplierComp::CalculateCalibration(const iimg::IBitm
 
 // reimplemented (iinsp::TSupplierCompWrap)
 
-int CPerspectiveCalibrationSupplierComp::ProduceObject(ProductType& result) const
+iinsp::ISupplier::WorkStatus CPerspectiveCalibrationSupplierComp::ProduceObject(ProductType& result) const
 {
 	if (!m_bitmapProviderCompPtr.IsValid()){
 		return WS_FAILED;

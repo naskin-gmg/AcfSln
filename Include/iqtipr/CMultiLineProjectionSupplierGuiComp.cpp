@@ -44,6 +44,8 @@ void CMultiLineProjectionSupplierGuiComp::OnGuiCreated()
 	if (m_projectionObserverGuiCompPtr.IsValid()){
 		m_projectionObserverGuiCompPtr->CreateGui(ProjectionFrame);
 	}
+
+	connect(this, SIGNAL(OnSupplierParamsChangedSignal()), SLOT(on_TestButton_clicked()), Qt::QueuedConnection);
 }
 
 
@@ -127,7 +129,7 @@ void CMultiLineProjectionSupplierGuiComp::UpdateGui(const istd::IChangeable::Cha
 void CMultiLineProjectionSupplierGuiComp::OnSupplierParamsChanged()
 {
 	if (IsGuiCreated() && AutoUpdateButton->isChecked()){
-		QTimer::singleShot(1, this, SLOT(on_TestButton_clicked()));
+		emit OnSupplierParamsChangedSignal();
 	}
 }
 

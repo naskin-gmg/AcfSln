@@ -17,7 +17,7 @@ namespace iipr
 
 // reimplemented (iproc::IProcessor)
 
-int CImageFlipProcessorComp::DoProcessing(
+iproc::IProcessor::TaskState CImageFlipProcessorComp::DoProcessing(
 			const iprm::IParamsSet* paramsPtr,
 			const istd::IPolymorphic* inputPtr,
 			istd::IChangeable* outputPtr,

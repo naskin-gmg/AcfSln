@@ -23,6 +23,7 @@ const istd::IChangeable::ChangeSet s_setPositionChangeSet(imm::IMediaController:
 
 CFrameSeqVideoControllerComp::CFrameSeqVideoControllerComp()
 :	m_currentFrameIndex(-1),
+	m_isPlaying(false),
 	m_isFrameLoaded(false)
 {
 }
@@ -38,7 +39,7 @@ istd::CIndex2d CFrameSeqVideoControllerComp::GetBitmapSize(const iprm::IParamsSe
 
 // reimplemented (iproc::IProcessor)
 
-int CFrameSeqVideoControllerComp::DoProcessing(
+iproc::IProcessor::TaskState CFrameSeqVideoControllerComp::DoProcessing(
 			const iprm::IParamsSet* /*paramsPtr*/,
 			const istd::IPolymorphic* /*inputPtr*/,
 			istd::IChangeable* outputPtr,

@@ -169,7 +169,7 @@ bool CEdgeBasedFeaturesSupplierComp::InitializeWork()
 }
 
 
-int CEdgeBasedFeaturesSupplierComp::ProduceObject(ProductType& result) const
+iinsp::ISupplier::WorkStatus CEdgeBasedFeaturesSupplierComp::ProduceObject(ProductType& result) const
 {
 	if (		m_edgeLinesProviderCompPtr.IsValid() &&
 				m_searchProcessorCompPtr.IsValid()){

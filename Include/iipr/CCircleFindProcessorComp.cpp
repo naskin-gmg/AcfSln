@@ -36,7 +36,7 @@ CCircleFindProcessorComp::CCircleFindProcessorComp()
 
 // reimplemented (iipr::IImageToFeatureProcessor)
 
-int CCircleFindProcessorComp::DoExtractFeatures(
+iproc::IProcessor::TaskState CCircleFindProcessorComp::DoExtractFeatures(
 			const iprm::IParamsSet* paramsPtr,
 			const iimg::IBitmap& image,
 			IFeaturesConsumer& results,
@@ -162,7 +162,7 @@ int CCircleFindProcessorComp::DoExtractFeatures(
 
 // reimplemented (iproc::IProcessor)
 
-int CCircleFindProcessorComp::DoProcessing(
+iproc::IProcessor::TaskState CCircleFindProcessorComp::DoProcessing(
 			const iprm::IParamsSet* paramsPtr,
 			const istd::IPolymorphic* inputPtr,
 			istd::IChangeable* outputPtr,

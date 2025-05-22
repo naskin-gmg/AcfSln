@@ -27,7 +27,7 @@ const i2d::ICalibration2d* CTubeProjectionLinesProviderComp::GetCalibration() co
 
 // reimplemented (iipr::CMultiLineSupplierCompBase)
 
-int CTubeProjectionLinesProviderComp::ProduceObject(ProductType& result) const
+iinsp::ISupplier::WorkStatus CTubeProjectionLinesProviderComp::ProduceObject(ProductType& result) const
 {
 	result.clear();
 

@@ -169,5 +169,28 @@ bool CSearchParams::Serialize(iser::IArchive & archive)
 }
 
 
+// reimplemented (istd::IChangeable)
+
+bool CSearchParams::CopyFrom(const istd::IChangeable& object, istd::IChangeable::CompatibilityMode /*mode*/)
+{
+	if (const CSearchParams* sourcePtr = dynamic_cast<const CSearchParams*>(&object))
+	{
+		istd::CChangeNotifier notifier(this);
+
+		m_angleRange = sourcePtr->m_angleRange;
+		m_scaleRange = sourcePtr->m_scaleRange;
+		m_minScore = sourcePtr->m_minScore;
+		m_isRotationEnabled = sourcePtr->m_isRotationEnabled;
+		m_isScaleEnabled = sourcePtr->m_isScaleEnabled;
+		m_nominalModelsCount = sourcePtr->m_nominalModelsCount;
+
+		return true;
+	}
+
+	return false;
+}
+
+
 } // namespace iipr
+
 

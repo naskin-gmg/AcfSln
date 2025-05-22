@@ -153,7 +153,7 @@ bool CRegistryConsistInfoComp::IsElementValid(
 			}
 			else{
 				if (reasonConsumerPtr != NULL){
-					reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformationProvider>(new ilog::CMessage(
+					reasonConsumerPtr->AddMessage(ilog::IMessageConsumer::MessagePtr(new ilog::CMessage(
 								istd::IInformationProvider::IC_WARNING,
 								MI_COMPONENT_INACTIVE,
 								tr("Element %1 uses unknown embedded composite component %2").arg(QString(elementName)).arg(QString(elementAddress.GetComponentId())),
@@ -171,7 +171,7 @@ bool CRegistryConsistInfoComp::IsElementValid(
 	}
 	else{
 		if (reasonConsumerPtr != NULL){
-			reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformationProvider>(new ilog::CMessage(
+			reasonConsumerPtr->AddMessage(ilog::IMessageConsumer::MessagePtr(new ilog::CMessage(
 						istd::IInformationProvider::IC_ERROR,
 						MI_NO_ELEMENT_INFO,
 						tr("No element info available for %1").arg(QString(elementName)),
@@ -201,7 +201,7 @@ bool CRegistryConsistInfoComp::IsElementWithInfoValid(
 		int componentType = metaInfoPtr->GetComponentType();
 		if ((componentType != icomp::IComponentStaticInfo::CT_REAL) && (componentType != icomp::IComponentStaticInfo::CT_COMPOSITE)){
 			if (reasonConsumerPtr != NULL){
-				reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformationProvider>(new ilog::CMessage(
+				reasonConsumerPtr->AddMessage(ilog::IMessageConsumer::MessagePtr(new ilog::CMessage(
 							istd::IInformationProvider::IC_WARNING,
 							MI_COMPONENT_INACTIVE,
 							tr("Element %1 uses wrong defined component %2").arg(QString(elementName)).arg(elementInfo.address.ToString()),
@@ -232,7 +232,7 @@ bool CRegistryConsistInfoComp::IsElementWithInfoValid(
 	else{
 		if (!ignoreUndef){
 			if (reasonConsumerPtr != NULL){
-				reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformationProvider>(new ilog::CMessage(
+				reasonConsumerPtr->AddMessage(ilog::IMessageConsumer::MessagePtr(new ilog::CMessage(
 							istd::IInformationProvider::IC_WARNING,
 							MI_COMPONENT_INACTIVE,
 							tr("Element %1 uses inactive component %2").arg(QString(elementName)).arg(elementInfo.address.ToString()),
@@ -267,7 +267,7 @@ bool CRegistryConsistInfoComp::IsElementWithInfoValid(
 	}
 	else{
 		if (reasonConsumerPtr != NULL){
-			reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformationProvider>(new ilog::CMessage(
+			reasonConsumerPtr->AddMessage(ilog::IMessageConsumer::MessagePtr(new ilog::CMessage(
 						istd::IInformationProvider::IC_WARNING,
 						MI_COMPONENT_INACTIVE,
 						tr("Element %1 is not loaded").arg(QString(elementName)),
@@ -305,7 +305,7 @@ bool CRegistryConsistInfoComp::IsAttributeValid(
 				if (attrInfoPtr != NULL){
 					if (!AreTypesCompatible(attrMetaInfoPtr->GetAttributeTypeId(), attrInfoPtr->attributeTypeName)){
 						if (reasonConsumerPtr != NULL){
-							reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformationProvider>(new ilog::CMessage(
+							reasonConsumerPtr->AddMessage(ilog::IMessageConsumer::MessagePtr(new ilog::CMessage(
 										istd::IInformationProvider::IC_ERROR,
 										MI_BAD_ATTRIBUTE_TYPE,
 										tr("Attribute %1 in %2 is defined as %3, but in registry it has type %4")
@@ -336,7 +336,7 @@ bool CRegistryConsistInfoComp::IsAttributeValid(
 					else if (	attrInfoPtr->exportId.isEmpty() &&
 								((attrMetaInfoPtr->GetAttributeFlags() & icomp::IAttributeStaticInfo::AF_NULLABLE) == 0)){
 						if (reasonConsumerPtr != NULL){
-							reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformationProvider>(new ilog::CMessage(
+							reasonConsumerPtr->AddMessage(ilog::IMessageConsumer::MessagePtr(new ilog::CMessage(
 										istd::IInformationProvider::IC_ERROR,
 										MI_REF_NOT_RESOLVED,
 										tr("Reference or factory %1 in %2 cannot be undefined")
@@ -351,7 +351,7 @@ bool CRegistryConsistInfoComp::IsAttributeValid(
 				}
 				else if ((attrMetaInfoPtr->GetAttributeFlags() & icomp::IAttributeStaticInfo::AF_NULLABLE) == 0){
 					if (reasonConsumerPtr != NULL){
-						reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformationProvider>(new ilog::CMessage(
+						reasonConsumerPtr->AddMessage(ilog::IMessageConsumer::MessagePtr(new ilog::CMessage(
 									istd::IInformationProvider::IC_ERROR,
 									MI_REF_NOT_RESOLVED,
 									tr("Reference or factory %1 in %2 cannot be undefined")
@@ -366,7 +366,7 @@ bool CRegistryConsistInfoComp::IsAttributeValid(
 			}
 			else if (!ignoreUndef){
 				if (reasonConsumerPtr != NULL){
-					reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformationProvider>(new ilog::CMessage(
+					reasonConsumerPtr->AddMessage(ilog::IMessageConsumer::MessagePtr(new ilog::CMessage(
 								istd::IInformationProvider::IC_ERROR,
 								MI_UNDEF_ATTRIBUTE,
 								tr("Attribute %1 in %2 not exists in component specification")
@@ -382,7 +382,7 @@ bool CRegistryConsistInfoComp::IsAttributeValid(
 	}
 	else{
 		if (reasonConsumerPtr != NULL){
-			reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformationProvider>(new ilog::CMessage(
+			reasonConsumerPtr->AddMessage(ilog::IMessageConsumer::MessagePtr(new ilog::CMessage(
 						istd::IInformationProvider::IC_ERROR,
 						MI_NO_ELEMENT_INFO,
 						tr("No element %1 found").arg(QString(elementName)),
@@ -639,7 +639,7 @@ bool CRegistryConsistInfoComp::CheckPointedElementCompatibility(
 {
 	if ((attributeFlags & (icomp::IAttributeStaticInfo::AF_FACTORY | icomp::IAttributeStaticInfo::AF_REFERENCE)) == 0){
 		if (!ignoreUndef && (reasonConsumerPtr != NULL)){
-			reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformationProvider>(new ilog::CMessage(
+			reasonConsumerPtr->AddMessage(ilog::IMessageConsumer::MessagePtr(new ilog::CMessage(
 						istd::IInformationProvider::IC_ERROR,
 						MI_BAD_ATTRIBUTE_TYPE,
 						messagePrefix + tr("Attribute has incompatible registry entry"),
@@ -656,7 +656,7 @@ bool CRegistryConsistInfoComp::CheckPointedElementCompatibility(
 
 	if (!subId.isEmpty() && ((attributeFlags & icomp::IAttributeStaticInfo::AF_FACTORY) != 0)){
 		if (!ignoreUndef && (reasonConsumerPtr != NULL)){
-			reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformationProvider>(new ilog::CMessage(
+			reasonConsumerPtr->AddMessage(ilog::IMessageConsumer::MessagePtr(new ilog::CMessage(
 						istd::IInformationProvider::IC_ERROR,
 						MI_BAD_ATTRIBUTE_TYPE,
 						messagePrefix + tr("Factory try to access subcomponents '%1', which is allowed only for references").arg(QString(pointedElementName)),
@@ -675,7 +675,7 @@ bool CRegistryConsistInfoComp::CheckPointedElementCompatibility(
 		if ((pointedElementFlags & icomp::IRegistryElement::EF_IS_DETACHED) != 0){
 			if ((attributeFlags & icomp::IAttributeStaticInfo::AF_REFERENCE) != 0){
 				if (!ignoreUndef && (reasonConsumerPtr != NULL)){
-					reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformationProvider>(new ilog::CMessage(
+					reasonConsumerPtr->AddMessage(ilog::IMessageConsumer::MessagePtr(new ilog::CMessage(
 								istd::IInformationProvider::IC_ERROR,
 								MI_BAD_ATTRIBUTE_TYPE,
 								messagePrefix + tr("Reference try to access container-detached component '%1', please attach it").arg(QString(pointedElementName)),
@@ -689,7 +689,7 @@ bool CRegistryConsistInfoComp::CheckPointedElementCompatibility(
 		else{
 			if ((attributeFlags & icomp::IAttributeStaticInfo::AF_FACTORY) != 0){
 				if (!ignoreUndef && (reasonConsumerPtr != NULL)){
-					reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformationProvider>(new ilog::CMessage(
+					reasonConsumerPtr->AddMessage(ilog::IMessageConsumer::MessagePtr(new ilog::CMessage(
 								istd::IInformationProvider::IC_ERROR,
 								MI_BAD_ATTRIBUTE_TYPE,
 								messagePrefix + tr("Factory try to access container-attached component '%1', please detach it").arg(QString(pointedElementName)),
@@ -706,7 +706,7 @@ bool CRegistryConsistInfoComp::CheckPointedElementCompatibility(
 			const icomp::IElementStaticInfo* pointedMetaInfoPtr = m_envManagerCompPtr->GetComponentMetaInfo(pointedElementAddress);
 			if (pointedMetaInfoPtr == NULL){
 				if (!ignoreUndef && (reasonConsumerPtr != NULL)){
-					reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformationProvider>(new ilog::CMessage(
+					reasonConsumerPtr->AddMessage(ilog::IMessageConsumer::MessagePtr(new ilog::CMessage(
 								istd::IInformationProvider::IC_ERROR,
 								MI_COMPONENT_NOT_FOUND,
 								messagePrefix + tr("Reference or factory is set to %1, but it cannot be resolved").arg(QString(pointedElementName)),
@@ -722,7 +722,7 @@ bool CRegistryConsistInfoComp::CheckPointedElementCompatibility(
 
 				if (pointedMetaInfoPtr == NULL){
 					if (reasonConsumerPtr != NULL){
-						reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformationProvider>(new ilog::CMessage(
+						reasonConsumerPtr->AddMessage(ilog::IMessageConsumer::MessagePtr(new ilog::CMessage(
 									istd::IInformationProvider::IC_ERROR,
 									MI_COMPONENT_NOT_FOUND,
 									messagePrefix + tr("Reference or factory is set to %1, but its subelement cannot be found").arg(QString(pointedElementName)),
@@ -755,7 +755,7 @@ bool CRegistryConsistInfoComp::CheckPointedElementCompatibility(
 
 					if (pointedMetaInfoPtr == NULL){
 						if (reasonConsumerPtr != NULL){
-							reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformationProvider>(new ilog::CMessage(
+							reasonConsumerPtr->AddMessage(ilog::IMessageConsumer::MessagePtr(new ilog::CMessage(
 										istd::IInformationProvider::IC_ERROR,
 										MI_COMPONENT_NOT_FOUND,
 										messagePrefix + tr("Reference or factory is set to %1, but its subelement cannot be found").arg(QString(pointedElementName)),
@@ -778,7 +778,7 @@ bool CRegistryConsistInfoComp::CheckPointedElementCompatibility(
 			}
 			else{
 				if (reasonConsumerPtr != NULL){
-					reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformationProvider>(new ilog::CMessage(
+					reasonConsumerPtr->AddMessage(ilog::IMessageConsumer::MessagePtr(new ilog::CMessage(
 								istd::IInformationProvider::IC_ERROR,
 								MI_COMPONENT_NOT_FOUND,
 								messagePrefix + tr("Reference or factory uses embedded type '%1', but this type is undefined").arg(QString(pointedElementAddress.GetComponentId())),
@@ -792,7 +792,7 @@ bool CRegistryConsistInfoComp::CheckPointedElementCompatibility(
 	}
 	else{
 		if (reasonConsumerPtr != NULL){
-			reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformationProvider>(new ilog::CMessage(
+			reasonConsumerPtr->AddMessage(ilog::IMessageConsumer::MessagePtr(new ilog::CMessage(
 						istd::IInformationProvider::IC_ERROR,
 						MI_COMPONENT_NOT_FOUND,
 						messagePrefix + tr("Reference or factory contains '%1', but this element doesn't exist").arg(QString(pointedElementName)),
@@ -840,7 +840,7 @@ bool CRegistryConsistInfoComp::CheckPointedElementInfoCompatibility(
 						(supportedInterfaces.find(nonConstInterfaceName) != supportedInterfaces.end());
 			if (!isInterfaceCompatible){
 				if (reasonConsumerPtr != NULL){
-					reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformationProvider>(new ilog::CMessage(
+					reasonConsumerPtr->AddMessage(ilog::IMessageConsumer::MessagePtr(new ilog::CMessage(
 								istd::IInformationProvider::IC_ERROR,
 								MI_WRONG_INTERFACE,
 								messagePrefix + tr("Reference or factory points at '%1', but it doesn't implement interface %2")
@@ -887,7 +887,7 @@ bool CRegistryConsistInfoComp::CheckPointedElementInfoCompatibility(
 
 			if (!isCompatibleInterfaceFound){
 				if (reasonConsumerPtr != NULL){
-					reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformationProvider>(new ilog::CMessage(
+					reasonConsumerPtr->AddMessage(ilog::IMessageConsumer::MessagePtr(new ilog::CMessage(
 								istd::IInformationProvider::IC_ERROR,
 								MI_WRONG_INTERFACE,
 								messagePrefix + tr("Reference or factory points at '%1', but it doesn't implement any optional interface").arg(QString(pointedElementName)),
@@ -901,7 +901,7 @@ bool CRegistryConsistInfoComp::CheckPointedElementInfoCompatibility(
 	}
 	else if (!ignoreUndef){
 		if (reasonConsumerPtr != NULL){
-			reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformationProvider>(new ilog::CMessage(
+			reasonConsumerPtr->AddMessage(ilog::IMessageConsumer::MessagePtr(new ilog::CMessage(
 						istd::IInformationProvider::IC_WARNING,
 						MI_COMPOSITE_FOUND,
 						messagePrefix + tr("Reference or factory '%1' in '%2' points at '%3', but it is not accessible in actual configuration").arg(QString(pointedElementName)),

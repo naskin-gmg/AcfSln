@@ -69,6 +69,11 @@ I_EXPORT_COMPONENT(
 			"Numeric Values Parameter Constraints" IM_AUTHOR("\"Witold Gantzke\""));
 
 I_EXPORT_COMPONENT(
+			NumericParamsProxy,
+			"Simple proxy of numeric parameters",
+			"Numeric Values Parameter Proxy" IM_AUTHOR("\"DHDAM\""));
+
+I_EXPORT_COMPONENT(
 			LinearAdjustParams,
 			"Parameter with scale and offset for simple linear transformations",
 			"Parameter Scale Offset Shift Contrast Brightness Linear Power" IM_CATEGORY(I_DATA_MODEL) IM_TAG("Model Parameter") IM_AUTHOR("\"Witold Gantzke\""));

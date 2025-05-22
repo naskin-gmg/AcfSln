@@ -26,7 +26,7 @@ istd::CIndex2d CCameraDelegatorComp::GetBitmapSize(const iprm::IParamsSet* param
 
 // reimplemented (iproc::IProcessor)
 
-int CCameraDelegatorComp::GetProcessorState(const iprm::IParamsSet* paramsPtr) const
+iproc::IProcessor::ProcessorState CCameraDelegatorComp::GetProcessorState(const iprm::IParamsSet* paramsPtr) const
 {
 	const iprm::IParamsSet* workingParamsPtr = GetWorkingParamsSet(paramsPtr);
 
@@ -53,7 +53,7 @@ bool CCameraDelegatorComp::AreParamsAccepted(
 }
 
 
-int CCameraDelegatorComp::DoProcessing(
+iproc::IProcessor::TaskState CCameraDelegatorComp::DoProcessing(
 			const iprm::IParamsSet* paramsPtr,
 			const istd::IPolymorphic* inputPtr,
 			istd::IChangeable* outputPtr,
@@ -85,7 +85,7 @@ int CCameraDelegatorComp::BeginTask(
 }
 
 
-int CCameraDelegatorComp::WaitTaskFinished(
+iproc::IProcessor::TaskState CCameraDelegatorComp::WaitTaskFinished(
 				int taskId,
 				double timeoutTime,
 				bool killOnTimeout)
@@ -116,7 +116,7 @@ int CCameraDelegatorComp::GetReadyTask()
 }
 
 
-int CCameraDelegatorComp::GetTaskState(int taskId) const
+iproc::IProcessor::TaskState CCameraDelegatorComp::GetTaskState(int taskId) const
 {
 	if (m_slaveCameraCompPtr.IsValid()){
 		return m_slaveCameraCompPtr->GetTaskState(taskId);

@@ -12,6 +12,20 @@
 // ACF includes
 #include <istd/TDelPtr.h>
 #include <iview/CImageShape.h>
+#include <iimg/CBitmap.h>
+
+namespace
+{
+void SetErrorImageToBitmap(iimg::IBitmap& bitmap)
+{
+	QPixmap errorPixmap(":/Icons/Error");
+	QImage errorImage = errorPixmap.toImage();
+	errorImage.setText("Error", "Error");
+	iimg::CBitmap errorBmp(errorImage);
+
+	bitmap.CopyFrom(errorBmp);
+}
+}
 
 
 namespace iqtcam
@@ -56,10 +70,11 @@ bool CSnapImageParamsEditorComp::SnapImage()
 
 	if (m_bitmapAcquisitionCompPtr.IsValid() && m_bitmapCompPtr.IsValid()){
 		int taskId = m_bitmapAcquisitionCompPtr->BeginTask(GetObservedObject(), NULL, m_bitmapCompPtr.GetPtr());
-		if (taskId >= 0){
-			retVal = m_bitmapAcquisitionCompPtr->WaitTaskFinished(-1, 1) != icam::IBitmapAcquisition::TS_INVALID;
-		}
+		retVal = taskId >= 0 && m_bitmapAcquisitionCompPtr->WaitTaskFinished(-1, 1) != icam::IBitmapAcquisition::TS_INVALID;
 	}
+
+	if (!retVal && m_bitmapCompPtr.IsValid())
+		SetErrorImageToBitmap(*m_bitmapCompPtr);
 
 	UpdateButtonsState();
 
@@ -161,6 +176,15 @@ void CSnapImageParamsEditorComp::OnGuiHidden()
 	OnChangeSnapButton->setChecked(false);
 
 	BaseClass::OnGuiHidden();
+}
+
+
+void CSnapImageParamsEditorComp::OnGuiDesignChanged()
+{
+	BaseClass::OnGuiDesignChanged();
+
+	IntervalSnapButton->setIcon(GetIcon(":/Icons/AutoUpdate"));
+	SnapImageButton->setIcon(GetIcon(":/Icons/Play"));
 }
 
 

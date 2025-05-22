@@ -23,7 +23,7 @@ CMultiSourceSnapBitmapSupplierComp::CMultiSourceSnapBitmapSupplierComp()
 
 // reimplemented (CSnapBitmapSupplierCompBase)
 
-iimg::IBitmap* CMultiSourceSnapBitmapSupplierComp::CreateBitmap() const
+iimg::IBitmapUniquePtr CMultiSourceSnapBitmapSupplierComp::CreateBitmap() const
 {
 	return m_bitmapCompFact.CreateInstance();
 }
@@ -68,20 +68,39 @@ bool CMultiSourceSnapBitmapSupplierComp::InitializeWork()
 }
 
 
-// private methods
+// protected methods
 
-IBitmapAcquisition* CMultiSourceSnapBitmapSupplierComp::GetSelectedCamera(int* slectedIndexPtr) const
+bool CMultiSourceSnapBitmapSupplierComp::SetSelectedCamera(int cameraIndex) const
 {
-	if (slectedIndexPtr != NULL){
-		*slectedIndexPtr = -1;
+	if (cameraIndex < 0 || cameraIndex >= m_cameraListCompPtr.GetCount()) {
+		return false;
+	}
+
+	iprm::TParamsPtr<iprm::ISelectionParam> sourceSelectionParamPtr(GetModelParametersSet(), *m_sourceSelectionParamIdAttrPtr);
+	if (sourceSelectionParamPtr.IsValid()) {
+		int sourceIndex = sourceSelectionParamPtr->GetSelectedOptionIndex();
+		if (sourceIndex != cameraIndex) {
+			return GetModelParametersSet()->GetParameter<iprm::ISelectionParam>(*m_sourceSelectionParamIdAttrPtr)->SetSelectedOptionIndex(cameraIndex);
+		}
+		return true;
+	}
+
+	return false;
+}
+
+
+IBitmapAcquisition* CMultiSourceSnapBitmapSupplierComp::GetSelectedCamera(int* selectedIndexPtr) const
+{
+	if (selectedIndexPtr != NULL){
+		*selectedIndexPtr = -1;
 	}
 
 	iprm::TParamsPtr<iprm::ISelectionParam> sourceSelectionParamPtr(GetModelParametersSet(), *m_sourceSelectionParamIdAttrPtr);
 	if (sourceSelectionParamPtr.IsValid()){
 		int sourceIndex = sourceSelectionParamPtr->GetSelectedOptionIndex();
 		if ((sourceIndex >= 0) && (sourceIndex < m_cameraListCompPtr.GetCount())){
-			if (slectedIndexPtr != NULL){
-				*slectedIndexPtr = sourceIndex;
+			if (selectedIndexPtr != NULL){
+				*selectedIndexPtr = sourceIndex;
 			}
 			return m_cameraListCompPtr[sourceIndex];
 		}

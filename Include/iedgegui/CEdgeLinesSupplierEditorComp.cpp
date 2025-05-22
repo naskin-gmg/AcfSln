@@ -20,6 +20,7 @@ namespace iedgegui
 CEdgeLinesSupplierEditorComp::CEdgeLinesSupplierEditorComp()
 {
 	m_edgesColorSchema.SetPen(iview::IColorSchema::SP_NORMAL, QPen(Qt::blue));
+	connect(this, SIGNAL(OnSupplierParamsChangedSignal()), SLOT(on_ProcessButton_clicked()), Qt::QueuedConnection);
 }
 
 
@@ -38,7 +39,7 @@ QWidget* CEdgeLinesSupplierEditorComp::GetParamsWidget() const
 void CEdgeLinesSupplierEditorComp::OnSupplierParamsChanged()
 {
 	if (IsGuiCreated() && AutoUpdateButton->isChecked()){
-		QTimer::singleShot(1, this, SLOT(on_ProcessButton_clicked()));
+		emit OnSupplierParamsChangedSignal();
 	}
 }
 

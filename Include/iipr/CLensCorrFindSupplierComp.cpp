@@ -402,7 +402,7 @@ void CLensCorrFindSupplierComp::UpdateHoughSpace(
 
 // reimplemented (iinsp::TSupplierCompWrap)
 
-int CLensCorrFindSupplierComp::ProduceObject(ProductType& result) const
+iinsp::ISupplier::WorkStatus CLensCorrFindSupplierComp::ProduceObject(ProductType& result) const
 {
 	if (!m_bitmapProviderCompPtr.IsValid()){
 		return WS_FAILED;

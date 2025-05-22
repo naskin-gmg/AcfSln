@@ -11,7 +11,7 @@ namespace iipr
 
 // reimplemented (iproc::IProcessor)
 
-int CCheckerboardPatternGeneratorComp::DoProcessing(
+iproc::IProcessor::TaskState CCheckerboardPatternGeneratorComp::DoProcessing(
 			const iprm::IParamsSet* /*paramsPtr*/,
 			const istd::IPolymorphic* /*inputPtr*/,
 			istd::IChangeable* outputPtr,

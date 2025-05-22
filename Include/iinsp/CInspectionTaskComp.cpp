@@ -65,17 +65,24 @@ bool CInspectionTaskComp::Serialize(iser::IArchive& archive)
 
 		retVal = retVal && archive.BeginMultiTag(taskListTag, taskTag, subtasksCount);
 
-		if (!retVal || (!archive.IsStoring() && (subtasksCount != m_subtasksCompPtr.GetCount()))){
-			SendWarningMessage(MI_BAD_PARAMS_COUNT, "Bad number of parameter to serialize");
+		if (!retVal){
+			SendErrorMessage(MI_BAD_PARAMS_COUNT, QT_TR_NOOP(QString("Couldn't save / load the number of subtasks")));
 			return false;
 		}
 
-		for (int i = 0; i < subtasksCount; ++i){
+		if (!archive.IsStoring() && subtasksCount != m_subtasksCompPtr.GetCount()){
+			QString message = QT_TR_NOOP("Actual") + QString(" (%1)").arg(subtasksCount);
+			message += QT_TR_NOOP(" / expected") + QString(" (%1)").arg(m_subtasksCompPtr.GetCount());
+			message += QT_TR_NOOP(QString(" subtasks' number mismatch. Trying to restore first %1 tasks").arg(std::min(subtasksCount, m_subtasksCompPtr.GetCount())));
+			SendVerboseMessage(message);
+		}
+
+		for (int i = 0, size = std::min(subtasksCount, m_subtasksCompPtr.GetCount()); i < size; ++i){
 			retVal = retVal && archive.BeginTag(taskTag);
 
 			iinsp::ISupplier* taskPtr = m_subtasksCompPtr[i];
 			if (taskPtr == NULL){
-				SendCriticalMessage(MI_NO_SUBTASK, "No subtask connected");
+				SendCriticalMessage(MI_NO_SUBTASK, QT_TR_NOOP("No subtask connected"));
 				return false;
 			}
 
@@ -102,7 +109,7 @@ bool CInspectionTaskComp::Serialize(iser::IArchive& archive)
 
 // reimplemented (iinsp::ISupplier)
 
-int CInspectionTaskComp::GetWorkStatus() const
+iinsp::ISupplier::WorkStatus CInspectionTaskComp::GetWorkStatus() const
 {
 	return m_workStatus.GetSupplierState();
 }
@@ -116,6 +123,10 @@ imod::IModel* CInspectionTaskComp::GetWorkStatusModel() const
 
 void CInspectionTaskComp::InvalidateSupplier()
 {
+	if (m_selfTaskCompPtr.IsValid()) {
+		m_selfTaskCompPtr->InvalidateSupplier();
+	}
+
 	int inspectionsCount = m_subtasksCompPtr.GetCount();
 	for (int i = 0; i < inspectionsCount; ++i){
 		iinsp::ISupplier* supplierPtr = m_subtasksCompPtr[i];
@@ -138,6 +149,10 @@ void CInspectionTaskComp::InvalidateSupplier()
 void CInspectionTaskComp::EnsureWorkInitialized()
 {
 	istd::CChangeNotifier changeNotifier(this, &m_supplierResultsChangeSet);
+
+	if (m_selfTaskCompPtr.IsValid()) {
+		m_selfTaskCompPtr->EnsureWorkInitialized();
+	}
 
 	int inspectionsCount = m_subtasksCompPtr.GetCount();
 
@@ -188,6 +203,10 @@ void CInspectionTaskComp::EnsureWorkFinished()
 
 	istd::CGeneralTimeStamp timer;
 
+	if (m_selfTaskCompPtr.IsValid()) {
+		m_selfTaskCompPtr->EnsureWorkFinished();
+	}
+
 	int inspectionsCount = m_subtasksCompPtr.GetCount();
 	for (int i = 0; i < inspectionsCount; ++i){
 		iinsp::ISupplier* supplierPtr = m_subtasksCompPtr[i];
@@ -213,8 +232,9 @@ void CInspectionTaskComp::EnsureWorkFinished()
 		ilog::IMessageConsumer::MessagePtr messagePtr(new ilog::CMessage(
 				istd::IInformationProvider::IC_NONE,
 				MI_LOCAL,
-				QObject::tr("Processing took %1 ms").arg(timer.GetElapsed() * 1000),
-				*m_diagnosticNameAttrPtr));
+				QT_TR_NOOP(QString("Processing took %1 ms").arg(timer.GetElapsed() * 1000)),
+				*m_diagnosticNameAttrPtr,
+				"iinsp::CInspectionTaskComp"));
 		
 		m_resultMessages.AddMessage(messagePtr);
 	}
@@ -226,6 +246,10 @@ void CInspectionTaskComp::EnsureWorkFinished()
 void CInspectionTaskComp::ClearWorkResults()
 {
 	istd::CChangeNotifier changeNotifier(this, &m_supplierResultsChangeSet);
+
+	if (m_selfTaskCompPtr.IsValid()) {
+		m_selfTaskCompPtr->ClearWorkResults();
+	}
 
 	int inspectionsCount = m_subtasksCompPtr.GetCount();
 	for (int i = 0; i < inspectionsCount; ++i){
@@ -246,7 +270,7 @@ void CInspectionTaskComp::ClearWorkResults()
 }
 
 
-const ilog::IMessageContainer* CInspectionTaskComp::GetWorkMessages(int containerType) const
+const ilog::IMessageContainer* CInspectionTaskComp::GetWorkMessages(MessageContainerType containerType) const
 {
 	if (containerType == MCT_RESULTS){
 		return &m_resultMessages;
@@ -341,8 +365,8 @@ void CInspectionTaskComp::EnsureStatusKnown()
 						InformationCategory category = infoProviderPtr->GetInformationCategory();
 						if (category > m_resultCategory){
 							m_resultCategory = category;
-							m_resultDescription = infoProviderPtr->GetInformationDescription();
 						}
+						m_resultDescription = infoProviderPtr->GetInformationDescription();
 					}
 				}
 
@@ -451,7 +475,7 @@ CInspectionTaskComp::MessageContainer::MessageContainer(
 
 // reimplemented (ilog::IMessageContainer)
 
-int CInspectionTaskComp::MessageContainer::GetWorstCategory() const
+istd::IInformationProvider::InformationCategory CInspectionTaskComp::MessageContainer::GetWorstCategory() const
 {
 	if (m_containerType == MCT_RESULTS){
 		m_parentPtr->EnsureStatusKnown();
@@ -459,7 +483,7 @@ int CInspectionTaskComp::MessageContainer::GetWorstCategory() const
 		return m_parentPtr->m_resultCategory;
 	}
 	else{
-		int retVal = istd::IInformationProvider::IC_NONE;
+		istd::IInformationProvider::InformationCategory retVal = istd::IInformationProvider::IC_NONE;
 
 		int subtasksCount = m_parentPtr->m_subtasksCompPtr.GetCount();
 		for (int i = 0; i < subtasksCount; ++i){
@@ -468,7 +492,7 @@ int CInspectionTaskComp::MessageContainer::GetWorstCategory() const
 				const ilog::IMessageContainer* containerPtr = supplierPtr->GetWorkMessages(m_containerType);
 
 				if (containerPtr != NULL){
-					int category = containerPtr->GetWorstCategory();
+					istd::IInformationProvider::InformationCategory category = containerPtr->GetWorstCategory();
 
 					if (category > retVal){
 						retVal = category;
@@ -493,7 +517,8 @@ ilog::IMessageContainer::Messages CInspectionTaskComp::MessageContainer::GetMess
 			const ilog::IMessageContainer* containerPtr = supplierPtr->GetWorkMessages(m_containerType);
 
 			if (containerPtr != NULL){
-				retVal += containerPtr->GetMessages();
+				ilog::IMessageContainer::Messages messages = containerPtr->GetMessages();
+				retVal.insert(retVal.end(),messages.begin(), messages.end());
 			}
 		}
 	}
@@ -742,12 +767,12 @@ void CInspectionTaskComp::TaskStatusObserver::AfterUpdate(imod::IModel* modelPtr
 
 	m_parentPtr->m_isStatusKnown = false;
 
-	int supplierState = WS_INVALID;
+	iinsp::ISupplier::WorkStatus supplierState = WS_INVALID;
 	int inspectionsCount = m_parentPtr->m_subtasksCompPtr.GetCount();
 	for (int i = 0; i < inspectionsCount; ++i){
 		const iinsp::ISupplier* supplierPtr = m_parentPtr->m_subtasksCompPtr[i];
 		if (supplierPtr != NULL){
-			int workStatus = supplierPtr->GetWorkStatus();
+			iinsp::ISupplier::WorkStatus workStatus = supplierPtr->GetWorkStatus();
 			if (workStatus > supplierState){
 				supplierState = workStatus;
 			}
@@ -768,13 +793,13 @@ CInspectionTaskComp::Status::Status()
 }
 
 
-int CInspectionTaskComp::Status::GetSupplierState() const
+iinsp::ISupplier::WorkStatus CInspectionTaskComp::Status::GetSupplierState() const
 {
 	return m_state;
 }
 
 
-void CInspectionTaskComp::Status::SetSupplierState(int state)
+void CInspectionTaskComp::Status::SetSupplierState(iinsp::ISupplier::WorkStatus state)
 {
 	if (m_state != state){
 		istd::CChangeNotifier changeNotifier(this);

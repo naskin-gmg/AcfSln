@@ -15,7 +15,7 @@ namespace iipr
 
 // reimplemented (iproc::IProcessor)
 
-int CGrayToRgbProcessorComp::DoProcessing(
+iproc::IProcessor::TaskState CGrayToRgbProcessorComp::DoProcessing(
 				const iprm::IParamsSet* /*paramsPtr*/,
 				const istd::IPolymorphic* inputPtr,
 				istd::IChangeable* outputPtr,

@@ -25,7 +25,7 @@ CBlobFeature::CBlobFeature()
 CBlobFeature::CBlobFeature(
 			double area,
 			double perimeter,
-			const i2d::CVector2d & position,
+			const i2d::CVector2d& position,
 			double angle,
 			const i2d::CVector2d& scale,
 			const i2d::CPolygon& contour)
@@ -115,7 +115,7 @@ bool CBlobFeature::CopyFrom(const IChangeable& object, CompatibilityMode mode)
 
 		m_area = objectPtr->m_area;
 		m_perimeter = objectPtr->m_perimeter;
-		m_contour.CopyFrom(objectPtr->m_contour);
+		m_contour.CopyFrom(objectPtr->m_contour, mode);
 
 		BaseClass::CopyFrom(object, mode);
 
@@ -135,6 +135,44 @@ istd::IChangeable* CBlobFeature::CloneMe(CompatibilityMode mode) const
 	}
 
 	return NULL;
+}
+
+
+// reimplemented (i2d::IObject2d)
+
+void CBlobFeature::SetCalibration(const i2d::ICalibration2d* calibrationPtr, bool releaseFlag)
+{
+	BaseClass::SetCalibration(calibrationPtr, releaseFlag);
+
+	m_contour.SetCalibration(calibrationPtr, releaseFlag);
+}
+
+
+i2d::CRectangle CBlobFeature::GetBoundingBox() const
+{
+	return m_contour.GetBoundingBox();
+}
+
+
+bool CBlobFeature::Transform(
+	const i2d::ITransformation2d& transformation,
+	i2d::ITransformation2d::ExactnessMode mode,
+	double* errorFactorPtr)
+{
+	BaseClass::Transform(transformation, mode, errorFactorPtr);
+
+	return m_contour.Transform(transformation, mode, errorFactorPtr);
+}
+
+
+bool CBlobFeature::InvTransform(
+	const i2d::ITransformation2d& transformation,
+	i2d::ITransformation2d::ExactnessMode mode,
+	double* errorFactorPtr)
+{
+	BaseClass::InvTransform(transformation, mode, errorFactorPtr);
+
+	return m_contour.InvTransform(transformation, mode, errorFactorPtr);
 }
 
 

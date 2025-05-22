@@ -58,7 +58,7 @@ void DoCalculateRange(
 	istd::CIntRange lineRange(0, imageSize.GetX());
 
 	InputPixelType minValue = std::numeric_limits<InputPixelType>::max();	// initiate min to max and max to min - invalid range
-	InputPixelType maxValue = std::numeric_limits<InputPixelType>::min();
+	InputPixelType maxValue = std::numeric_limits<InputPixelType>::lowest();
 	Q_ASSERT(minValue > maxValue);
 
 	for (int y = 0; y < imageSize.GetY(); ++y){
@@ -332,7 +332,7 @@ bool CPreciseBlobProcessorComp::DoCalculateBlobs(
 		int ignoredBlobsCount = 0;
 
 		double scale = 1.0;
-		const i2d::ICalibration2d* calibrationPtr = filterParamsPtr->GetCalibration();
+		const i2d::ICalibration2d* calibrationPtr = filterParamsPtr != NULL ? filterParamsPtr->GetCalibration() : NULL;
 		if (calibrationPtr != NULL){
 			i2d::CAffine2d transform;
 			if (calibrationPtr->GetLocalInvTransform(i2d::CVector2d(0, 0), transform)){

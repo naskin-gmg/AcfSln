@@ -9,6 +9,35 @@
 
 namespace icalibgui
 {
+	
+
+// public methods
+
+CPerspectiveCalibEditorComp::CPerspectiveCalibEditorComp()
+	:m_currentViewPtr(NULL)
+{
+}
+
+
+// reimplemented (iqt2d::IViewExtender)
+
+void CPerspectiveCalibEditorComp::AddItemsToScene(iqt2d::IViewProvider* providerPtr, int /*flags*/)
+{
+	m_currentViewPtr = dynamic_cast<iview::CCalibratedViewBase*>(providerPtr->GetView());
+	if (m_currentViewPtr != NULL){
+		m_currentViewPtr->SetDisplayCalibration(m_calibrationCopyPtr.GetPtr());
+	}
+}
+
+
+void CPerspectiveCalibEditorComp::RemoveItemsFromScene(iqt2d::IViewProvider* providerPtr)
+{
+	iview::CCalibratedViewBase* viewPtr = dynamic_cast<iview::CCalibratedViewBase*>(providerPtr->GetView());
+	if (viewPtr != NULL){
+		viewPtr->SetDisplayCalibration(NULL);
+		m_currentViewPtr = NULL;
+	}
+}
 
 
 // protected methods
@@ -70,6 +99,8 @@ void CPerspectiveCalibEditorComp::UpdateGui(const istd::IChangeable::ChangeSet& 
 }
 
 
+// reimplemented (iqtgui::CGuiComponentBase)
+
 void CPerspectiveCalibEditorComp::OnGuiCreated()
 {
 	BaseClass::OnGuiCreated();
@@ -112,6 +143,23 @@ void CPerspectiveCalibEditorComp::OnGuiDestroyed()
 }
 
 
+// reimplemented (imod::IObserver)
+
+void CPerspectiveCalibEditorComp::AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet)
+{
+	icalib::CPerspectiveCalibration2d* objectPtr = GetObservedObject();
+	if (objectPtr != NULL){
+		m_calibrationCopyPtr.SetCastedOrRemove(objectPtr->CloneMe());
+	}
+
+	if (BaseClass::IsGuiCreated() && !changeSet.ContainsExplicit(istd::IChangeable::CF_DESTROYING) && m_currentViewPtr != NULL){
+		m_currentViewPtr->SetDisplayCalibration(m_calibrationCopyPtr.GetPtr());
+	}
+
+	BaseClass::AfterUpdate(modelPtr, changeSet);
+}
+
+
 // reimplemented (iqtgui::CGuiComponentBase)
 
 void CPerspectiveCalibEditorComp::OnModelChanged(int /*modelId*/, const istd::IChangeable::ChangeSet& /*changeSet*/)
@@ -120,6 +168,14 @@ void CPerspectiveCalibEditorComp::OnModelChanged(int /*modelId*/, const istd::IC
 
 	const i2d::ICalibration2d* calibrationPtr = m_calibProviderCompPtr->GetCalibration();
 	CalibrateButton->setEnabled(calibrationPtr != NULL);
+
+	if (calibrationPtr != NULL){
+		m_calibrationCopyPtr.SetCastedOrRemove(calibrationPtr->CloneMe());
+	}
+
+	if (m_currentViewPtr != NULL){
+		m_currentViewPtr->SetDisplayCalibration(m_calibrationCopyPtr.GetPtr());
+	}
 }
 
 

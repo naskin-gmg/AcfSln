@@ -29,7 +29,7 @@ CSupplierCompBase::CSupplierCompBase()
 
 // reimplemented (iinsp::ISupplier)
 
-int CSupplierCompBase::GetWorkStatus() const
+iinsp::ISupplier::WorkStatus CSupplierCompBase::GetWorkStatus() const
 {
 	return m_workStatus.GetSupplierState();
 }
@@ -126,7 +126,7 @@ void CSupplierCompBase::ClearWorkResults()
 }
 
 
-const ilog::IMessageContainer* CSupplierCompBase::GetWorkMessages(int containerType) const
+const ilog::IMessageContainer* CSupplierCompBase::GetWorkMessages(MessageContainerType containerType) const
 {
 	if (CSupplierCompBase::IsMessageContainerSupported(containerType)){
 		return &m_messageContainers[containerType];
@@ -210,11 +210,34 @@ void CSupplierCompBase::AddMessage(const istd::IInformationProvider* messagePtr,
 	Q_ASSERT(messagePtr != NULL);
 
 	if (IsMessageContainerSupported(containerType)){
-		m_messageContainers[containerType].AddMessage(istd::TSmartPtr<const istd::IInformationProvider>(messagePtr));
+		m_messageContainers[containerType].AddMessage(ilog::IMessageConsumer::MessagePtr(messagePtr));
 	}
 	else{
 		delete messagePtr;
 	}
+}
+
+
+// helper method with simpler interface
+
+void CSupplierCompBase::AddMessage(istd::IInformationProvider::InformationCategory category, const QString& text, int id, int containerType) const
+{
+	if (!IsMessageContainerSupported(containerType))
+		return;
+
+	QByteArray messageSourceId = istd::CClassInfo(*this).GetName();
+
+	// Remove <>  from e.g. templates, vectors
+	if (messageSourceId.contains("<")){
+		int startIndex = messageSourceId.lastIndexOf("<");
+		int endIndex = messageSourceId.indexOf(">");
+		messageSourceId = messageSourceId.mid(startIndex + 1, endIndex - startIndex - 1).trimmed();
+	}
+
+	auto messagePtr = ilog::IMessageConsumer::MessagePtr(
+		new ilog::CMessage(category, id, text, GetDiagnosticName(), messageSourceId));
+
+	m_messageContainers[containerType].AddMessage(messagePtr);
 }
 
 
@@ -294,13 +317,13 @@ CSupplierCompBase::Status::Status()
 }
 
 
-int CSupplierCompBase::Status::GetSupplierState() const
+iinsp::ISupplier::WorkStatus CSupplierCompBase::Status::GetSupplierState() const
 {
 	return m_state;
 }
 
 
-void CSupplierCompBase::Status::SetSupplierState(int state)
+void CSupplierCompBase::Status::SetSupplierState(iinsp::ISupplier::WorkStatus state)
 {
 	if (m_state != state){
 		istd::CChangeNotifier changeNotifier(this);

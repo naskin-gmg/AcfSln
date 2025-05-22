@@ -123,7 +123,7 @@ void CConvertComponentCommandComp::InsertElementToFilters(
 
 					const iser::IObject* checkedAttributePtr = checkedInfoPtr->elementPtr->GetAttribute(checkedAttributeId);
 					const icomp::IAttributeStaticInfo* checkedAttrStaticInfoPtr = checkedStaticInfoPtr->GetAttributeInfo(checkedAttributeId);
-					if ((checkedAttributePtr != NULL) && (checkedAttrStaticInfoPtr != NULL)){
+					if ((checkedAttributePtr != nullptr) && (checkedAttrStaticInfoPtr != nullptr)){
 						icomp::IElementStaticInfo::Ids attrRelatedInterfaces = checkedAttrStaticInfoPtr->GetRelatedMetaIds(icomp::IComponentStaticInfo::MGI_INTERFACES, 0, 0);
 
 						const iattr::CIdAttribute* referenceAttrPtr = dynamic_cast<const iattr::CIdAttribute*>(checkedAttributePtr);

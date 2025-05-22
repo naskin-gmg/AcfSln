@@ -36,21 +36,21 @@ public:
 		I_ASSIGN_MULTI_0(m_cameraNamesAttrPtr, "CameraNames", "List of camera names", true);
 		I_ASSIGN(m_sourceSelectionParamIdAttrPtr, "CameraSelectorId", "ID of the source camera selector parameter in the supplier's parameter set", true, "CameraSelectorId");
 		I_ASSIGN(m_cameraManagerParamIdAttrPtr, "CameraManagerParamId", "ID of the camera parameter manager in the supplier's parameter set", true, "CameraManagerParamId");
-		I_ASSIGN(m_parameterSetCompPtr, "ParamsSet", "Parameter set for camera selection", true, "ParamsSet");
+		I_ASSIGN(m_parameterSetCompPtr, "ParamsSet", "Parameter set for camera selection", false, "ParamsSet");
 	I_END_COMPONENT;
 
 	CCameraMultiplexerComp();
 
 	// reimplemented (iipr::IBitmapAcquisition)
-	virtual istd::CIndex2d GetBitmapSize(const iprm::IParamsSet* paramsPtr) const override;
+	virtual istd::CIndex2d GetBitmapSize(const iprm::IParamsSet* paramsPtr) const;
 
 	// reimplemented (iproc::IProcessor)
-	virtual int GetProcessorState(const iprm::IParamsSet* paramsPtr) const override;
+	virtual iproc::IProcessor::ProcessorState GetProcessorState(const iprm::IParamsSet* paramsPtr) const override;
 	virtual bool AreParamsAccepted(
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,
 				const istd::IChangeable* outputPtr) const override;
-	virtual int DoProcessing(
+	virtual iproc::IProcessor::TaskState DoProcessing(
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,
 				istd::IChangeable* outputPtr,
@@ -60,13 +60,13 @@ public:
 				const istd::IPolymorphic* inputPtr,
 				istd::IChangeable* outputPtr,
 				ibase::IProgressManager* progressManagerPtr = NULL) override;
-	virtual int WaitTaskFinished(
+	virtual iproc::IProcessor::TaskState WaitTaskFinished(
 					int taskId = -1,
 					double timeoutTime = -1,
-					bool killOnTimeout = true);
+					bool killOnTimeout = true) override;
 	virtual void CancelTask(int taskId = -1) override;
 	virtual int GetReadyTask() override;
-	virtual int GetTaskState(int taskId = -1) const override;
+	virtual iproc::IProcessor::TaskState GetTaskState(int taskId = -1) const override;
 	virtual void InitProcessor(const iprm::IParamsSet* paramsPtr) override;
 
 private:
@@ -78,12 +78,12 @@ private:
 		void SetParent(CCameraMultiplexerComp* parentPtr);
 
 		// reimplemented (iprm::IOptionsList)
-		virtual int GetOptionsFlags() const override;
-		virtual int GetOptionsCount() const override;
-		virtual QString GetOptionName(int index) const override;
-		virtual QString GetOptionDescription(int index) const override;
-		virtual QByteArray GetOptionId(int index) const override;
-		virtual bool IsOptionEnabled(int index) const override;
+		virtual int GetOptionsFlags() const;
+		virtual int GetOptionsCount() const;
+		virtual QString GetOptionName(int index) const;
+		virtual QString GetOptionDescription(int index) const;
+		virtual QByteArray GetOptionId(int index) const;
+		virtual bool IsOptionEnabled(int index) const;
 		
 	private:
 		CCameraMultiplexerComp* m_parentPtr;
@@ -95,9 +95,9 @@ private:
 		return &component.m_cameraList;
 	}
 
-	int GetSelectedIndex() const;
+	int GetSelectedIndex(const iprm::IParamsSet* paramsPtr) const;
 	const iprm::IParamsSet* GetWorkingParamsSet(const iprm::IParamsSet* paramsPtr) const;
-	IBitmapAcquisition* GetSelectedCamera() const;
+	IBitmapAcquisition* GetSelectedCamera(const iprm::IParamsSet* paramsPtr) const;
 
 private:
 	I_MULTIREF(IBitmapAcquisition, m_cameraListCompPtr);
@@ -108,6 +108,7 @@ private:
 	I_REF(iprm::IParamsSet, m_parameterSetCompPtr);
 
 	imod::TModelWrap<CameraList> m_cameraList;
+	mutable const iprm::IParamsSet*  m_currentParamsSetPtr;
 };
 
 

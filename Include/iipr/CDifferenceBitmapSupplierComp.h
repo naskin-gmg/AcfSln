@@ -20,12 +20,12 @@ namespace iipr
 	Supplier of bitmap built on difference of two images.
 */
 class CDifferenceBitmapSupplierComp:
-			public iinsp::TSupplierCompWrap< QPair<i2d::ICalibration2d*,  istd::TDelPtr<iimg::IBitmap> > >,
+			public iinsp::TSupplierCompWrap< QPair<i2d::ICalibration2d*,  iimg::IBitmapSharedPtr > >,
 			virtual public iimg::IBitmapProvider,
 			virtual public i2d::ICalibrationProvider
 {
 public:
-	typedef iinsp::TSupplierCompWrap< QPair<i2d::ICalibration2d*,  istd::TDelPtr<iimg::IBitmap> > > BaseClass;
+	typedef iinsp::TSupplierCompWrap< QPair<i2d::ICalibration2d*,  iimg::IBitmapSharedPtr > > BaseClass;
 
 	I_BEGIN_COMPONENT(CDifferenceBitmapSupplierComp);
 		I_REGISTER_SUBELEMENT(OffsetContraints);
@@ -56,7 +56,7 @@ protected:
 	bool EnsureBitmapCreated(ProductType& result) const;
 
 	// reimplemented (iinsp::TSupplierCompWrap)
-	virtual int ProduceObject(ProductType& result) const;
+	virtual iinsp::ISupplier::WorkStatus ProduceObject(ProductType& result) const;
 
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();

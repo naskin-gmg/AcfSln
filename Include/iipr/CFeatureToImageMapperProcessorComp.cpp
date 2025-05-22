@@ -9,7 +9,7 @@ namespace iipr
 
 // reimplemented (iipr::IFeatureToFeatureProcessor)
 
-int CFeatureToImageMapperProcessorComp::DoConvertFeatures(
+iproc::IProcessor::TaskState CFeatureToImageMapperProcessorComp::DoConvertFeatures(
 			const iprm::IParamsSet* paramsPtr,
 			const IFeaturesProvider& container,
 			IFeaturesConsumer& results)
@@ -52,7 +52,7 @@ int CFeatureToImageMapperProcessorComp::DoConvertFeatures(
 
 // reimplemented (iproc::IProcessor)
 
-int CFeatureToImageMapperProcessorComp::DoProcessing(
+iproc::IProcessor::TaskState CFeatureToImageMapperProcessorComp::DoProcessing(
 			const iprm::IParamsSet* paramsPtr,
 			const istd::IPolymorphic* inputPtr,
 			istd::IChangeable* outputPtr,

@@ -56,13 +56,13 @@ public:
 	virtual const i2d::ICalibration2d* GetCalibration() const;
 
 	// reimplemented (iinsp::ISupplier)
-	virtual int GetWorkStatus() const;
+	virtual iinsp::ISupplier::WorkStatus GetWorkStatus() const;
 	virtual imod::IModel* GetWorkStatusModel() const;
 	virtual void InvalidateSupplier();
 	virtual void EnsureWorkInitialized();
 	virtual void EnsureWorkFinished();
 	virtual void ClearWorkResults();
-	virtual const ilog::IMessageContainer* GetWorkMessages(int containerType) const;
+	virtual const ilog::IMessageContainer* GetWorkMessages(MessageContainerType containerType) const;
 	virtual iprm::IParamsSet* GetModelParametersSet() const;
 
 protected:

@@ -28,13 +28,13 @@ namespace icam
 	This component works with a set of camera parameters and iterate this set during acquisition of the output bitmaps.
 	The number of output bitmaps is equal the number of parameter sets in the parameter manager.
 */
-class CMultiCameraBitmapSupplierComp:
-			public iinsp::TSupplierCompWrap< istd::TPointerVector<const iimg::IBitmap> >,
+	class CMultiCameraBitmapSupplierComp :
+		public iinsp::TSupplierCompWrap<std::vector<iimg::IBitmapSharedPtr>> ,
 			virtual public iimg::IMultiBitmapProvider,
 			virtual public i2d::ICalibrationProvider
 {
 public:
-	typedef iinsp::TSupplierCompWrap< istd::TPointerVector<const iimg::IBitmap> > BaseClass;
+	typedef iinsp::TSupplierCompWrap<std::vector<iimg::IBitmapSharedPtr>> BaseClass;
 
 	I_BEGIN_COMPONENT(CMultiCameraBitmapSupplierComp);
 		I_REGISTER_INTERFACE(iimg::IMultiBitmapProvider);
@@ -56,7 +56,7 @@ public:
 protected:
 	// reimplemented (iinsp::TSupplierCompWrap)
 	virtual bool InitializeWork();
-	virtual int ProduceObject(ProductType& result) const;
+	virtual iinsp::ISupplier::WorkStatus ProduceObject(ProductType& result) const;
 
 private:
 	/**

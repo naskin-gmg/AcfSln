@@ -48,31 +48,31 @@ public:
 	virtual bool GetImagePosition(
 				const imeas::INumericValue& feature,
 				const iprm::IParamsSet* paramsPtr,
-				i2d::CVector2d& result) const;
+				i2d::CVector2d& result) const override;
 
 	// reimplemented (iipr::ILineProjectionProcessor)
 	virtual bool DoProjection(
 				const iimg::IBitmap& bitmap,
 				const i2d::CLine2d& projectionLine,
 				const IProjectionParams* paramsPtr,
-				imeas::IDataSequence& results);
+				imeas::IDataSequence& results) override;
 
 	// reimplemented (iproc::IProcessor)
-	virtual int DoProcessing(
+	virtual iproc::IProcessor::TaskState DoProcessing(
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,
 				istd::IChangeable* outputPtr,
-				ibase::IProgressManager* progressManagerPtr = NULL);
+				ibase::IProgressManager* progressManagerPtr = NULL) override;
 
 	// reimplemented (iipr::IProjectionConstraints)
-	virtual istd::CRange GetLineWidthRange() const;
-	virtual int GetMinProjectionSize() const;
-	virtual int GetMaxProjectionSize() const;
-	virtual bool IsAutoProjectionSizeSupported() const;
+	virtual istd::CRange GetLineWidthRange() const override;
+	virtual int GetMinProjectionSize() const override;
+	virtual int GetMaxProjectionSize() const override;
+	virtual bool IsAutoProjectionSizeSupported() const override;
 
 protected:
 	// reimplemented (icomp::CComponentBase)
-	virtual void OnComponentCreated();
+	virtual void OnComponentCreated() override;
 
 private:
 	I_ATTR(QByteArray, m_lineParamIdAttrPtr);

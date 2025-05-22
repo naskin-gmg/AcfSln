@@ -34,7 +34,7 @@ void CDataSequenceSupplierResultsViewComp::OnGuiCreated()
 	QWidget* widgetPtr = GetWidget();
 
 	QVBoxLayout* layoutPtr = new QVBoxLayout(widgetPtr);
-	layoutPtr->setContentsMargins(0,0,0,0);
+	layoutPtr->setContentsMargins(0, 0, 0, 0);
 
 	if (m_resultsGuiCompPtr.IsValid() && m_resultsObserverCompPtr.IsValid()){
 		m_resultsGuiCompPtr->CreateGui(widgetPtr);

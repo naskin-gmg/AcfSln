@@ -12,9 +12,9 @@ namespace iipr
 
 // reimplemented (iinsp::TSupplierCompWrap)
 
-int CMultiLineProjectionSupplierComp::ProduceObject(ProductType& result) const
+iinsp::ISupplier::WorkStatus CMultiLineProjectionSupplierComp::ProduceObject(ProductType& result) const
 {
-	int retVal = WS_OK;
+	iinsp::ISupplier::WorkStatus retVal = WS_OK;
 
 	if (m_bitmapProviderCompPtr.IsValid() &&
 		m_linesProviderCompPtr.IsValid()){

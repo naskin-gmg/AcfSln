@@ -3,6 +3,9 @@
 
 // ACF includes
 #include <ilog/CMessage.h>
+#include <iprm/TParamsPtr.h>
+#include <iprm/IParamsManager.h>
+#include <iipr/CImageCopyProcessorComp.h>
 
 
 namespace iipr
@@ -10,6 +13,16 @@ namespace iipr
 
 
 // public methods
+
+const iimg::IBitmapProvider* CProcessedBitmapSupplierBase::GetBitmapProvider() const
+{
+	if (m_bitmapProviderCompPtr.IsValid()) {
+		return m_bitmapProviderCompPtr.GetPtr();
+	}
+	else
+		return nullptr;
+}
+
 
 // reimplemented (i2d::ICalibrationProvider)
 
@@ -49,7 +62,12 @@ const iimg::IBitmap* CProcessedBitmapSupplierBase::GetBitmap() const
 bool CProcessedBitmapSupplierBase::EnsureBitmapCreated(ProductType& result) const
 {
 	if (!result.IsValid()){
-		result.SetPtr(CreateBitmap());
+		result.FromUnique(CreateBitmap());
+	}
+
+	// zero result
+	if (result.IsValid()) {
+		result.GetPtr()->ClearImage();
 	}
 
 	return result.IsValid();
@@ -64,7 +82,7 @@ iproc::IProcessor* CProcessedBitmapSupplierBase::GetImageProcessor() const
 
 // reimplemented (iinsp::TSupplierCompWrap)
 
-int CProcessedBitmapSupplierBase::ProduceObject(ProductType& result) const
+iinsp::ISupplier::WorkStatus CProcessedBitmapSupplierBase::ProduceObject(ProductType& result) const
 {
 	if (m_outputBitmapCalibrationCompPtr.IsValid()){
 		m_outputBitmapCalibrationCompPtr->ResetData();
@@ -72,7 +90,7 @@ int CProcessedBitmapSupplierBase::ProduceObject(ProductType& result) const
 
 	iproc::IProcessor* imageProcessorPtr = GetImageProcessor();
 
-	if (!m_bitmapProviderCompPtr.IsValid() || (imageProcessorPtr == NULL)){
+	if (!m_bitmapProviderCompPtr.IsValid() || (imageProcessorPtr == nullptr)){
 		return WS_FAILED;
 	}
 
@@ -90,16 +108,17 @@ int CProcessedBitmapSupplierBase::ProduceObject(ProductType& result) const
 
 	Timer performanceTimer(this, "Bitmap processing");
 
-	int status = imageProcessorPtr->DoProcessing(GetModelParametersSet(), bitmapPtr, result.GetPtr());
-	switch (status){
-		case iproc::IProcessor::TS_OK:
-			return WS_OK;
+	int status = ProcessBitmapWithParameters(bitmapPtr, result.GetPtr(), GetModelParametersSet(), imageProcessorPtr);
 
-		case iproc::IProcessor::TS_CANCELED:
-			return WS_CANCELED;
+	switch (status) {
+	case iproc::IProcessor::TS_OK:
+		return WS_OK;
 
-		default:
-			return WS_FAILED;
+	case iproc::IProcessor::TS_CANCELED:
+		return WS_CANCELED;
+
+	default:
+		return WS_FAILED;
 	}
 
 	// should not get here
@@ -137,6 +156,172 @@ void CProcessedBitmapSupplierBase::OnComponentDestroyed()
 	}
 
 	BaseClass::OnComponentDestroyed();
+}
+
+
+// virtual method base implementation
+
+int CProcessedBitmapSupplierBase::ProcessBitmapWithParameters(const iimg::IBitmap* inputBitmapPtr, iimg::IBitmap* outputBitmapPtr, const iprm::IParamsSet* parametersPtr, iproc::IProcessor* imageProcessorPtr) const
+{
+	if (imageProcessorPtr == nullptr){
+		imageProcessorPtr = GetImageProcessor();
+	}
+	if (imageProcessorPtr != nullptr){
+		return imageProcessorPtr->DoProcessing(parametersPtr, inputBitmapPtr, outputBitmapPtr);
+	}
+
+	return iproc::IProcessor::TS_INVALID;
+}
+
+
+// reimplemented (icam::ICameraAcquisition)
+
+bool CProcessedBitmapSupplierBase::StartCamera() const
+{
+	if (m_inputCameraAcquisitionCompPtr.IsValid()) {
+		return m_inputCameraAcquisitionCompPtr->StartCamera();
+	}
+
+	return false;
+}
+
+
+bool CProcessedBitmapSupplierBase::StopCamera() const
+{
+	if (m_inputCameraAcquisitionCompPtr.IsValid()) {
+		return m_inputCameraAcquisitionCompPtr->StopCamera();
+	}
+
+	return false;
+}
+
+
+bool CProcessedBitmapSupplierBase::GetLastImage(iimg::IBitmap& snapBitmap) const
+{
+	if (!m_inputCameraAcquisitionCompPtr.IsValid()) {
+		return false;
+	}
+
+	iproc::IProcessor* imageProcessorPtr = GetImageProcessor();
+	if (imageProcessorPtr == NULL) {
+		return false;
+	}
+
+	iimg::IBitmapSharedPtr snapBmpPtr;
+	if (!EnsureBitmapCreated(snapBmpPtr)) {
+		return false;
+	}
+
+	if (!m_inputCameraAcquisitionCompPtr->GetLastImage(*snapBmpPtr)) {
+		return false;
+	}
+
+	if (imageProcessorPtr->DoProcessing(GetModelParametersSet(), snapBmpPtr.GetPtr(), &snapBitmap) != iproc::IProcessor::TS_OK){
+		return false;
+	}
+
+	return true;
+}
+
+
+// methods of CProcessedBitmapSupplierComp
+
+int CProcessedBitmapSupplierComp::GetRegionsCount(const iprm::IParamsSet* parametersPtr, const QByteArray paramsManagerId) const
+{
+	if ((parametersPtr != nullptr) && (!paramsManagerId.isEmpty())){
+		iprm::TParamsPtr<iprm::IParamsManager> managerPtr(parametersPtr, paramsManagerId);
+		if (managerPtr.IsValid()){
+			return managerPtr->GetParamsSetsCount();
+		}
+	}
+
+	return 0;
+}
+
+
+int CProcessedBitmapSupplierComp::DoMultiParamsSetProcessing(const iimg::IBitmap* inputBitmapPtr, iimg::IBitmap* outputBitmapPtr, const iprm::IParamsSet* parametersPtr, iproc::IProcessor* imageProcessorPtr) const
+{
+	int status = iproc::IProcessor::TS_OK;
+
+	Q_ASSERT(imageProcessorPtr != nullptr);
+
+	iprm::TParamsPtr<iprm::IParamsManager> paramsManagerPtr(parametersPtr, *m_paramsManagerParamIdAttrPtr);
+	const iprm::IParamsManager* managerPtr = paramsManagerPtr.GetPtr();
+	Q_ASSERT(managerPtr != nullptr);
+
+	const int paramsSetCount = managerPtr->GetParamsSetsCount();
+	Q_ASSERT(paramsSetCount != 0);
+
+	iimg::IBitmapUniquePtr tempBitmapPtr(CreateBitmap());
+	tempBitmapPtr->CopyFrom(*outputBitmapPtr);
+
+	for (int i = 0; i < paramsSetCount; ++i) {
+		const iprm::IParamsSet* paramsPtr = managerPtr->GetParamsSet(i);
+		if (paramsPtr != nullptr) {
+			int oneStatus = imageProcessorPtr->DoProcessing(paramsPtr, inputBitmapPtr, tempBitmapPtr.GetPtr());
+
+			if (!m_copyProcessorCompPtr.IsValid()){
+				//SendWarningMessage(0, QString("No Region CopyProcessor provided, result skips processed region %1 (%2)").arg(i).arg(managerPtr->GetParamsSetName(i)));
+				outputBitmapPtr->CopyFrom(*tempBitmapPtr);
+			}
+			else {
+				m_copyProcessorCompPtr->DoProcessing(paramsPtr, tempBitmapPtr.GetPtr(), outputBitmapPtr);
+			}
+
+			status = qMax(status, oneStatus);	// max should be worse? 
+		}
+	}
+
+	return status;
+}
+
+
+// reimplemented (CProcessedBitmapSupplierBase)
+
+int CProcessedBitmapSupplierComp::ProcessBitmapWithParameters(const iimg::IBitmap* inputBitmapPtr, iimg::IBitmap* outputBitmapPtr, const iprm::IParamsSet* parametersPtr, iproc::IProcessor* imageProcessorPtr) const
+{
+	// multi region
+	if (m_paramsManagerParamIdAttrPtr.IsValid()) 
+	{
+		// copy input to output before any region processing
+		if (m_copyProcessorCompPtr.IsValid()) {
+			m_copyProcessorCompPtr->DoProcessing(nullptr, inputBitmapPtr, outputBitmapPtr);
+		}
+		else
+			outputBitmapPtr->CopyFrom(*inputBitmapPtr);
+
+		// if managerId is valid and manager is not empty
+		int regionsCount = GetRegionsCount(parametersPtr, *m_paramsManagerParamIdAttrPtr);
+		if (regionsCount)
+			return DoMultiParamsSetProcessing(inputBitmapPtr, outputBitmapPtr, parametersPtr, imageProcessorPtr);
+
+		// if no global params set -> bail out
+		if (!m_globalParamsIdAttrPtr.IsValid()) {
+			// #10887: no regions defined - so tell about this
+			AddMessage(ilog::CMessage::IC_WARNING, QT_TR_NOOP("No processing regions defined"));
+
+			// we deliberately wont fail here - with "ok" we wanna see input image instead of /\ ...
+			return iproc::IProcessor::TS_OK;
+		}
+	}
+
+	// if manager is empty or not defined, try global
+	if (imageProcessorPtr == nullptr)
+		imageProcessorPtr = GetImageProcessor();
+
+	if (imageProcessorPtr != nullptr){
+		if (m_globalParamsIdAttrPtr.IsValid()){
+			const iprm::TParamsPtr<iprm::IParamsSet> globalParamsPtr(parametersPtr, *m_globalParamsIdAttrPtr);
+			if (globalParamsPtr.IsValid()){
+				return imageProcessorPtr->DoProcessing(globalParamsPtr.GetPtr(), inputBitmapPtr, outputBitmapPtr);
+			}
+		}
+		else{	//try the whole paramsSet
+			return imageProcessorPtr->DoProcessing(parametersPtr, inputBitmapPtr, outputBitmapPtr);
+		}
+	}
+	
+	return iproc::IProcessor::TS_INVALID;
 }
 
 

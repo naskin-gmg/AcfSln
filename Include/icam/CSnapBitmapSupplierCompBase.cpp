@@ -8,7 +8,7 @@
 
 // ACF-Solutions includes
 #include <iproc/IProcessor.h>
-#include <icalib/CAffineCalibration2d.h>
+#include <icalib/TCalibrationFactory.h>
 
 
 namespace icam
@@ -47,12 +47,14 @@ const i2d::ICalibration2d* CSnapBitmapSupplierCompBase::GetCalibration() const
 
 // reimplemented (iinsp::TSupplierCompWrap)
 
-int CSnapBitmapSupplierCompBase::ProduceObject(ProductType& result) const
+iinsp::ISupplier::WorkStatus CSnapBitmapSupplierCompBase::ProduceObject(ProductType& result) const
 {
 	result.first.Reset();
 
 	if (!result.second.IsValid()){
-		result.second.SetPtr(CreateBitmap());
+		iimg::IBitmapUniquePtr instancePtr = CreateBitmap();
+
+		result.second = iimg::IBitmapSharedPtr::CreateFromUnique(instancePtr);
 		if (!result.second.IsValid()){
 			SendErrorMessage(0, "Bitmap instance could not be created");
 
@@ -69,6 +71,14 @@ int CSnapBitmapSupplierCompBase::ProduceObject(ProductType& result) const
 		case iproc::IProcessor::TS_OK:
 			{
 				istd::CIndex2d bitmapSize = result.second->GetImageSize();
+
+				const bool allowEmptyImage = m_allowEmptyImageResultAttrPtr.IsValid() ? *m_allowEmptyImageResultAttrPtr : false;
+
+				if (bitmapSize.IsSizeEmpty() && !allowEmptyImage) {
+					SendErrorMessage(0, QT_TR_NOOP("Image is empty"));
+					return WS_FAILED;
+				}
+
 				i2d::CVector2d center = *m_moveCalibrationToCenterAttrPtr ? i2d::CVector2d(bitmapSize.GetX() * 0.5, bitmapSize.GetY() * 0.5) : i2d::CVector2d();
 
 				i2d::CVector2d scale(1, 1);
@@ -86,7 +96,8 @@ int CSnapBitmapSupplierCompBase::ProduceObject(ProductType& result) const
 
 				iprm::TParamsPtr<i2d::ICalibration2d> calibrationPtr(GetModelParametersSet(), m_calibrationIdAttrPtr, m_defaultCalibrationCompPtr, false);
 				if (calibrationPtr.IsValid()){
-					result.first.SetCastedOrRemove(calibrationPtr->CloneMe());
+					//result.first.SetCastedOrRemove(calibrationPtr->CloneMe());
+					result.first.SetCastedOrRemove(icalib::FactorizeFrom(calibrationPtr.GetPtr()));
 				}
 				else{
 					if (scale != i2d::CVector2d(1, 1)){
@@ -95,8 +106,9 @@ int CSnapBitmapSupplierCompBase::ProduceObject(ProductType& result) const
 
 						result.first.SetPtr(affineCalibrationPtr);
 					}
-					else if (result.second->GetCalibration()){
-						result.first.SetCastedOrRemove(result.second->GetCalibration()->CloneMe());
+					else if (auto bitmapCalibPtr = result.second->GetCalibration()) {
+						//result.first.SetCastedOrRemove(result.second->GetCalibration()->CloneMe());
+						result.first.SetCastedOrRemove(icalib::FactorizeFrom(bitmapCalibPtr));
 					}
 					else{
 						result.first.Reset();

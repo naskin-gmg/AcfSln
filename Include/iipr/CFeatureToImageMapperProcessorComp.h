@@ -35,17 +35,17 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (iipr::IFeatureToFeatureProcessor)
-	virtual int DoConvertFeatures(
+	virtual iproc::IProcessor::TaskState DoConvertFeatures(
 				const iprm::IParamsSet* paramsPtr,
 				const IFeaturesProvider& container,
-				IFeaturesConsumer& results);
+				IFeaturesConsumer& results) override;
 
 	// reimplemented (iproc::IProcessor)
-	virtual int DoProcessing(
+	virtual iproc::IProcessor::TaskState DoProcessing(
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,
 				istd::IChangeable* outputPtr,
-				ibase::IProgressManager* progressManagerPtr = NULL);
+				ibase::IProgressManager* progressManagerPtr = NULL) override;
 
 protected:
 	typedef TWeightedFeatureWrap<i2d::CPosition2d> PositionFeature;

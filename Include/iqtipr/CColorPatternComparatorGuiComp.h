@@ -27,6 +27,11 @@ public:
 	I_BEGIN_COMPONENT(CColorPatternComparatorGuiComp);
 	I_END_COMPONENT;
 
+	CColorPatternComparatorGuiComp();
+
+signals:
+	void OnSupplierParamsChangedSignal();
+
 protected Q_SLOTS:
 	void on_TestButton_clicked();
 

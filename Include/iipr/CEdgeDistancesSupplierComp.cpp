@@ -37,7 +37,7 @@ const imeas::INumericValue& CEdgeDistancesSupplierComp::GetFeature(int index) co
 
 // reimplemented (iinsp::TSupplierCompWrap)
 
-int CEdgeDistancesSupplierComp::ProduceObject(ProductType& result) const
+iinsp::ISupplier::WorkStatus CEdgeDistancesSupplierComp::ProduceObject(ProductType& result) const
 {
 	result.ResetFeatures();
 

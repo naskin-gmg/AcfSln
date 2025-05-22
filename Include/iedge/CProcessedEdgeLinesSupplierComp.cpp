@@ -1,5 +1,9 @@
 #include <iedge/CProcessedEdgeLinesSupplierComp.h>
 
+// Qt includes
+#include <QtCore/QFile>
+#include <QtCore/QTextstream>
+
 
 namespace iedge
 {
@@ -15,9 +19,38 @@ const CEdgeLineContainer* CProcessedEdgeLinesSupplierComp::GetEdgesContainer() c
 
 // protected methods
 
+
+void CProcessedEdgeLinesSupplierComp::SerializeContours(const CEdgeLineContainer& result) const
+{
+	QFile outputFile;
+	QTextStream outputFileStream(&outputFile);
+	outputFile.setFileName("C:\\Work\\Develop\\Products\\RTVision\\Testing\\EdgesData\\EdgesData.txt");
+	bool ok = outputFile.open(QIODevice::Text | QIODevice::WriteOnly |QIODevice::Append);
+	if (!ok){
+		return;
+	}
+
+	const int count = result.GetItemsCount();
+	for (int i = 0; i < count; ++i){
+		const iedge::CEdgeLine& oneLine = result.GetAt(i);
+		const int nodesCount = oneLine.GetNodesCount();
+		for (int j = 0; j < nodesCount; ++j){
+			const iedge::CEdgeNode& oneNode = oneLine.GetNode(j);
+			const i2d::CVector2d& nodePosition = oneNode.GetPosition();
+
+			outputFileStream << i << " " << j << " " << nodePosition.GetX() << " " << nodePosition.GetY() << " " << oneNode.GetWeight() << "\n";
+		}
+	}
+	if (outputFile.isOpen()){
+		outputFileStream.flush();
+		outputFile.close();
+	}
+}
+
+
 // reimplemented (iinsp::TSupplierCompWrap)
 
-int CProcessedEdgeLinesSupplierComp::ProduceObject(CEdgeLineContainer& result) const
+iinsp::ISupplier::WorkStatus CProcessedEdgeLinesSupplierComp::ProduceObject(CEdgeLineContainer& result) const
 {
 	if (!m_edgeLinesProviderCompPtr.IsValid()){
 		SendCriticalMessage(0, "Bad component architecture, 'EdgeLinesProvider' component reference is not set");

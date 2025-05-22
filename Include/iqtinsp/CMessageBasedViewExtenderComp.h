@@ -65,7 +65,7 @@ protected:
 	I_REF(iprm::ISelectionParam, m_messageSelectorCompPtr);
 	I_REF(imod::IModel, m_messageSelectorModelCompPtr);
 
-	typedef istd::TSmartPtr<iview::IShape> ShapePtr;
+	typedef istd::TSharedInterfacePtr<iview::IShape> ShapePtr;
 
 	struct Shape
 	{

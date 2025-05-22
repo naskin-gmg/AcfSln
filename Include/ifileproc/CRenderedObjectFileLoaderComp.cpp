@@ -52,7 +52,7 @@ bool CRenderedObjectFileLoaderComp::IsOperationSupported(
 }
 
 
-int CRenderedObjectFileLoaderComp::LoadFromFile(
+ifile::IFilePersistence::OperationState CRenderedObjectFileLoaderComp::LoadFromFile(
 			istd::IChangeable& data,
 			const QString& filePath,
 			ibase::IProgressManager* /*progressManagerPtr*/) const
@@ -145,7 +145,7 @@ int CRenderedObjectFileLoaderComp::LoadFromFile(
 }
 
 
-int CRenderedObjectFileLoaderComp::SaveToFile(
+ifile::IFilePersistence::OperationState CRenderedObjectFileLoaderComp::SaveToFile(
 			const istd::IChangeable& /*data*/,
 			const QString& /*filePath*/,
 			ibase::IProgressManager* /*progressManagerPtr*/) const
@@ -288,7 +288,7 @@ void CRenderedObjectFileLoaderComp::OnComponentCreated()
 				Configuration configuration;
 
 				configuration.filePersistencePtr = loaderPtr;
-				configuration.dataObjectPtr.SetPtr(m_dataObjectFactCompPtr.CreateInstance(loaderIndex));
+				configuration.dataObjectPtr.FromUnique(m_dataObjectFactCompPtr.CreateInstance(loaderIndex));
 				configuration.previewGenerationProcessorPtr = m_previewGenerationProcessorsCompPtr[loaderIndex];
 
 				if (configuration.IsValid()){

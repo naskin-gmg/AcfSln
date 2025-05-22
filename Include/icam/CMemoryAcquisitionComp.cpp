@@ -13,7 +13,7 @@ namespace icam
 
 // reimplemented (iproc::IProcessor)
 
-int CMemoryAcquisitionComp::DoProcessing(
+iproc::IProcessor::TaskState CMemoryAcquisitionComp::DoProcessing(
 			const iprm::IParamsSet* /*paramsPtr*/,
 			const istd::IPolymorphic* /*inputPtr*/,
 			istd::IChangeable* outputPtr,

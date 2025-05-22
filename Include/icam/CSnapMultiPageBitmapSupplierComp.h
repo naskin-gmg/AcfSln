@@ -25,12 +25,12 @@ namespace icam
 	Implementation of bitmap supplier based on image acquisition.
 */
 class CSnapMultiPageBitmapSupplierComp:
-			public iinsp::TSupplierCompWrap< istd::TDelPtr<iimg::IMultiBitmapProvider> >,
+	public iinsp::TSupplierCompWrap<iimg::IMultiBitmapProviderSharedPtr>,
 			virtual public iimg::IMultiBitmapProvider,
 			virtual public idoc::IMultiPageDocumentProvider
 {
 public:
-	typedef iinsp::TSupplierCompWrap< istd::TDelPtr<iimg::IMultiBitmapProvider> > BaseClass;
+	typedef iinsp::TSupplierCompWrap<iimg::IMultiBitmapProviderSharedPtr> BaseClass;
 
 	I_BEGIN_COMPONENT(CSnapMultiPageBitmapSupplierComp);
 		I_REGISTER_INTERFACE(iimg::IMultiBitmapProvider);
@@ -50,7 +50,7 @@ public:
 protected:
 	// reimplemented (iinsp::TSupplierCompWrap)
 	virtual bool InitializeWork();
-	virtual int ProduceObject(ProductType& result) const;
+	virtual iinsp::ISupplier::WorkStatus ProduceObject(ProductType& result) const;
 
 private:
 	I_FACT(iimg::IMultiBitmapProvider, m_bitmapCompFact);

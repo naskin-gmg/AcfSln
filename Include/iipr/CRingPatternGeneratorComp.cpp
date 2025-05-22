@@ -15,7 +15,7 @@ namespace iipr
 
 // reimplemented (iproc::IProcessor)
 
-int CRingPatternGeneratorComp::DoProcessing(
+iproc::IProcessor::TaskState CRingPatternGeneratorComp::DoProcessing(
 			const iprm::IParamsSet* /*paramsPtr*/,
 			const istd::IPolymorphic* /*inputPtr*/,
 			istd::IChangeable* outputPtr,

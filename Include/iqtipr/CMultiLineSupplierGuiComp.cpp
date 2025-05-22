@@ -17,6 +17,7 @@ namespace iqtipr
 
 CMultiLineSupplierGuiComp::CMultiLineSupplierGuiComp()
 {
+	connect(this, SIGNAL(OnSupplierParamsChangedSignal()), SLOT(on_TestButton_clicked()), Qt::QueuedConnection);
 }
 
 
@@ -43,7 +44,7 @@ void CMultiLineSupplierGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& ch
 void CMultiLineSupplierGuiComp::OnSupplierParamsChanged()
 {
 	if (IsGuiCreated() && AutoUpdateButton->isChecked()){
-		QTimer::singleShot(1, this, SLOT(on_TestButton_clicked()));
+		emit OnSupplierParamsChangedSignal();
 	}
 }
 

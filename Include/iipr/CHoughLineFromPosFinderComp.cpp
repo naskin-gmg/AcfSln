@@ -15,7 +15,7 @@ namespace iipr
 
 // reimplemented (iipr::IFeatureToFeatureProcessor)
 
-int CHoughLineFromPosFinderComp::DoConvertFeatures(
+iproc::IProcessor::TaskState CHoughLineFromPosFinderComp::DoConvertFeatures(
 			const iprm::IParamsSet* paramsPtr,
 			const IFeaturesProvider& container,
 			IFeaturesConsumer& results)
@@ -59,7 +59,7 @@ int CHoughLineFromPosFinderComp::DoConvertFeatures(
 
 // reimplemented (iproc::IProcessor)
 
-int CHoughLineFromPosFinderComp::DoProcessing(
+iproc::IProcessor::TaskState CHoughLineFromPosFinderComp::DoProcessing(
 			const iprm::IParamsSet* paramsPtr,
 			const istd::IPolymorphic* inputPtr,
 			istd::IChangeable* outputPtr,

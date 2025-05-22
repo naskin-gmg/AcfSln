@@ -2,8 +2,7 @@
 
 
 // ACF includes
-#include <ilog/CExtMessage.h>
-#include <istd/TRange.h>
+#include <iser/ISerializable.h>
 #include <imeas/TMeasurementValue.h>
 
 
@@ -15,7 +14,7 @@ namespace imeas
 	Extended message supporting attach of measurement information.
 */
 template<class BaseMessageType, class ValueType = double>
-class TMeasurementMessage: public BaseMessageType
+class TMeasurementMessage: public BaseMessageType, virtual public iser::ISerializable
 {
 public:
 	typedef BaseMessageType BaseClass;

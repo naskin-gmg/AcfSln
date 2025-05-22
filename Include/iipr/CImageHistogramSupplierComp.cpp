@@ -23,7 +23,7 @@ const imeas::IDataSequence* CImageHistogramSupplierComp::GetDataSequence() const
 
 // reimplemented (iinsp::TSupplierCompWrap)
 
-int CImageHistogramSupplierComp::ProduceObject(imod::TModelWrap<imeas::CSimpleSamplesSequence32>& result) const
+iinsp::ISupplier::WorkStatus CImageHistogramSupplierComp::ProduceObject(imod::TModelWrap<imeas::CSimpleSamplesSequence32>& result) const
 {
 	if (		m_bitmapProviderCompPtr.IsValid() &&
 				m_histogramProcessorCompPtr.IsValid()){

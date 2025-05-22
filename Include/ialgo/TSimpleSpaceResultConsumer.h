@@ -58,12 +58,12 @@ public:
 	PosMap positions;
 
 private:
-	int m_maxPoints;
-	int m_maxConsideredPoints;
-	double m_minDistance;
-	double m_minMaxRatio;
+	int m_maxPoints = 0;
+	int m_maxConsideredPoints = 0;
+	double m_minDistance = 0.0;
+	double m_minMaxRatio = 0.0;
 
-	double m_maxValue;
+	double m_maxValue = 0.0;
 };
 
 
@@ -76,7 +76,8 @@ TSimpleSpaceResultConsumer<Dimensions, Element>::TSimpleSpaceResultConsumer(int 
 :	m_maxPoints(maxPoints),
 	m_maxConsideredPoints(maxConsideredPoints),
 	m_minDistance(minDistance),
-	m_minMaxRatio(minMaxRatio)
+	m_minMaxRatio(minMaxRatio),
+	m_maxValue(std::numeric_limits<double>::lowest())
 {
 }
 
@@ -93,7 +94,7 @@ void TSimpleSpaceResultConsumer<Dimensions, Element>::OnProcessingBegin(
 			const TIHoughSpace<Dimensions, Element>& /*space*/,
 			const Element& /*minValue*/)
 {
-	m_maxValue = 0;
+	m_maxValue = std::numeric_limits<double>::lowest();
 }
 
 

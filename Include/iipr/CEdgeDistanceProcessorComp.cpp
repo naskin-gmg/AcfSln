@@ -20,7 +20,7 @@ namespace iipr
 
 // reimplemented (iipr::IImageToFeatureProcessor)
 
-int CEdgeDistanceProcessorComp::DoExtractFeatures(
+iproc::IProcessor::TaskState CEdgeDistanceProcessorComp::DoExtractFeatures(
 			const iprm::IParamsSet* paramsPtr,
 			const iimg::IBitmap& image,
 			IFeaturesConsumer& results,
@@ -81,7 +81,7 @@ int CEdgeDistanceProcessorComp::DoExtractFeatures(
 
 // reimplemented (iproc::IProcessor)
 
-int CEdgeDistanceProcessorComp::DoProcessing(
+iproc::IProcessor::TaskState CEdgeDistanceProcessorComp::DoProcessing(
 			const iprm::IParamsSet* paramsPtr,
 			const istd::IPolymorphic* inputPtr,
 			istd::IChangeable* outputPtr,

@@ -74,6 +74,8 @@ public:
 		istd::CRange valueRange;
 	};
 
+	virtual bool IsValueAcceptedByFilter(const int filterIdx, const double& value) const = 0;
+
 	virtual const iprm::IOptionsList* GetSupportedProperties() const = 0;
 	virtual bool IsFiltersEnabled() const = 0;
 	virtual void SetFiltersEnabled(bool enabled = true) = 0;

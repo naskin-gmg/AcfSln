@@ -36,29 +36,29 @@ public:
 	virtual istd::CIndex2d GetBitmapSize(const iprm::IParamsSet* paramsPtr) const;
 
 	// reimplemented (iproc::IProcessor)
-	virtual int GetProcessorState(const iprm::IParamsSet* paramsPtr) const;
+	virtual iproc::IProcessor::ProcessorState GetProcessorState(const iprm::IParamsSet* paramsPtr) const override;
 	virtual bool AreParamsAccepted(
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,
-				const istd::IChangeable* outputPtr) const;
-	virtual int DoProcessing(
+				const istd::IChangeable* outputPtr) const override;
+	virtual iproc::IProcessor::TaskState DoProcessing(
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,
 				istd::IChangeable* outputPtr,
-				ibase::IProgressManager* progressManagerPtr = NULL);
+				ibase::IProgressManager* progressManagerPtr = NULL) override;
 	virtual int BeginTask(
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,
 				istd::IChangeable* outputPtr,
-				ibase::IProgressManager* progressManagerPtr = NULL);
-	virtual int WaitTaskFinished(
+				ibase::IProgressManager* progressManagerPtr = NULL) override;
+	virtual iproc::IProcessor::TaskState WaitTaskFinished(
 					int taskId = -1,
 					double timeoutTime = -1,
-					bool killOnTimeout = true);
-	virtual void CancelTask(int taskId = -1);
-	virtual int GetReadyTask();
-	virtual int GetTaskState(int taskId = -1) const;
-	virtual void InitProcessor(const iprm::IParamsSet* paramsPtr);
+					bool killOnTimeout = true) override;
+	virtual void CancelTask(int taskId = -1) override;
+	virtual int GetReadyTask() override;
+	virtual iproc::IProcessor::TaskState GetTaskState(int taskId = -1) const override;
+	virtual void InitProcessor(const iprm::IParamsSet* paramsPtr) override;
 
 protected:
 	virtual const iprm::IParamsSet* GetWorkingParamsSet(const iprm::IParamsSet* inputParamsPtr) const;

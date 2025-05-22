@@ -133,7 +133,7 @@ bool CEdgesReductorComp::DoLinesProcessing(
 
 // reimplemented (iproc::IProcessor)
 
-int CEdgesReductorComp::DoProcessing(
+iproc::IProcessor::TaskState CEdgesReductorComp::DoProcessing(
 			const iprm::IParamsSet* paramsPtr,
 			const istd::IPolymorphic* inputPtr,
 			istd::IChangeable* outputPtr,

@@ -21,11 +21,11 @@ namespace iipr
 	Supplier of bitmap's vector built on bitmap 
 */
 class CBitmapJoinerSupplierComp:
-			public iinsp::TSupplierCompWrap< QPair<i2d::ITransformation2d*,  istd::TDelPtr<iimg::IBitmap> > >,
+			public iinsp::TSupplierCompWrap< QPair<i2d::ITransformation2d*,  iimg::IBitmapSharedPtr> >,
 			virtual public iimg::IBitmapProvider
 {
 public:
-	typedef iinsp::TSupplierCompWrap< QPair<i2d::ITransformation2d*,  istd::TDelPtr<iimg::IBitmap> > > BaseClass;
+	typedef iinsp::TSupplierCompWrap< QPair<i2d::ITransformation2d*, iimg::IBitmapSharedPtr> > BaseClass;
 
 	I_BEGIN_COMPONENT(CBitmapJoinerSupplierComp);
 		I_REGISTER_INTERFACE(iimg::IBitmapProvider);
@@ -44,7 +44,7 @@ protected:
 	virtual const i2d::ITransformation2d* GetLogTransform() const;	
 
 	// reimplemented (iinsp::TSupplierCompWrap)
-	virtual int ProduceObject(ProductType& result) const;
+	virtual iinsp::ISupplier::WorkStatus ProduceObject(ProductType& result) const;
 
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();

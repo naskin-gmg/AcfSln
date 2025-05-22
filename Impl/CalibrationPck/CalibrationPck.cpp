@@ -43,6 +43,10 @@ I_EXPORT_COMPONENT(
 			"Provides of affine transformation based on rotation, translation and scale parameters",
 			"2D Affine Tranformation Calibration" IM_CATEGORY(I_DATA_MODEL) IM_TAG("2D"));
 
+I_EXPORT_COMPONENT(
+			LUTCalibration2d,
+			"Lookuptable 2d calibration",
+			"LUT Calibration Tranformation" IM_CATEGORY(I_DATA_MODEL) IM_TAG("2D Model"));
 
 } // namespace CalibrationPck
 

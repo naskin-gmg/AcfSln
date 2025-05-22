@@ -71,6 +71,7 @@ public:
 		I_ASSIGN_TO(m_generalParamsModelCompPtr, m_generalParamsCompPtr, true);
 		I_ASSIGN(m_diagnosticNameAttrPtr, "DiagnosticName", "Name of this supplier for diagnostic, if it is not set, no diagnostic log message will be send", false, "");
 		I_ASSIGN(m_supportTempMessagesAttrPtr, "SupportTempMessages", "If enabled cumulation of temporary messages will be supported", true, false);
+		I_ASSIGN(m_selfTaskCompPtr, "SelfTask", "This task implementation", false, "SelfTask");
 	I_END_COMPONENT;
 
 	CInspectionTaskComp();
@@ -84,13 +85,13 @@ public:
 	virtual bool Serialize(iser::IArchive& archive) override;
 
 	// reimplemented (iinsp::ISupplier)
-	virtual int GetWorkStatus() const override;
+	virtual iinsp::ISupplier::WorkStatus GetWorkStatus() const override;
 	virtual imod::IModel* GetWorkStatusModel() const override;
 	virtual void InvalidateSupplier() override;
 	virtual void EnsureWorkInitialized() override;
 	virtual void EnsureWorkFinished() override;
 	virtual void ClearWorkResults() override;
-	virtual const ilog::IMessageContainer* GetWorkMessages(int messageType) const override;
+	virtual const ilog::IMessageContainer* GetWorkMessages(MessageContainerType messageType) const override;
 	virtual iprm::IParamsSet* GetModelParametersSet() const override;
 
 	// reimplemented (istd::IInformationProvider)
@@ -120,7 +121,7 @@ protected:
 		MessageContainer(CInspectionTaskComp* parentPtr, iinsp::ISupplier::MessageContainerType containerType);
 
 		// reimplemented (ilog::IMessageContainer)
-		virtual int GetWorstCategory() const override;
+		virtual istd::IInformationProvider::InformationCategory GetWorstCategory() const override;
 		virtual Messages GetMessages() const override;
 		virtual void ClearMessages() override;
 
@@ -151,6 +152,8 @@ protected:
 
 		// reimplemented (istd::IChangeable)
 		virtual bool ResetData(CompatibilityMode mode = CM_WITHOUT_REFS) override;
+		
+		// reimplemented (istd::IChangeable)
 		virtual bool CopyFrom(const istd::IChangeable& object, istd::IChangeable::CompatibilityMode mode = CM_WITHOUT_REFS) override;
 
 	private:
@@ -176,11 +179,11 @@ protected:
 	public:
 		Status();
 
-		int GetSupplierState() const;
-		void SetSupplierState(int state);
+		iinsp::ISupplier::WorkStatus GetSupplierState() const;
+		void SetSupplierState(iinsp::ISupplier::WorkStatus state);
 
 	private:
-		int m_state;
+		iinsp::ISupplier::WorkStatus m_state;
 	};
 
 	typedef imod::TModelWrap<Status> StatusModel;
@@ -196,6 +199,7 @@ protected:
 	I_REF(imod::IModel, m_generalParamsModelCompPtr);
 	I_ATTR(QString, m_diagnosticNameAttrPtr);
 	I_ATTR(bool, m_supportTempMessagesAttrPtr);
+	I_REF(iinsp::ISupplier, m_selfTaskCompPtr);
 
 	typedef QVector<iinsp::ISupplier*> Suppliers;
 	Suppliers m_subtasks;

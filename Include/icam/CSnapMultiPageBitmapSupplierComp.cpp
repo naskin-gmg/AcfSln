@@ -69,7 +69,7 @@ bool CSnapMultiPageBitmapSupplierComp::InitializeWork()
 }
 
 
-int CSnapMultiPageBitmapSupplierComp::ProduceObject(ProductType& result) const
+iinsp::ISupplier::WorkStatus CSnapMultiPageBitmapSupplierComp::ProduceObject(ProductType& result) const
 {
 	result.Reset();
 
@@ -86,7 +86,9 @@ int CSnapMultiPageBitmapSupplierComp::ProduceObject(ProductType& result) const
 	}
 
 	if (!result.IsValid()){
-		result.SetPtr(m_bitmapCompFact.CreateInstance());
+		iimg::IMultiBitmapProviderUniquePtr bitmapInstancePtr = m_bitmapCompFact.CreateInstance();
+
+		result.FromUnique(bitmapInstancePtr);
 		if (!result.IsValid()){
 			SendErrorMessage(0, "Bitmap instance could not be created");
 

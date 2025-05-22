@@ -11,9 +11,9 @@ namespace iproc
 
 // reimplemented (iproc::IProcessor)
 
-int CCascadedProcessorComp::GetProcessorState(const iprm::IParamsSet* paramsPtr) const
+IProcessor::ProcessorState CCascadedProcessorComp::GetProcessorState(const iprm::IParamsSet* paramsPtr) const
 {
-	int retVal = BaseClass2::GetProcessorState(paramsPtr);
+	IProcessor::ProcessorState retVal = BaseClass2::GetProcessorState(paramsPtr);
 
 	int processorsCount = m_processorsCompPtr.GetCount();
 	for (int i = 0; i < processorsCount; ++i){
@@ -68,7 +68,7 @@ bool CCascadedProcessorComp::AreParamsAccepted(
 }
 
 
-int CCascadedProcessorComp::DoProcessing(
+IProcessor::TaskState CCascadedProcessorComp::DoProcessing(
 			const iprm::IParamsSet* paramsPtr,
 			const istd::IPolymorphic* inputPtr,
 			istd::IChangeable* outputPtr,
@@ -121,7 +121,7 @@ int CCascadedProcessorComp::DoProcessing(
 			return TS_INVALID;
 		}
 
-		int taskState = processorPtr->DoProcessing(paramsPtr, processorInputPtr, processorOutputPtr, progressDelegators[i].get());
+		IProcessor::TaskState taskState = processorPtr->DoProcessing(paramsPtr, processorInputPtr, processorOutputPtr, progressDelegators[i].get());
 		if (taskState != TS_OK){
 			return taskState;
 		}

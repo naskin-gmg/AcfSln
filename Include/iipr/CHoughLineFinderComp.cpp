@@ -14,7 +14,7 @@ namespace iipr
 
 // reimplemented (iipr::IImageToFeatureProcessor)
 
-int CHoughLineFinderComp::DoExtractFeatures(
+iproc::IProcessor::TaskState CHoughLineFinderComp::DoExtractFeatures(
 			const iprm::IParamsSet* paramsPtr,
 			const iimg::IBitmap& image,
 			IFeaturesConsumer& results,
@@ -194,7 +194,7 @@ int CHoughLineFinderComp::DoExtractFeatures(
 
 // reimplemented (iproc::IProcessor)
 
-int CHoughLineFinderComp::DoProcessing(
+iproc::IProcessor::TaskState CHoughLineFinderComp::DoProcessing(
 			const iprm::IParamsSet* paramsPtr,
 			const istd::IPolymorphic* inputPtr,
 			istd::IChangeable* outputPtr,

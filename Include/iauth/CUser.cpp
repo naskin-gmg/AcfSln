@@ -69,6 +69,12 @@ void CUser::SetUserGroup(int group)
 }
 
 
+bool CUser::IsEnabled() const
+{
+	return m_userGroup > 0; // corresponds to qauth::IGroupRights::DG_DISABLED;
+}
+
+
 bool CUser::CheckPassword(const QString& password) const
 {
 	return (m_password == password);

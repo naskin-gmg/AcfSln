@@ -14,7 +14,7 @@ namespace ifileproc
 
 // reimplemented (iproc::IProcessor)
 
-int CBitmapPreviewGeneratorComp::DoProcessing(
+iproc::IProcessor::TaskState CBitmapPreviewGeneratorComp::DoProcessing(
 			const iprm::IParamsSet* paramsPtr,
 			const istd::IPolymorphic* inputPtr,
 			istd::IChangeable* outputPtr,

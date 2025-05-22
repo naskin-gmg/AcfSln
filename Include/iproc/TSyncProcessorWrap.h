@@ -28,7 +28,7 @@ public:
 	TSyncProcessorWrap();
 
 	// pseudo-reimplemented (iproc::IProcessor)
-	virtual int GetProcessorState(const iprm::IParamsSet* paramsPtr) const override;
+	virtual IProcessor::ProcessorState GetProcessorState(const iprm::IParamsSet* paramsPtr) const override;
 	virtual bool AreParamsAccepted(
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,
@@ -38,13 +38,13 @@ public:
 				const istd::IPolymorphic* inputPtr,
 				istd::IChangeable* outputPtr,
 				ibase::IProgressManager* progressManagerPtr = NULL) override;
-	virtual int WaitTaskFinished(
+	virtual IProcessor::TaskState WaitTaskFinished(
 					int taskId = -1,
 					double timeoutTime = -1,
-					bool killOnTimeout = true) override;
+					bool killOnTimeout = true);
 	virtual void CancelTask(int taskId = -1) override;
 	virtual int GetReadyTask() override;
-	virtual int GetTaskState(int taskId = -1) const override;
+	virtual IProcessor::TaskState GetTaskState(int taskId = -1) const override;
 	virtual void InitProcessor(const iprm::IParamsSet* paramsPtr) override;
 
 protected:
@@ -58,7 +58,7 @@ protected:
 
 
 private:
-	typedef QMap<int, int> TaskToStateMap;
+	typedef QMap<int, IProcessor::TaskState> TaskToStateMap;
 
 	TaskToStateMap m_taskToStateMap;
 	int m_nextTaskId;
@@ -77,7 +77,7 @@ TSyncProcessorWrap<Base>::TSyncProcessorWrap()
 // pseudo-reimplemented (iproc::IProcessor)
 
 template <class Base>
-int TSyncProcessorWrap<Base>::GetProcessorState(const iprm::IParamsSet* /*paramsPtr*/) const
+IProcessor::ProcessorState TSyncProcessorWrap<Base>::GetProcessorState(const iprm::IParamsSet* /*paramsPtr*/) const
 {
 	return IProcessor::PS_READY;
 }
@@ -110,12 +110,12 @@ int TSyncProcessorWrap<Base>::BeginTask(
 
 
 template <class Base>
-int TSyncProcessorWrap<Base>::WaitTaskFinished(
+IProcessor::TaskState TSyncProcessorWrap<Base>::WaitTaskFinished(
 			int taskId,
 			double /*timeoutTime*/,
 			bool /*killOnTimeout*/)
 {
-	int retVal = IProcessor::TS_NONE;
+	IProcessor::TaskState retVal = IProcessor::TS_NONE;
 
 	if (taskId >= 0){
 		TaskToStateMap::iterator foundIter = m_taskToStateMap.find(taskId);
@@ -129,7 +129,7 @@ int TSyncProcessorWrap<Base>::WaitTaskFinished(
 		for (		TaskToStateMap::const_iterator iter = m_taskToStateMap.begin();
 					iter != m_taskToStateMap.end();
 					++iter){	// we are looking for worst status value. This values are sorted worst => bigger.
-			int taskState = iter.value();
+			IProcessor::TaskState taskState = iter.value();
 			if (taskState > retVal){
 				retVal = taskState;
 			}
@@ -167,9 +167,9 @@ int TSyncProcessorWrap<Base>::GetReadyTask()
 
 
 template <class Base>
-int TSyncProcessorWrap<Base>::GetTaskState(int taskId) const
+IProcessor::TaskState TSyncProcessorWrap<Base>::GetTaskState(int taskId) const
 {
-	int retVal = IProcessor::TS_NONE;
+	IProcessor::TaskState retVal = IProcessor::TS_NONE;
 
 	if (taskId >= 0){
 		TaskToStateMap::ConstIterator foundIter = m_taskToStateMap.constFind(taskId);
@@ -181,7 +181,7 @@ int TSyncProcessorWrap<Base>::GetTaskState(int taskId) const
 		for (		TaskToStateMap::const_iterator iter = m_taskToStateMap.begin();
 					iter != m_taskToStateMap.end();
 					++iter){	// we are looking for worst status value. This values are sorted worst => bigger.
-			int taskState = iter.value();
+			IProcessor::TaskState taskState = iter.value();
 			if (taskState > retVal){
 				retVal = taskState;
 			}
@@ -193,8 +193,9 @@ int TSyncProcessorWrap<Base>::GetTaskState(int taskId) const
 
 
 template <class Base>
-void TSyncProcessorWrap<Base>::InitProcessor(const iprm::IParamsSet* /*paramsPtr*/)
+void TSyncProcessorWrap<Base>::InitProcessor(const iprm::IParamsSet* paramsPtr)
 {
+	Base::InitProcessor(paramsPtr);
 }
 
 

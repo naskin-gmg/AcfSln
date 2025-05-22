@@ -24,7 +24,7 @@ public:
 		Specialization of processing interface for extraction of features from image.
 		\return				state of this processor task \sa iproc::IProcessor::TaskState.
 	*/
-	virtual int DoExtractFeatures(
+	virtual iproc::IProcessor::TaskState DoExtractFeatures(
 				const iprm::IParamsSet* paramsPtr,
 				const iimg::IBitmap& image,
 				IFeaturesConsumer& results,

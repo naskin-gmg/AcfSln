@@ -29,7 +29,7 @@ CFileAcquisitionComp::CFileAcquisitionComp()
 
 // reimplemented (iproc::IProcessor)
 
-int CFileAcquisitionComp::DoProcessing(
+iproc::IProcessor::TaskState CFileAcquisitionComp::DoProcessing(
 			const iprm::IParamsSet* paramsPtr,
 			const istd::IPolymorphic* /*inputPtr*/,
 			istd::IChangeable* outputPtr,
@@ -110,7 +110,7 @@ int CFileAcquisitionComp::DoProcessing(
 		imageFileName = inputPath;
 	}
 
-	int retVal = TS_INVALID;
+	iproc::IProcessor::TaskState retVal = TS_INVALID;
 
 	if (!imageFileName.isEmpty()){
 		if (outputPtr != NULL){
@@ -122,12 +122,19 @@ int CFileAcquisitionComp::DoProcessing(
 				m_lastImageSize = imagePtr->GetImageSize();
 			}
 
+			// #9125
 			if (m_lastFileNameCompPtr.IsValid()){
 				m_lastFileNameCompPtr->SetPath(imageFileName);
 			}
 		}
 		else{
 			retVal = TS_OK;
+		}
+	}
+	else {
+		// #9125
+		if (m_lastFileNameCompPtr.IsValid()) {
+			m_lastFileNameCompPtr->SetPath("");
 		}
 	}
 

@@ -23,7 +23,7 @@ public:
 	/**
 		Calculate statistics of a data sequence.
 	*/
-	virtual int CalculateDataStatistics(
+	virtual iproc::IProcessor::TaskState CalculateDataStatistics(
 				const imeas::IDataSequence& dataSequence,
 				imeas::IDataSequenceStatistics& dataStatistics) const = 0;
 };

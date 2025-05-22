@@ -31,7 +31,7 @@ const iimg::IBitmap* CMultiCameraBitmapSupplierComp::GetBitmap(int bitmapIndex) 
 
 	const ProductType* productPtr = GetWorkProduct();
 	if (productPtr != NULL){
-		return productPtr->GetAt(bitmapIndex);
+		return productPtr->at(bitmapIndex).GetPtr();
 	}
 
 	return NULL;
@@ -68,9 +68,9 @@ bool CMultiCameraBitmapSupplierComp::InitializeWork()
 }
 
 
-int CMultiCameraBitmapSupplierComp::ProduceObject(ProductType& result) const
+iinsp::ISupplier::WorkStatus CMultiCameraBitmapSupplierComp::ProduceObject(ProductType& result) const
 {
-	result.Reset();
+	result.clear();
 
 	if (!m_bitmapCompFact.IsValid()){
 		SendCriticalMessage(0, "Bad component architecture, 'BitmapFactory' component reference is not set");
@@ -95,12 +95,12 @@ int CMultiCameraBitmapSupplierComp::ProduceObject(ProductType& result) const
 		return WS_FAILED;
 	}
 
-	int retVal = WS_OK;
+	iinsp::ISupplier::WorkStatus retVal = WS_OK;
 
 	Timer performanceTimer(this, "Acquisition of image(s)");
 
 	for (int cameraIndex = 0; cameraIndex < camerasCount; cameraIndex++){
-		istd::TDelPtr<iimg::IBitmap> cameraBitmapPtr(m_bitmapCompFact.CreateInstance());
+		iimg::IBitmapUniquePtr cameraBitmapPtr = m_bitmapCompFact.CreateInstance();
 		if (!cameraBitmapPtr.IsValid()){
 			SendErrorMessage(0, "Bitmap instance could not be created");
 
@@ -114,16 +114,16 @@ int CMultiCameraBitmapSupplierComp::ProduceObject(ProductType& result) const
 
 		switch (status){
 				case iproc::IProcessor::TS_OK:
-					result.PushBack(cameraBitmapPtr.PopPtr());
+					result.push_back(iimg::IBitmapSharedPtr::CreateFromUnique(cameraBitmapPtr));
 					break;
 
 				case iproc::IProcessor::TS_CANCELED:
-					result.Reset();
+					result.clear();
 					retVal = WS_CANCELED;
 					break;
 
 				default:
-					result.Reset();
+					result.clear();
 					retVal = WS_FAILED;
 					break;
 		}

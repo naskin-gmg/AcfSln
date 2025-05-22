@@ -178,7 +178,7 @@ bool CFastEdgesExtractorComp::DoContourExtraction(
 
 // reimplemented (iproc::IProcessor)
 
-int CFastEdgesExtractorComp::DoProcessing(
+iproc::IProcessor::TaskState CFastEdgesExtractorComp::DoProcessing(
 		const iprm::IParamsSet* paramsPtr,
 		const istd::IPolymorphic* inputPtr,
 		istd::IChangeable* outputPtr,
@@ -676,11 +676,11 @@ void CFastEdgesExtractorComp::InternalContainer::ExtractLines(
 
 				nodeElementPtr->isExtracted = true;
 
-				CEdgeNode currentNode(
+				CEdgeNode newNode(
 							nodeElementPtr->position,
 							nodeElementPtr->derivative.GetLength() * weightScale);
 
-				resultLine.GetNodeRef(index++) = currentNode;
+				resultLine.GetNodeRef(index++) = newNode;
 			}
 		}
 	}
@@ -718,11 +718,11 @@ void CFastEdgesExtractorComp::InternalContainer::ExtractLines(
 
 				nodeElementPtr->isExtracted = true;
 
-				CEdgeNode currentNode(
+				CEdgeNode newNode(
 							nodeElementPtr->position,
 							nodeElementPtr->derivative.GetLength() * weightScale);
 
-				resultLine.GetNodeRef(index++) = currentNode;
+				resultLine.GetNodeRef(index++) = newNode;
 
 				nodeElementPtr = nodeElementPtr->nextPtr;
 			} while (nodeElementPtr != &node);

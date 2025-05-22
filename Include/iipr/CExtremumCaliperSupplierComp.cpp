@@ -43,7 +43,7 @@ const imeas::INumericValue& CExtremumCaliperSupplierComp::GetFeature(int index) 
 
 // reimplemented (iinsp::TSupplierCompWrap)
 
-int CExtremumCaliperSupplierComp::ProduceObject(ProductType& result) const
+iinsp::ISupplier::WorkStatus CExtremumCaliperSupplierComp::ProduceObject(ProductType& result) const
 {
 	if (		m_sequenceProviderCompPtr.IsValid() &&
 				m_extremumProcessorCompPtr.IsValid()){

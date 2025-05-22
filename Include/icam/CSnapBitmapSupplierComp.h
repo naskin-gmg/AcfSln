@@ -24,7 +24,7 @@ public:
 
 protected:
 	// reimplemented (CSnapBitmapSupplierCompBase)
-	virtual iimg::IBitmap* CreateBitmap() const;
+	virtual iimg::IBitmapUniquePtr CreateBitmap() const override;
 
 private:
 	I_FACT(iimg::IBitmap, m_bitmapCompFact);

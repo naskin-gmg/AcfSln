@@ -34,12 +34,12 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (iproc::IProcessor)
-	virtual int GetProcessorState(const iprm::IParamsSet* paramsPtr) const;
+	virtual IProcessor::ProcessorState GetProcessorState(const iprm::IParamsSet* paramsPtr) const;
 	virtual bool AreParamsAccepted(
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,
 				const istd::IChangeable* outputPtr) const;
-	virtual int DoProcessing(
+	virtual IProcessor::TaskState DoProcessing(
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,
 				istd::IChangeable* outputPtr,

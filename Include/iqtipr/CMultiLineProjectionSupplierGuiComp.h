@@ -30,6 +30,9 @@ public:
 		I_ASSIGN(m_projectionSelectorCompPtr, "ProjectionSelector", "External selection of the current projection", false, "ProjectionSelector");
 	I_END_COMPONENT;
 
+signals:
+	void OnSupplierParamsChangedSignal();
+
 protected Q_SLOTS:
 	void on_TestButton_clicked();
 	void on_ProjectionSlider_valueChanged(int value);

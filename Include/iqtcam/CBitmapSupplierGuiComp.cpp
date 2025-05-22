@@ -13,6 +13,7 @@
 #include <iinsp/ISupplier.h>
 #include <iview/CImageShape.h>
 #include <iview/CViewBase.h>
+#include <icam/ICameraAcquisition.h>
 
 
 namespace iqtcam
@@ -39,20 +40,43 @@ const iimg::IBitmap* CBitmapSupplierGuiComp::GetBitmap() const
 
 void CBitmapSupplierGuiComp::on_SnapImageButton_clicked()
 {
+	iinsp::ISupplier* supplierPtr = GetObservedObject();
+	icam::ICameraAcquisition* cameraAcquisitionPtr = CompCastPtr<icam::ICameraAcquisition>(supplierPtr);
+
+
+	if (cameraAcquisitionPtr != NULL) {
+		cameraAcquisitionPtr->StartCamera();
+	}
+
 	// snap with UI message by default
 	DoSnap();
+
+	if (cameraAcquisitionPtr != NULL) {
+		cameraAcquisitionPtr->StopCamera();
+	}
 }
 
 
 void CBitmapSupplierGuiComp::on_LiveImageButton_toggled(bool checked)
 {
+	iinsp::ISupplier* supplierPtr = GetObservedObject();
+	icam::ICameraAcquisition* cameraAcquisitionPtr = CompCastPtr<icam::ICameraAcquisition>(supplierPtr);
+
 	if (checked){
 		m_timer.setInterval(*m_snapIntervalAttrPtr);
+		
+		if (cameraAcquisitionPtr != NULL) {
+			cameraAcquisitionPtr->StartCamera();
+		}
 
 		m_timer.start();
 	}
 	else{
 		m_timer.stop();
+
+		if (cameraAcquisitionPtr != NULL) {
+			cameraAcquisitionPtr->StopCamera();
+		}
 	}
 
 	SnapImageButton->setEnabled(!checked);
@@ -105,7 +129,7 @@ void CBitmapSupplierGuiComp::DoSnap(bool noGui)
 
 		if (supplierPtr->GetWorkStatus() == iinsp::ISupplier::WS_FAILED){
 			if (noGui){
-				SendCriticalMessage(0, QObject::tr("Snap Error"));
+				SendCriticalMessage(0, QT_TR_NOOP("Snap Error"));
 			}
 			else{
 				QMessageBox::warning(
@@ -125,6 +149,8 @@ void CBitmapSupplierGuiComp::OnGuiCreated()
 	BaseClass::OnGuiCreated();
 
 	SaveImageButton->setVisible(m_bitmapLoaderCompPtr.IsValid() && m_bitmapPtr.IsValid());
+
+	ControlFrame->setVisible(*m_showControlPanelAttrPtr);
 }
 
 
@@ -134,6 +160,7 @@ void CBitmapSupplierGuiComp::OnGuiHidden()
 
 	BaseClass::OnGuiHidden();
 }
+
 
 void CBitmapSupplierGuiComp::OnGuiRetranslate()
 {
@@ -182,9 +209,10 @@ QWidget* CBitmapSupplierGuiComp::GetParamsWidget() const
 void CBitmapSupplierGuiComp::CreateShapes(int /*sceneId*/, Shapes& result)
 {
 	imod::IModel* bitmapModelPtr = dynamic_cast<imod::IModel*>(m_bitmapPtr.GetPtr());
-	iview::CImageShape* shapePtr = new iview::CImageShape;
+	if (bitmapModelPtr != NULL){
+		iview::CImageShape* shapePtr = new iview::CImageShape;
+		Q_ASSERT(shapePtr);
 
-	if ((bitmapModelPtr != NULL) && (shapePtr != NULL)){
 		shapePtr->AssignToLayer(iview::IViewLayer::LT_BACKGROUND);
 
 		result.PushBack(shapePtr);
@@ -256,9 +284,12 @@ void CBitmapSupplierGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& chang
 void CBitmapSupplierGuiComp::AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet)
 {
 	const iimg::IBitmap* bitmapPtr = NULL;
+	int status = iinsp::ISupplier::WS_FAILED;
 
 	iinsp::ISupplier* supplierPtr = GetObservedObject();
 	if (supplierPtr != NULL){
+		status = supplierPtr->GetWorkStatus();
+
 		iimg::IBitmapProvider* providerPtr = dynamic_cast<iimg::IBitmapProvider*>(supplierPtr);
 		if (providerPtr != NULL){
 			bitmapPtr = providerPtr->GetBitmap();
@@ -271,35 +302,29 @@ void CBitmapSupplierGuiComp::AfterUpdate(imod::IModel* modelPtr, const istd::ICh
 		}
 	}
 
+	istd::CChangeNotifier updateOriginal(&m_originalBitmapProvider);
+	if (bitmapPtr) {
+		m_originalBitmapProvider.m_bitmap.CopyFrom(*bitmapPtr);
+	}
+	else
+		m_originalBitmapProvider.m_bitmap.ResetImage();
+
 	if (m_bitmapPtr.IsValid()){
 		if ((bitmapPtr == NULL) || !m_bitmapPtr->CopyFrom(*bitmapPtr)){
 			m_bitmapPtr->ResetImage();
 		}
 
-		istd::CIndex2d imageSize = m_bitmapPtr->GetImageSize();
-		i2d::CRectangle imageBox(0, 0, imageSize.GetX(), imageSize.GetY());
+		if (status == iinsp::ISupplier::WS_FAILED){
+			QPixmap errorPixmap(":/Icons/Error");
+			QImage errorImage = errorPixmap.toImage();
+			errorImage.setText("Error", "Error");
+			iimg::CBitmap errorBmp(errorImage);
 
-		const ShapesMap& shapesMap = GetShapesMap();
-		QList<iqt2d::IViewProvider*> keys = shapesMap.keys();
-
-#if QT_VERSION >= 0x060000
-		QSet<iqt2d::IViewProvider*> views(keys.begin(), keys.end());
-
-#else
-		QSet<iqt2d::IViewProvider*> views = keys.toSet();
-#endif
-
-		for (		QSet<iqt2d::IViewProvider*>::ConstIterator viewIter = views.begin();
-					viewIter != views.end();
-					++viewIter){
-			iqt2d::IViewProvider* viewProviderPtr = *viewIter;
-			Q_ASSERT(viewProviderPtr != NULL);
-
-			iview::CViewBase* viewPtr = dynamic_cast<iview::CViewBase*>(viewProviderPtr->GetView());
-			if (viewPtr != NULL){
-				viewPtr->SetFitArea(imageBox);
-			}
+			m_bitmapPtr->SetCalibration(nullptr);
+			m_bitmapPtr->CopyFrom(errorBmp);
 		}
+
+		UpdateViewShapes();
 	}
 
 	BaseClass::AfterUpdate(modelPtr, changeSet);
@@ -313,10 +338,42 @@ void CBitmapSupplierGuiComp::OnComponentCreated()
 	BaseClass::OnComponentCreated();
 
 	if (m_bitmapFactPtr.IsValid()){
-		m_bitmapPtr.SetPtr(m_bitmapFactPtr.CreateInstance());
+		m_bitmapPtr.FromUnique(m_bitmapFactPtr.CreateInstance());
 	}
 	else{
 		m_bitmapPtr.SetPtr(new BitmapImpl);
+	}
+}
+
+void CBitmapSupplierGuiComp::UpdateViewShapes()
+{
+	if (!m_bitmapPtr.IsValid()) {
+		return;
+	}
+
+	istd::CIndex2d imageSize = m_bitmapPtr->GetImageSize();
+	i2d::CRectangle imageBox(0, 0, imageSize.GetX(), imageSize.GetY());
+
+	const ShapesMap& shapesMap = GetShapesMap();
+
+	QList<iqt2d::IViewProvider*> keys = shapesMap.keys();
+
+#if QT_VERSION >= 0x060000
+		QSet<iqt2d::IViewProvider*> views(keys.begin(), keys.end());
+#else
+		QSet<iqt2d::IViewProvider*> views = keys.toSet();
+#endif
+
+	for (QSet<iqt2d::IViewProvider*>::ConstIterator viewIter = views.begin();
+		viewIter != views.end();
+		++viewIter) {
+		iqt2d::IViewProvider* viewProviderPtr = *viewIter;
+		Q_ASSERT(viewProviderPtr != NULL);
+
+		iview::CViewBase* viewPtr = dynamic_cast<iview::CViewBase*>(viewProviderPtr->GetView());
+		if (viewPtr != NULL) {
+			viewPtr->SetFitArea(imageBox);
+		}
 	}
 }
 

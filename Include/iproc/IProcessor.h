@@ -92,7 +92,7 @@ public:
 		\param	paramsPtr	pointer to parameter object or NULL if general state is mean.
 		\return				state of this processor \sa ProcessorState.
 	 */
-	virtual int GetProcessorState(const iprm::IParamsSet* paramsPtr) const = 0;
+	virtual ProcessorState GetProcessorState(const iprm::IParamsSet* paramsPtr) const = 0;
 
 	/**
 		Check if specified parameter set is accepted for this processor.
@@ -109,7 +109,7 @@ public:
 		Do synchronized processing.
 		\return		state of processing task \sa TaskState.
 	*/
-	virtual int DoProcessing(
+	virtual TaskState DoProcessing(
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,
 				istd::IChangeable* outputPtr,
@@ -144,7 +144,7 @@ public:
 		\param	killOnTimeout	indicate that task must be killed by timeout.
 		\return					state of selected task or all tasks \sa TaskState.
 	*/
-	virtual int WaitTaskFinished(
+	virtual TaskState WaitTaskFinished(
 					int taskId = -1,
 					double timeoutTime = -1,
 					bool killOnTimeout = true) = 0;
@@ -170,7 +170,7 @@ public:
 						If it is -1 state of the last task will be returned.
 		\return					state of selected task or all tasks \sa TaskState.
 	*/
-	virtual int GetTaskState(int taskId = -1) const = 0;
+	virtual TaskState GetTaskState(int taskId = -1) const = 0;
 
 	/**
 		Init processor to optimal process with specified params.
@@ -183,6 +183,9 @@ public:
 	*/
 	virtual void InitProcessor(const iprm::IParamsSet* paramsPtr) = 0;
 };
+
+
+typedef istd::TUniqueInterfacePtr<iproc::IProcessor> IProcessorPtr;
 
 
 } // namespace iproc

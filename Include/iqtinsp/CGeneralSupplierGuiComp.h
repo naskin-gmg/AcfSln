@@ -8,6 +8,7 @@
 // ACF includes
 #include <istd/CChangeNotifier.h>
 #include <iinsp/ISupplier.h>
+#include <iprm/ITextParam.h>
 
 // ACF-Solutions includes
 #include <iqtinsp/TSupplierGuiCompBase.h>
@@ -24,6 +25,9 @@ class TGeneralSupplierGuiComp: public TSupplierGuiCompBase<UI>
 public:
 	typedef TSupplierGuiCompBase<UI> BaseClass;
 
+	using BaseClass::m_useVerticalSpacerAttrPtr;
+	using BaseClass::m_showResultStatusFrameAttrPtr;
+
 protected:
 	// pseudo slots
 	virtual void Test();
@@ -34,9 +38,10 @@ protected:
 	virtual void OnSupplierParamsChanged() override;
 
 	// reimplemented (iqtgui::TGuiObserverWrap)
-	virtual void OnGuiModelAttached() override;
-	virtual void OnGuiHidden() override;
-	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet) override;
+	virtual void OnGuiCreated();
+	virtual void OnGuiModelAttached();
+	virtual void OnGuiHidden();
+	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
 };
 
 
@@ -90,6 +95,23 @@ void TGeneralSupplierGuiComp<UI>::OnSupplierParamsChanged()
 // reimplemented (iqtgui::TGuiObserverWrap)
 
 template <class UI>
+void TGeneralSupplierGuiComp<UI>::OnGuiCreated()
+{
+	BaseClass::OnGuiCreated();
+
+	if (*m_useVerticalSpacerAttrPtr){
+		BaseClass::VerticalSpacer->changeSize(1, 1, QSizePolicy::Minimum, QSizePolicy::MinimumExpanding);
+		BaseClass::ParamsGB->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Maximum);
+	}
+	else {
+		BaseClass::VerticalSpacer->changeSize(0, 0, QSizePolicy::Fixed, QSizePolicy::Fixed);
+	}
+
+	this->ShowResultsBox(*m_showResultStatusFrameAttrPtr);
+}
+
+
+template <class UI>
 void TGeneralSupplierGuiComp<UI>::OnGuiModelAttached()
 {
 	BaseClass::OnGuiModelAttached();
@@ -102,6 +124,8 @@ void TGeneralSupplierGuiComp<UI>::OnGuiModelAttached()
 
 	BaseClass::LoadParamsButton->setVisible(isLoadSupported);
 	BaseClass::SaveParamsButton->setVisible(isSaveSupported);
+
+	BaseClass::ParamsPersistenceFrame->setVisible(isLoadSupported || isSaveSupported);
 }
 
 
@@ -136,21 +160,26 @@ void TGeneralSupplierGuiComp<UI>::UpdateGui(const istd::IChangeable::ChangeSet& 
 		}
 	}
 
-	BaseClass::StatusLabel->setText(BaseClass::m_visualStatus.GetStatusText());
-	if (!description.isEmpty()){
-		BaseClass::DescriptionLabel->setText(description);
-		BaseClass::DescriptionLabel->setVisible(true);
+	if (*m_showResultStatusFrameAttrPtr){
+		BaseClass::StatusLabel->setText(BaseClass::m_visualStatus.GetStatusText());
+
+		if (!description.isEmpty()){
+			BaseClass::DescriptionLabel->setText(description);
+			BaseClass::DescriptionLabel->setVisible(true);
+		}
+		else {
+			BaseClass::DescriptionLabel->setVisible(false);
+		}
 	}
-	else{
-		BaseClass::DescriptionLabel->setVisible(false);
-	}
+
+	this->ShowResultsBox(*m_showResultStatusFrameAttrPtr);
 }
 
 
 /**
 	Default implementation of the supplier's UI
 */
-class CGeneralSupplierGuiComp: public TGeneralSupplierGuiComp<>
+class CGeneralSupplierGuiComp : public TGeneralSupplierGuiComp<>
 {
 	Q_OBJECT
 
@@ -158,7 +187,8 @@ public:
 	typedef TGeneralSupplierGuiComp<> BaseClass;
 
 	I_BEGIN_COMPONENT(CGeneralSupplierGuiComp);
-		I_ASSIGN(m_showResultStatusFrameAttrPtr, "ShowResultStatusFrame", "If enabled, show result status group box on the bottom of the view", true, true);
+	I_ASSIGN(m_buttonLabelCompPtr, "ButtonLabelText", "Component contains text of button", false, "ButtonLabelText");
+	I_ASSIGN(m_disableAutoTestAttrPtr, "DisableAutoTest", "Disable auto test (continues) button", false, false);
 	I_END_COMPONENT;
 
 	CGeneralSupplierGuiComp();
@@ -166,15 +196,27 @@ public:
 protected:
 	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated() override;
+	virtual void OnGuiDestroyed() override;
 	virtual void OnGuiDesignChanged() override;
 
+	// reimplemented (iqtgui::TGuiObserverWrap)
+	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet) override;
+
+	// reimplemented (iqtinsp::TSupplierGuiCompBase)
+	virtual void OnSupplierParamsChanged() override;
+	virtual void ShowResultsBox(bool show) override;
+
+Q_SIGNALS:
+	void OnSupplierParamsChangedSignal();
+
 protected Q_SLOTS:
-	void on_TestButton_clicked();
+	void OnTestButtonClicked();
 	void on_LoadParamsButton_clicked();
 	void on_SaveParamsButton_clicked();
 
 private:
-	I_ATTR(bool, m_showResultStatusFrameAttrPtr);
+	I_REF(iprm::ITextParam, m_buttonLabelCompPtr);
+	I_ATTR(bool, m_disableAutoTestAttrPtr);
 };
 
 

@@ -59,7 +59,7 @@ iipr::IImageToFeatureProcessor* CMultiPointPosCorrSupplierComp::GetCompatiblePro
 
 // reimplemented (iinsp::TSupplierCompWrap)
 
-int CMultiPointPosCorrSupplierComp::ProduceObject(ProductType& result) const
+iinsp::ISupplier::WorkStatus CMultiPointPosCorrSupplierComp::ProduceObject(ProductType& result) const
 {
 	if (!m_featureProcessorsCompPtr.IsValid()){
 		SendCriticalMessage(0, "Wrong component topology");

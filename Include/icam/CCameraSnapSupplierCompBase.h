@@ -35,13 +35,13 @@ public:
 
 protected:
 	// reimplemented (CSnapBitmapSupplierCompBase)
-	virtual int DoSnap(const iprm::IParamsSet* snapParamsPtr, iimg::IBitmap& snapBitmap) const;
+	virtual int DoSnap(const iprm::IParamsSet* snapParamsPtr, iimg::IBitmap& snapBitmap) const override;
 
 	// reimplemented (iinsp::TSupplierCompWrap)
-	virtual bool InitializeWork();
+	virtual bool InitializeWork() override;
 
 	// reimplemented (icomp::CComponentBase)
-	virtual void OnComponentCreated();
+	virtual void OnComponentCreated() override;
 
 private:
 	I_REF(IBitmapAcquisition, m_bitmapAcquisitionCompPtr);

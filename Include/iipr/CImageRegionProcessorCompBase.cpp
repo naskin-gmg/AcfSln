@@ -18,7 +18,7 @@ namespace iipr
 
 // reimplemented (iproc::IProcessor)
 
-int CImageRegionProcessorCompBase::DoProcessing(
+iproc::IProcessor::TaskState CImageRegionProcessorCompBase::DoProcessing(
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,
 				istd::IChangeable* outputPtr,

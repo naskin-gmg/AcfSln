@@ -15,7 +15,7 @@ const istd::IChangeable::ChangeSet s_changeUnitChangeSet(iprm::ISelectionParam::
 // public methods
 
 CRelativeUnitSelectorComp::CRelativeUnitSelectorComp()
-	:m_displayMode(DM_PERCENT)
+	:m_precision(0), m_displayMode(DM_PERCENT)
 {
 }
 
@@ -86,16 +86,16 @@ QString CRelativeUnitSelectorComp::GetOptionName(int index) const
 		case DM_PERCENT:
 			return "%";
 		case DM_PERMILLE:
-			return QChar(0x2030);
+			return QCHAR_PERMILLE;
 		default:
-			return QString();
+			return "";
 	}
 }
 
 
 QString CRelativeUnitSelectorComp::GetOptionDescription(int /*index*/) const
 {
-	return QString();
+	return "";
 }
 
 
@@ -141,10 +141,10 @@ QString CRelativeUnitSelectorComp::GetUnitName() const
 		return "%";
 
 	case DM_PERMILLE:
-		return QChar(0x2030);
+		return QCHAR_PERMILLE;
 
 	default:
-		return QString();
+		return "";
 	}
 }
 

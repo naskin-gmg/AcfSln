@@ -21,6 +21,7 @@ namespace iqtipr
 CValueSupplierGuiComp::CValueSupplierGuiComp()
 :	m_isResultVisible(false)
 {
+	connect(this, SIGNAL(OnSupplierParamsChangedSignal()), SLOT(on_TestButton_clicked()), Qt::QueuedConnection);
 }
 
 
@@ -59,7 +60,7 @@ QWidget* CValueSupplierGuiComp::GetParamsWidget() const
 void CValueSupplierGuiComp::OnSupplierParamsChanged()
 {
 	if (IsGuiCreated() && AutoUpdateButton->isChecked()){
-		QTimer::singleShot(1, this, SLOT(on_TestButton_clicked()));
+		emit OnSupplierParamsChangedSignal();
 	}
 }
 

@@ -49,6 +49,11 @@ I_EXPORT_COMPONENT(
 			"Projection Line Processor" IM_TAG("Processor") IM_AUTHOR("\"Witold Gantzke\""));
 
 I_EXPORT_COMPONENT(
+			BilinearLineProjectionProcessor,
+			"Line projection implementation for single line width with bilinear approximation",
+			"Projection Line Processor" IM_TAG("Processor") IM_AUTHOR("\"Nikolai Karpenko\""));
+
+I_EXPORT_COMPONENT(
 			CircleFindProcessor,
 			"Circle finder processor",
 			"Circle Finder Annulus Caliper Processor" IM_TAG("Processor") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
@@ -107,6 +112,11 @@ I_EXPORT_COMPONENT(
 			ImagePolarTransformProcessor,
 			"Polar transformation",
 			"Processor Polar Transform" IM_AUTHOR("\"Kirill Lepskiy\""));
+
+I_EXPORT_COMPONENT(
+			ImageCopyProcessor,
+			"Image region copy and convert processor",
+			"Copy Region Processor Convert AOI ROI");
 
 I_EXPORT_COMPONENT(
 			ImageCropProcessor,
@@ -221,7 +231,7 @@ I_EXPORT_COMPONENT(
 I_EXPORT_COMPONENT(
 			ImageFlipProcessor,
 			"Image flipping processor (vertical/horizontal)",
-			"Flip Mirror Image" IM_AUTHOR("\"Arseniy Masyuk\""));
+			"Flip Mirror Image");
 
 I_EXPORT_COMPONENT(
 			ColorPatternController,
@@ -307,6 +317,12 @@ I_EXPORT_COMPONENT(
 			SearchConstraints,
 			"Search constraints component, which provides constraints from Base object and possibility to configurate the shrink of corresponding ranges",
 			"Search Constraints Provider" IM_CATEGORY(I_DATA_PROCESSING));
+
+I_EXPORT_COMPONENT(
+			SelectProcessedBitmapSupplier,
+			"Supplier providing Processed Bitmap wrt selected Processor",
+			"Supplier Bitmap Select Processor" IM_TAG("Selected Processor Supplier Bitmap"));
+
 
 } // namespace IprPck
 

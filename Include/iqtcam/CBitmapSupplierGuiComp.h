@@ -12,12 +12,10 @@
 #include <iimg/CBitmap.h>
 #include <iqtgui/IGuiObject.h>
 #include <iqtgui/TDesignerGuiObserverCompBase.h>
-
 #include <iimg/IBitmapProvider.h>
-
 #include <iqtinsp/TSupplierGuiCompBase.h>
-
 #include <iqtcam/iqtcam.h>
+
 
 #include <GeneratedFiles/iqtcam/ui_CBitmapSupplierGuiComp.h>
 
@@ -44,12 +42,19 @@ public:
 		I_ASSIGN(m_snapButtonTextAttrPtr, "SnapButtonText", "Snap button text", false, "Snap");
 		I_ASSIGN(m_snapButtonTooltipAttrPtr, "SnapButtonTooltip", "Snap button tooltip", false, "Snap next image");
 		I_ASSIGN(m_bitmapFactPtr, "BitmapFactory", "Factory used for bitmap instantiation", false, "BitmapFactory");
+		I_ASSIGN(m_showControlPanelAttrPtr, "ShowControlPanel", "If enabled, the control button panel is shown", true, true);
+
+		I_REGISTER_SUBELEMENT(OriginalBitmapProvider);
+		I_REGISTER_SUBELEMENT_INTERFACE(OriginalBitmapProvider, iimg::IBitmapProvider, ExtractOriginalBitmapProvider);
+		I_REGISTER_SUBELEMENT_INTERFACE(OriginalBitmapProvider, imod::IModel, ExtractOriginalBitmapProvider);
+		I_REGISTER_SUBELEMENT_INTERFACE(OriginalBitmapProvider, istd::IChangeable, ExtractOriginalBitmapProvider);
+
 	I_END_COMPONENT;
 
 	CBitmapSupplierGuiComp();
 
 	// reimplemented (iimg::IBitmapProvider)
-	virtual const iimg::IBitmap* GetBitmap() const override;
+	virtual const iimg::IBitmap* GetBitmap() const;
 
 protected Q_SLOTS:
 	void on_SnapImageButton_clicked();
@@ -62,10 +67,6 @@ protected Q_SLOTS:
 protected:
 	void DoSnap(bool noGui = false);
 
-	// reimplemented (iqtgui::CGuiComponentBase)
-	virtual void OnGuiCreated() override;
-	virtual void OnGuiHidden() override;
-
 	// reimplemented (iqtinsp::TSupplierGuiCompBase)
 	virtual QWidget* GetParamsWidget() const override;
 
@@ -76,14 +77,43 @@ protected:
 	virtual void OnGuiModelAttached() override;
 	virtual void OnGuiModelDetached() override;
 	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet) override;
+
+	// reimplemented (iqtgui::CGuiComponentBase)
+	virtual void OnGuiCreated() override;
+	virtual void OnGuiHidden() override;
 	virtual void OnGuiRetranslate() override;
 	virtual void OnGuiDesignChanged() override;
 
 	// reimplemented (imod::IObserver)
-	virtual void AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet) override;
+	virtual void AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet);
 
 	// reimplemented (icomp::CComponentBase)
-	virtual void OnComponentCreated() override;
+	virtual void OnComponentCreated();
+
+private:
+	void UpdateViewShapes();
+
+	// OriginalBitmapProvider subclass
+	class OriginalBitmapProvider : public iimg::IBitmapProvider
+	{
+	public:
+		// reimplemented (iimg::IBitmapProvider)
+		virtual const iimg::IBitmap* GetBitmap() const
+		{
+			return &m_bitmap;
+		}
+
+		iimg::CBitmap m_bitmap;
+	};
+
+	// static template methods for sub-element access
+	template <class InterfaceType>
+	static InterfaceType* ExtractOriginalBitmapProvider(CBitmapSupplierGuiComp& component)
+	{
+		return &component.m_originalBitmapProvider;
+	}
+
+	imod::TModelWrap<OriginalBitmapProvider> m_originalBitmapProvider;
 
 private:
 	I_REF(ifile::IFilePersistence, m_bitmapLoaderCompPtr);
@@ -91,10 +121,11 @@ private:
 	I_ATTR(int, m_snapIntervalAttrPtr);
 	I_ATTR(QByteArray, m_snapButtonTextAttrPtr);
 	I_ATTR(QByteArray, m_snapButtonTooltipAttrPtr);
+	I_ATTR(bool, m_showControlPanelAttrPtr);
 
 	typedef imod::TModelWrap<iimg::CBitmap> BitmapImpl;
 
-	istd::TDelPtr<iimg::IBitmap> m_bitmapPtr;
+	iimg::IBitmapSharedPtr m_bitmapPtr;
 
 	QTimer m_timer;
 };

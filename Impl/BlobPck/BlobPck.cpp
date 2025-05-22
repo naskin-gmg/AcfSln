@@ -28,6 +28,12 @@ I_EXPORT_COMPONENT(
 			"Editor for the blob filter parameters",
 			"Blob Filter Parameters Editor UI GUI");
 
+I_EXPORT_COMPONENT(
+			BlobFeaturesSupplierGui,
+			"UI for blob-related feature supplier",
+			"Features Blob Search"
+);
+
 
 } // namespace BlobPck
 

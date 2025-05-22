@@ -18,7 +18,9 @@ bool CBitmapJoinerCompBase::PrepareSnapResult(int imageCount, istd::IChangeable*
 	m_snapList.resize(imageCount);
 
 	for(int listIndex = 0; listIndex < m_snapList.size(); listIndex++){
-		m_snapList[listIndex].bitmapPtr.SetPtr(m_bitmapFactoryPtr.CreateInstance());
+		iimg::IBitmapUniquePtr bitmapInstancePtr = m_bitmapFactoryPtr.CreateInstance();
+
+		m_snapList[listIndex].bitmapPtr.FromUnique(bitmapInstancePtr);
 	}
 
 	return true;

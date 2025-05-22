@@ -25,7 +25,7 @@ istd::CIndex2d CMultiCameraJoinerComp::GetBitmapSize(const iprm::IParamsSet* /*p
 
 // reimplemented (iproc::IProcessor)
 
-int CMultiCameraJoinerComp::DoProcessing(
+iproc::IProcessor::TaskState CMultiCameraJoinerComp::DoProcessing(
 			const iprm::IParamsSet* paramsPtr,
 			const istd::IPolymorphic* inputPtr,
 			istd::IChangeable* outputPtr,

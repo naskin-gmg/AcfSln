@@ -17,7 +17,7 @@ const CEdgeLineContainer* CExtractedEdgeLinesSupplierComp::GetEdgesContainer() c
 
 // reimplemented (iinsp::TSupplierCompWrap)
 
-int CExtractedEdgeLinesSupplierComp::ProduceObject(CEdgeLineContainer& result) const
+iinsp::ISupplier::WorkStatus CExtractedEdgeLinesSupplierComp::ProduceObject(CEdgeLineContainer& result) const
 {
 	result.Reset();
 

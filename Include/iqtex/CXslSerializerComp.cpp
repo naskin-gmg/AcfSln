@@ -38,7 +38,7 @@ bool CXslSerializerComp::IsOperationSupported(
 }
 
 
-int CXslSerializerComp::LoadFromFile(
+ifile::IFilePersistence::OperationState CXslSerializerComp::LoadFromFile(
 			istd::IChangeable& data,
 			const QString& filePath,
 			ibase::IProgressManager* /*progressManagerPtr*/) const
@@ -64,7 +64,7 @@ int CXslSerializerComp::LoadFromFile(
 }
 
 
-int CXslSerializerComp::SaveToFile(
+ifile::IFilePersistence::OperationState CXslSerializerComp::SaveToFile(
 			const istd::IChangeable& data,
 			const QString& filePath,
 			ibase::IProgressManager* /*progressManagerPtr*/) const
@@ -78,14 +78,14 @@ int CXslSerializerComp::SaveToFile(
 		Q_ASSERT(serializablePtr != NULL);
 
 		if (!CheckMinimalVersion(*serializablePtr, archive.GetVersionInfo())){
-			SendWarningMessage(MI_UNSUPPORTED_VERSION, QObject::tr("Archive version is not supported, possible lost of data"));
+			SendWarningMessage(MI_UNSUPPORTED_VERSION, QT_TR_NOOP("Archive version is not supported, possible lost of data"));
 		}
 
 		if ((const_cast<iser::ISerializable*>(serializablePtr))->Serialize(archive)){
 			return OS_OK;
 		}
 		else{
-			SendInfoMessage(MI_CANNOT_SAVE, QObject::tr("Cannot serialize object to file"));
+			SendInfoMessage(MI_CANNOT_SAVE, QT_TR_NOOP("Cannot serialize object to file"));
 		}
 	}
 #endif
@@ -98,7 +98,7 @@ int CXslSerializerComp::SaveToFile(
 
 void CXslSerializerComp::OnReadError(const iser::IArchive& /*archive*/, const istd::IChangeable& /*data*/, const QString& filePath) const
 {
-	SendWarningMessage(MI_CANNOT_LOAD, QObject::tr("Cannot load object from file ") + filePath);
+	SendWarningMessage(MI_CANNOT_LOAD, QT_TR_NOOP("Cannot load object from file ") + filePath);
 }
 
 
