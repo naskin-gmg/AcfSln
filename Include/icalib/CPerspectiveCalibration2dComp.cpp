@@ -29,15 +29,17 @@ void CPerspectiveCalibration2dComp::OnComponentCreated()
 
 void CPerspectiveCalibration2dComp::OnComponentDestroyed()
 {
-	BaseClass::OnComponentDestroyed();
-
 	istd::CChangeGroup changeGroup(this);
 	Q_UNUSED(changeGroup);
+
+	Reset();
 
 	SetArgumentArea(NULL);
 	SetResultArea(NULL);
 	SetArgumentUnitInfo(NULL);
 	SetResultUnitInfo(NULL);
+
+	BaseClass::OnComponentDestroyed();
 }
 
 

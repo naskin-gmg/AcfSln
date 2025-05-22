@@ -23,6 +23,7 @@ class CPerspectiveCalibration2d: virtual public i2d::ICalibration2d
 public:
 	CPerspectiveCalibration2d();
 	CPerspectiveCalibration2d(const i2d::CAffine2d& affinePart, const i2d::CVector2d& perspectiveAxis);
+	virtual ~CPerspectiveCalibration2d();
 
 	/**
 		Reset this calibration, set to be identity transform.

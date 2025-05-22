@@ -41,6 +41,14 @@ CPerspectiveCalibration2d::CPerspectiveCalibration2d(const i2d::CAffine2d& affin
 }
 
 
+CPerspectiveCalibration2d::~CPerspectiveCalibration2d()
+{
+	// reset it silently
+	m_affinePart.Reset();
+	m_perspAxis.Reset();
+}
+
+
 void CPerspectiveCalibration2d::Reset()
 {
 	istd::CChangeNotifier notifier(this, &GetAllChanges());
