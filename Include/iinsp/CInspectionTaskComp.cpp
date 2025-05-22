@@ -233,8 +233,7 @@ void CInspectionTaskComp::EnsureWorkFinished()
 				istd::IInformationProvider::IC_NONE,
 				MI_LOCAL,
 				QT_TR_NOOP(QString("Processing took %1 ms").arg(timer.GetElapsed() * 1000)),
-				*m_diagnosticNameAttrPtr,
-				"iinsp::CInspectionTaskComp"));
+				*m_diagnosticNameAttrPtr));
 		
 		m_resultMessages.AddMessage(messagePtr);
 	}

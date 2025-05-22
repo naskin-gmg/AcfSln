@@ -1641,7 +1641,7 @@ void CInspectionTaskGuiComp::DoUpdateEditor(int taskIndex)
 			}
 		}
 
-		m_taskCommandsDisplayerPtr->SetCommands(commandsPtr);
+		m_taskCommandsDisplayerPtr->ShowCommands(commandsPtr);
 	}
 
 	// Output current task index

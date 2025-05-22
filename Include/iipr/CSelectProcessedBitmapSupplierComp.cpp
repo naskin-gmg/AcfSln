@@ -20,7 +20,7 @@ iinsp::ISupplier::WorkStatus CSelectProcessedBitmapSupplierComp::ProduceObject(P
 {
 	const iimg::IBitmapProvider* bitmapProviderPtr = GetBitmapProvider();
 	if (bitmapProviderPtr == nullptr){
-		AddMessage(new ilog::CMessage(ilog::CMessage::IC_ERROR, 0, QT_TR_NOOP("No input bitmap provider"), "BitmapProcessing", "iipr::CSelectProcessedBitmapSupplierComp"));
+		AddMessage(new ilog::CMessage(ilog::CMessage::IC_ERROR, 0, QT_TR_NOOP("No input bitmap provider"), "BitmapProcessing"));
 		return WS_FAILED;
 	}
 
@@ -31,7 +31,7 @@ iinsp::ISupplier::WorkStatus CSelectProcessedBitmapSupplierComp::ProduceObject(P
 
 	const iimg::IBitmap* bitmapPtr = bitmapProviderPtr->GetBitmap();
 	if (bitmapPtr == nullptr){
-		AddMessage(new ilog::CMessage(ilog::CMessage::IC_ERROR, 0, QT_TR_NOOP("No input image"), "BitmapProcessing", "iipr::CSelectProcessedBitmapSupplierComp"));
+		AddMessage(new ilog::CMessage(ilog::CMessage::IC_ERROR, 0, QT_TR_NOOP("No input image"), "BitmapProcessing"));
 
 		return WS_FAILED;
 	}
@@ -40,9 +40,6 @@ iinsp::ISupplier::WorkStatus CSelectProcessedBitmapSupplierComp::ProduceObject(P
 	tempBitmapPtr->CopyFrom(*const_cast<iimg::IBitmap*>(bitmapPtr));
 
 	Timer performanceTimer(this, "Selectable bitmap processing");
-
-	/*iproc::IProcessor* imageProcessorPtr = GetImageProcessor();
-	const iprm::IParamsSet* currentParamsPtr = GetParametersSelected();*/
 
 	int regionsCount = 0;
 	const iprm::IParamsManager* paramsManagerPtr = nullptr;
@@ -56,8 +53,7 @@ iinsp::ISupplier::WorkStatus CSelectProcessedBitmapSupplierComp::ProduceObject(P
 		}
 	}
 
-	// #10887
-	if (!regionsCount) {
+	if (!regionsCount){
 		// Generally, this one should be refactored
 		AddMessage(ilog::CMessage::IC_WARNING, QT_TR_NOOP("No processing regions defined"));
 
@@ -87,18 +83,14 @@ iinsp::ISupplier::WorkStatus CSelectProcessedBitmapSupplierComp::ProduceObject(P
 		}
 
 		if (imageProcessorPtr == nullptr) {
-			AddMessage(new ilog::CMessage(ilog::CMessage::IC_ERROR, 0, QT_TR_NOOP("Image processor is not accessible"), "BitmapProcessing", "iipr::CSelectProcessedBitmapSupplierComp"));
+			AddMessage(new ilog::CMessage(ilog::CMessage::IC_ERROR, 0, QT_TR_NOOP("Image processor is not accessible"), "BitmapProcessing"));
 			return WS_FAILED;
 		}
 		if (currentParamsPtr == nullptr) {
-			AddMessage(new ilog::CMessage(ilog::CMessage::IC_ERROR, 0, QT_TR_NOOP("Image processor parameters are not accessible"), "BitmapProcessing", "iipr::CSelectProcessedBitmapSupplierComp"));
+			AddMessage(new ilog::CMessage(ilog::CMessage::IC_ERROR, 0, QT_TR_NOOP("Image processor parameters are not accessible"), "BitmapProcessing"));
 			return WS_FAILED;
 		}
 
-		//int status = imageProcessorPtr->DoProcessing(currentParamsPtr, bitmapPtr, result.GetPtr());
-		//status = qMax(status, ProcessBitmapWithParameters(tempBitmapPtr.GetPtr(), result.GetPtr(), currentParamsPtr, imageProcessorPtr));
-
-		// #10887
 		status = std::max(status, imageProcessorPtr->DoProcessing(currentParamsPtr, tempBitmapPtr.GetPtr(), result.GetPtr()));
 
 		tempBitmapPtr->CopyFrom(*result.GetPtr());
@@ -114,7 +106,6 @@ iinsp::ISupplier::WorkStatus CSelectProcessedBitmapSupplierComp::ProduceObject(P
 	default:
 		return WS_FAILED;
 	}
-
 
 	// should not get here
 	return WS_FAILED;

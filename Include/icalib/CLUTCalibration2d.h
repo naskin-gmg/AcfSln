@@ -17,7 +17,7 @@ namespace icalib
 class CLUTCalibration2d: virtual public i2d::ICalibration2d
 {
 public:
-<	CLUTCalibration2d();
+	CLUTCalibration2d();
 
 	const iimg::CGeneralBitmap& GetLut() const;
 	void SetLut(const iimg::IBitmap& lut);

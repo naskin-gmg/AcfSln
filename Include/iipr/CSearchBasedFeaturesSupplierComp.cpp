@@ -197,8 +197,7 @@ iinsp::ISupplier::WorkStatus CSearchBasedFeaturesSupplierComp::SearchOneParamsSe
 			istd::IInformationProvider::IC_NONE,
 			MI_SUPPLIER_RESULTS_STATUS,
 			QT_TR_NOOP("Search not successfull"),
-			sourceName,
-			"iipr::CSearchBasedFeaturesSupplierComp");
+			sourceName);
 
 		AddMessage(message);
 
@@ -228,8 +227,7 @@ iinsp::ISupplier::WorkStatus CSearchBasedFeaturesSupplierComp::SearchOneParamsSe
 		informationCategory,
 		MI_SUPPLIER_RESULTS_STATUS,
 		searchResultText,
-		sourceName,
-		"iipr::CSearchBasedFeaturesSupplierComp");
+		sourceName);
 
 	AddMessage(message);
 
@@ -248,8 +246,7 @@ bool CSearchBasedFeaturesSupplierComp::IsNegativeModelFound(const imeas::INumeri
 			m_defaultInformationCategory,
 			MI_SUPPLIER_RESULTS_STATUS,
 			searchResultText,
-			sourceName,
-			"iipr::CSearchBasedFeaturesSupplierComp");
+			sourceName);
 
 		AddMessage(message);
 		return true;
@@ -404,9 +401,9 @@ iinsp::ISupplier::WorkStatus CSearchBasedFeaturesSupplierComp::ProduceObject(CFe
 				sourceName = "Search Result";
 			}
 
-			iinsp::ISupplier::WorkStatus outputStatus = SearchOneParamsSet(paramsSetPtr, bitmapPtr, result, informationCategory, sourceName);
-			if (outputStatus != WS_OK){
-				return outputStatus;
+			iinsp::ISupplier::WorkStatus singleStatus = SearchOneParamsSet(paramsSetPtr, bitmapPtr, result, informationCategory, sourceName);
+			if (singleStatus != WS_OK){
+				return singleStatus;
 			}
 
 			const int featuresCount = result.GetFeaturesCount();

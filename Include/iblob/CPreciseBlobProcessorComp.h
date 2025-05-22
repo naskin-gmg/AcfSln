@@ -1,12 +1,9 @@
-#ifndef iblob_CPreciseBlobProcessorComp_included
-#define iblob_CPreciseBlobProcessorComp_included
+#pragma once
 
 
 // ACF includes
 #include <iprm/IEnableableParam.h>
 #include <iimg/CScanlineMask.h>
-
-// ACF-Solutions includes
 #include <imeas/INumericValue.h>
 #include <imeas/CGeneralNumericConstraints.h>
 #include <iblob/CBlobProcessorCompBase.h>
@@ -94,8 +91,5 @@ private:
 
 
 } // namespace iblob
-
-
-#endif // !iblob_CPreciseBlobProcessorComp_included
 
 

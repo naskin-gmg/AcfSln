@@ -235,7 +235,7 @@ void CSupplierCompBase::AddMessage(istd::IInformationProvider::InformationCatego
 	}
 
 	auto messagePtr = ilog::IMessageConsumer::MessagePtr(
-		new ilog::CMessage(category, id, text, GetDiagnosticName(), messageSourceId));
+		new ilog::CMessage(category, id, text, GetDiagnosticName()));
 
 	m_messageContainers[containerType].AddMessage(messagePtr);
 }

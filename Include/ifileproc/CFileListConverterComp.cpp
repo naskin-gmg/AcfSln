@@ -34,7 +34,7 @@ iproc::IProcessor::TaskState CFileListConverterComp::DoProcessing(
 
 	auto progressLoggerPtr = StartProgressLogger(progressManagerPtr, true);
 	
-	int retVal = TS_OK;
+	TaskState retVal = TS_OK;
 
 	CFilePathesContainer* convertedFileListPtr = dynamic_cast<CFilePathesContainer*>(outputPtr);
 

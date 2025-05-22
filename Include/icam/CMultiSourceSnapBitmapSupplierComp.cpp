@@ -77,10 +77,16 @@ bool CMultiSourceSnapBitmapSupplierComp::SetSelectedCamera(int cameraIndex) cons
 	}
 
 	iprm::TParamsPtr<iprm::ISelectionParam> sourceSelectionParamPtr(GetModelParametersSet(), *m_sourceSelectionParamIdAttrPtr);
-	if (sourceSelectionParamPtr.IsValid()) {
+	if (sourceSelectionParamPtr.IsValid()){
 		int sourceIndex = sourceSelectionParamPtr->GetSelectedOptionIndex();
 		if (sourceIndex != cameraIndex) {
-			return GetModelParametersSet()->GetParameter<iprm::ISelectionParam>(*m_sourceSelectionParamIdAttrPtr)->SetSelectedOptionIndex(cameraIndex);
+			iprm::IParamsSet* paramsPtr = GetModelParametersSet();
+			if (paramsPtr != nullptr){
+				iprm::TEditableParamsPtr<iprm::ISelectionParam> sourceCameraSelectorPtr(paramsPtr, *m_sourceSelectionParamIdAttrPtr);
+				if (sourceCameraSelectorPtr.IsValid()){
+					return sourceCameraSelectorPtr->SetSelectedOptionIndex(cameraIndex);
+				}
+			}
 		}
 		return true;
 	}

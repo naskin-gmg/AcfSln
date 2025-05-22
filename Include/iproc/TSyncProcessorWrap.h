@@ -193,9 +193,8 @@ IProcessor::TaskState TSyncProcessorWrap<Base>::GetTaskState(int taskId) const
 
 
 template <class Base>
-void TSyncProcessorWrap<Base>::InitProcessor(const iprm::IParamsSet* paramsPtr)
+void TSyncProcessorWrap<Base>::InitProcessor(const iprm::IParamsSet* /*paramsPtr*/)
 {
-	Base::InitProcessor(paramsPtr);
 }
 
 
