@@ -54,7 +54,7 @@ protected:
 	I_ATTR(int, m_imageSizeAttrPtr);
 	I_ATTR(QByteArray, m_pageSelectionAttrPtr);
 
-	typedef istd::TPointerVector<iimg::IBitmap> PreviewBitmaps;
+	typedef std::vector<iimg::IBitmapSharedPtr> PreviewBitmaps;
 
 	PreviewBitmaps m_previewBitmaps;
 };

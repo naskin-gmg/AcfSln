@@ -25,16 +25,16 @@ const iprm::IOptionsList* CRenderedDocumentPreviewGeneratorComp::GetBitmapListIn
 
 int CRenderedDocumentPreviewGeneratorComp::GetBitmapsCount() const
 {
-	return m_previewBitmaps.GetCount();
+	return int(m_previewBitmaps.size());
 }
 
 
 const iimg::IBitmap* CRenderedDocumentPreviewGeneratorComp::GetBitmap(int bitmapIndex) const
 {
 	Q_ASSERT(bitmapIndex >= 0);
-	Q_ASSERT(bitmapIndex < m_previewBitmaps.GetCount());
+	Q_ASSERT(bitmapIndex < m_previewBitmaps.size());
 
-	return m_previewBitmaps.GetAt(bitmapIndex);
+	return m_previewBitmaps.at(bitmapIndex).GetPtr();
 }
 
 
@@ -44,7 +44,7 @@ void CRenderedDocumentPreviewGeneratorComp::EnsurePreviewGenerated()
 {
 	istd::CChangeNotifier changePtr(this);
 
-	m_previewBitmaps.Reset();
+	m_previewBitmaps.clear();
 
 	idoc::IMultiPageDocument* documentPtr = GetObservedObject();
 	if ((documentPtr != NULL) && m_renderingProcessorCompPtr.IsValid()){
@@ -56,10 +56,10 @@ void CRenderedDocumentPreviewGeneratorComp::EnsurePreviewGenerated()
 			pageSelection.SetSelectedOptionIndex(pageIndex);
 			processingParams.SetEditableParameter(*m_pageSelectionAttrPtr, &pageSelection);
 
-			istd::TDelPtr<iimg::IBitmap> previewBitmapPtr;
+			iimg::IBitmapSharedPtr previewBitmapPtr;
 
 			if (m_bitmapFactoryCompPtr.IsValid()){
-				previewBitmapPtr.SetPtr(m_bitmapFactoryCompPtr.CreateInstance());
+				previewBitmapPtr.FromUnique(m_bitmapFactoryCompPtr.CreateInstance());
 			}
 			else{
 				previewBitmapPtr.SetPtr(new imod::TModelWrap<iimg::CBitmap>);
@@ -68,7 +68,7 @@ void CRenderedDocumentPreviewGeneratorComp::EnsurePreviewGenerated()
 			if (previewBitmapPtr.IsValid()){
 				int state = m_renderingProcessorCompPtr->DoProcessing(&processingParams, documentPtr, previewBitmapPtr.GetPtr());
 				if (state == iproc::IProcessor::TS_OK){
-					m_previewBitmaps.PushBack(previewBitmapPtr.PopPtr());
+					m_previewBitmaps.push_back(previewBitmapPtr);
 				}
 			}
 		}
@@ -84,7 +84,7 @@ bool CRenderedDocumentPreviewGeneratorComp::OnModelDetached(imod::IModel* modelP
 
 		istd::CChangeNotifier changePtr(this);
 
-		m_previewBitmaps.Reset();
+		m_previewBitmaps.clear();
 
 		return true;
 	}
