@@ -6,7 +6,7 @@
 #include <QtCore/QMimeData>
 #include <QtCore/QVariantAnimation>
 #include <QtGui/QClipboard>
-#include <QScrollBar>
+#include <QtWidgets/QScrollBar>
 #if QT_VERSION >= 0x050000
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QVBoxLayout>

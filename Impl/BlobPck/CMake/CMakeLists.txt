@@ -2,7 +2,7 @@ project(BlobPck LANGUAGES CXX)
 
 include(${ACFDIR}/Config/CMake/ComponentConfig.cmake)
 
-target_link_libraries(${PROJECT_NAME} iblob iblobgui imeas iipr)
+target_link_libraries(${PROJECT_NAME} iblob iblobgui imeas iipr icalib)
 include(${ACFDIR}/Config/CMake/AcfQt.cmake)
 include(${ACFDIR}/Config/CMake/AcfStdGui.cmake)
 include(${ACFDIR}/Config/CMake/AcfStd.cmake)
