@@ -2,9 +2,9 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4809" Description="ACF"/>
-            <Version Id="1" Number="2103" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="331008" Description="Qt Framework"/>
+            <Version Id="0" Number="5010" Description="ACF"/>
+            <Version Id="1" Number="2177" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="331522" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description>Image acquisition GUI for image acquisition task</Description>
@@ -84,7 +84,7 @@
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                     <AttributeInfo Id="ViewCalibrationMode" Type="Integer" ExportId="ViewCalibrationMode">
-                        <Data IsEnabled="true" Value="2"/>
+                        <Data IsEnabled="true" Value="1"/>
                     </AttributeInfo>
                     <AttributeInfo Id="ViewExtenderMode" Type="Integer" ExportId="ViewExtenderMode">
                         <Data IsEnabled="false"/>
@@ -105,6 +105,7 @@
         <Interface InterfaceId="istd::IChangeable" ComponentId="ImageTaskGui/VisualStatus"/>
     </ExportedInterfaces>
     <ExportedComponents>
+        <Component ExportedId="OriginalBitmapProvider" ComponentId="ImageTaskGui/OriginalBitmapProvider"/>
         <Component ExportedId="VisualStatus" ComponentId="ImageTaskGui/VisualStatus"/>
     </ExportedComponents>
 </Acf>
