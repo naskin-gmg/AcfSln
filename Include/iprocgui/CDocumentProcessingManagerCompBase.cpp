@@ -1,6 +1,9 @@
 #include <iprocgui/CDocumentProcessingManagerCompBase.h>
 
 
+// Qt includes
+#include <QtWidgets/QMessageBox>
+
 // ACF includes
 #include <iqtgui/CGuiComponentDialog.h>
 
@@ -177,6 +180,17 @@ void CDocumentProcessingManagerCompBase::OnDoProcessing()
 
 	// Force model update:
 	dialogPtr.Reset();
+
+	// Prepare/initialize processing parameters for the document:
+	if (m_paramsControllerCompPtr.IsValid() && (inputDocumentPtr != nullptr) && m_paramsSetCompPtr.IsValid()){
+		QString errorMessage;
+		bool success = m_paramsControllerCompPtr->ConfigureParametersForDocument(*inputDocumentPtr, *m_paramsSetCompPtr, &errorMessage);
+		if (!success){
+			QMessageBox::critical(nullptr, tr("Document Processing"), tr("Processing parameters could not be initialized. Operation canceled."));
+
+			return;
+		}
+	}
 
 	// Process document:
 	DoDocumentProcessing(inputDocumentPtr, documentTypeId);

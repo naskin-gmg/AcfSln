@@ -9,10 +9,11 @@
 #include <ilog/TLoggerCompWrap.h>
 #include <ibase/ICommandsProvider.h>
 #include <idoc/IDocumentManager.h>
-#include <iproc/IProcessor.h>
 #include <iqtgui/IGuiObject.h>
 #include <iqtgui/CHierarchicalCommand.h>
 #include <iqtgui/TMakeIconProviderCompWrap.h>
+#include <iproc/IProcessor.h>
+#include <idocproc/IDocumentProcessingParamsController.h>
 
 
 namespace iprocgui
@@ -45,7 +46,7 @@ public:
 		I_ASSIGN(m_commandGroupIdAttrPtr, "CommandGroup", "Specify the command group ID", true, 0);
 		I_ASSIGN(m_commandShowInToolBarAttrPtr, "ShowInToolsBar", "If enabled the command button will be shown also in the tool bar", true, false);
 		I_ASSIGN(m_commandIconPathAttrPtr, "CommandIconPath", "Path to the icon resource used for the command", false, "CommandIconPath");
-
+		I_ASSIGN(m_paramsControllerCompPtr, "ParamsController", "Controller for initialization of default parameters based on the input document", false, "ParamsController");
 	I_END_COMPONENT;
 
 	CDocumentProcessingManagerCompBase();
@@ -98,6 +99,7 @@ protected:
 	I_ATTR(int, m_commandGroupIdAttrPtr);
 	I_ATTR(bool, m_commandShowInToolBarAttrPtr);
 	I_ATTR(QString, m_commandIconPathAttrPtr);
+	I_REF(idocproc::IDocumentProcessingParamsController, m_paramsControllerCompPtr);
 
 	iqtgui::CHierarchicalCommand m_processingMenu;
 	iqtgui::CHierarchicalCommand m_rootCommands;
