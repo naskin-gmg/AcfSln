@@ -84,7 +84,12 @@ public:
 		/**
 			Task finished but an error is occured.
 		 */
-		TS_INVALID
+		TS_INVALID,
+
+		/**
+			Skip Task processing.
+		*/
+		TS_SKIP
 	};
 
 	/**
