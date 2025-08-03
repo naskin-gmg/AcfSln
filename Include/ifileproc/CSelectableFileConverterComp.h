@@ -52,7 +52,7 @@ public:
 	virtual bool Serialize(iser::IArchive& archive);
 
 	// reimplemented (icomp::CComponentBase)
-	virtual void OnComponentCreated();
+	virtual void OnComponentCreated() override;
 
 protected:
 	// reimplemented (iprm::IOptionsList)

@@ -51,7 +51,7 @@ protected:
 	virtual iinsp::ISupplier::WorkStatus ProduceObject(ProductType& result) const;
 
 	// reimplemented (icomp::CComponentBase)
-	virtual void OnComponentCreated();
+	virtual void OnComponentCreated() override;
 
 private:
 	I_REF(iimg::IBitmapProvider, m_bitmapProviderCompPtr);

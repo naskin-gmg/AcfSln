@@ -80,7 +80,7 @@ protected:
 	void UpdateHoughSpace(const i2d::CVector2d& point1, const i2d::CVector2d& point2);
 
 	// reimplemented (icomp::CComponentBase)
-	virtual void OnComponentCreated();
+	virtual void OnComponentCreated() override;
 
 private:
 	typedef TWeightedFeatureWrap<i2d::CLine2d> LineFeature;

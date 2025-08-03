@@ -33,7 +33,7 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (iipr::IBitmapAcquisition)
-	virtual istd::CIndex2d GetBitmapSize(const iprm::IParamsSet* paramsPtr) const;
+	virtual istd::CIndex2d GetBitmapSize(const iprm::IParamsSet* paramsPtr) const override;
 
 	// reimplemented (iproc::IProcessor)
 	virtual iproc::IProcessor::ProcessorState GetProcessorState(const iprm::IParamsSet* paramsPtr) const override;
@@ -64,7 +64,7 @@ protected:
 	virtual const iprm::IParamsSet* GetWorkingParamsSet(const iprm::IParamsSet* inputParamsPtr) const;
 
 	// reimplemented (icomp::CComponentBase)
-	virtual void OnComponentCreated();
+	virtual void OnComponentCreated() override;
 
 protected:
 	I_REF(IBitmapAcquisition, m_slaveCameraCompPtr);

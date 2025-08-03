@@ -71,7 +71,7 @@ protected:
 	virtual bool IsOptionEnabled(int index) const;
 
 	// reimplemented (ibase::CComponentBase)
-	virtual void OnComponentCreated();
+	virtual void OnComponentCreated() override;
 
 private:
 	I_ATTR(int, m_dimensionsCountAttrPtr);

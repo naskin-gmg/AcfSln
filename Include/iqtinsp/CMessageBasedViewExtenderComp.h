@@ -48,8 +48,8 @@ public:
 	virtual void RemoveItemsFromScene(iqt2d::IViewProvider* providerPtr);
 
 	// reimplemented (icomp::CComponentBase)
-	virtual void OnComponentCreated();
-	virtual void OnComponentDestroyed();
+	virtual void OnComponentCreated() override;
+	virtual void OnComponentDestroyed() override;
 
 protected:
 	virtual bool IsMessageAccepted(const istd::IInformationProvider& message) const;

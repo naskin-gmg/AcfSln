@@ -126,7 +126,7 @@ protected:
 	void AddIntermediateResults(Rays& outRays);
 
 	// reimplemented (icomp::CComponentBase)
-	virtual void OnComponentCreated();
+	virtual void OnComponentCreated() override;
 
 private:
 	I_REF(iproc::IProcessor, m_slaveProcessorCompPtr);

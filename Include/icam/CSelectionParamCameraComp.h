@@ -32,10 +32,10 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (iipr::IBitmapAcquisition)
-	virtual istd::CIndex2d GetBitmapSize(const iprm::IParamsSet* paramsPtr) const;
+	virtual istd::CIndex2d GetBitmapSize(const iprm::IParamsSet* paramsPtr) const override;
 
 	// reimplemented (iproc::IProcessor)
-	virtual iproc::IProcessor::ProcessorState GetProcessorState(const iprm::IParamsSet* paramsPtr) const;
+	virtual iproc::IProcessor::ProcessorState GetProcessorState(const iprm::IParamsSet* paramsPtr) const override;
 	virtual bool AreParamsAccepted(
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,
@@ -66,15 +66,15 @@ protected:
 		JoinParamsSet(const iprm::IParamsSet* origParamsPtr, const iprm::IParamsSet* selectedParamsPtr);
 
 		// reimplemented (iprm::IParamsSet)
-		virtual Ids GetParamIds(bool editableOnly = false) const;
-		virtual const iser::ISerializable* GetParameter(const QByteArray& id) const;
-		virtual iser::ISerializable* GetEditableParameter(const QByteArray& id);
+		virtual Ids GetParamIds(bool editableOnly = false) const override;
+		virtual const iser::ISerializable* GetParameter(const QByteArray& id) const override;
+		virtual iser::ISerializable* GetEditableParameter(const QByteArray& id) override;
 
 		// reimplemented (iser::IObject)
-		virtual QByteArray GetFactoryId() const;
+		virtual QByteArray GetFactoryId() const override;
 
 		// reimplemented (iser::ISerializable)
-		virtual bool Serialize(iser::IArchive& archive);
+		virtual bool Serialize(iser::IArchive& archive) override;
 
 	private:
 		const iprm::IParamsSet* m_origParamsPtr;

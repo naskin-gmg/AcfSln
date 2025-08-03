@@ -49,7 +49,7 @@ public:
 
 protected:
 	// reimplemented (icomp::CComponentBase)
-	virtual void OnComponentCreated();
+	virtual void OnComponentCreated() override;
 
 protected Q_SLOTS:
 	void on_DataAcquisitionButton_clicked();
@@ -63,8 +63,8 @@ protected:
 	bool DoDataAcquisition();
 
 	// reimplemented (iqtgui::CGuiComponentBase)
-	virtual void OnGuiCreated();
-	virtual void OnGuiDestroyed();
+	virtual void OnGuiCreated() override;
+	virtual void OnGuiDestroyed() override;
 
 private:
 	I_REF(istd::IChangeable, m_inputDataCompPtr);

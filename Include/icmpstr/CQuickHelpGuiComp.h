@@ -58,7 +58,7 @@ protected:
 	QString CalcDoxygenFileName(const istd::CClassInfo& classInfo) const;
 
 	// reimplemented (CGuiComponentBase)
-	virtual void OnGuiCreated();
+	virtual void OnGuiCreated() override;
 
 protected Q_SLOTS:
 	void on_EditButton_clicked();

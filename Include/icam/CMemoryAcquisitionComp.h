@@ -42,7 +42,7 @@ public:
 				ibase::IProgressManager* progressManagerPtr = NULL) override;
 
 	// reimplemented (icam::IBitmapAcquisition)
-	virtual istd::CIndex2d GetBitmapSize(const iprm::IParamsSet* paramsPtr) const;
+	virtual istd::CIndex2d GetBitmapSize(const iprm::IParamsSet* paramsPtr) const override;
 };
 
 

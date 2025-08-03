@@ -49,39 +49,39 @@ public:
 	CFrameSeqVideoControllerComp();
 
 	// reimplemented (icam::IBitmapAcquisition)
-	virtual istd::CIndex2d GetBitmapSize(const iprm::IParamsSet* paramsPtr) const;
+	virtual istd::CIndex2d GetBitmapSize(const iprm::IParamsSet* paramsPtr) const override;
 
 	// reimplemented (iproc::IProcessor)
 	virtual iproc::IProcessor::TaskState DoProcessing(
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,
 				istd::IChangeable* outputPtr,
-				ibase::IProgressManager* progressManagerPtr = NULL);
+				ibase::IProgressManager* progressManagerPtr = NULL) override;
 
 	// reimplemented (imm::IMediaController)
-	virtual QString GetOpenedMediumUrl() const;
-	virtual bool OpenMediumUrl(const QString& url, bool autoPlay = true);
-	virtual void CloseMedium();
-	virtual bool IsPlaying() const;
-	virtual bool SetPlaying(bool state = true);
-	virtual double GetMediumLength() const;
-	virtual double GetCurrentPosition() const;
-	virtual bool SetCurrentPosition(double position);
-	virtual int GetSupportedFeatures() const;
+	virtual QString GetOpenedMediumUrl() const override;
+	virtual bool OpenMediumUrl(const QString& url, bool autoPlay = true) override;
+	virtual void CloseMedium() override;
+	virtual bool IsPlaying() const override;
+	virtual bool SetPlaying(bool state = true) override;
+	virtual double GetMediumLength() const override;
+	virtual double GetCurrentPosition() const override;
+	virtual bool SetCurrentPosition(double position) override;
+	virtual int GetSupportedFeatures() const override;
 
 	// reimplemented (imm::IVideoInfo)
-	virtual int GetFramesCount() const;
-	virtual double GetFrameInterval() const;
-	virtual istd::CIndex2d GetFrameSize() const;
-	virtual double GetPixelAspectRatio() const;
+	virtual int GetFramesCount() const override;
+	virtual double GetFrameInterval() const override;
+	virtual istd::CIndex2d GetFrameSize() const override;
+	virtual double GetPixelAspectRatio() const override;
 
 	// reimplemented (imm::IVideoController)
-	virtual int GetCurrentFrame() const;
-	virtual bool SetCurrentFrame(int frameIndex);
+	virtual int GetCurrentFrame() const override;
+	virtual bool SetCurrentFrame(int frameIndex) override;
 
 	// reimplemented (ifile::IFileTypeInfo)
-	virtual bool GetFileExtensions(QStringList& result, const istd::IChangeable* dataObjectPtr = NULL, int flags = -1, bool doAppend = false) const;
-	virtual QString GetTypeDescription(const QString* extensionPtr = NULL) const;
+	virtual bool GetFileExtensions(QStringList& result, const istd::IChangeable* dataObjectPtr = NULL, int flags = -1, bool doAppend = false) const override;
+	virtual QString GetTypeDescription(const QString* extensionPtr = NULL) const override;
 
 protected:
 	bool LoadCurrentFrame();

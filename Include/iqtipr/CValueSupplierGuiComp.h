@@ -53,16 +53,16 @@ protected:
 	virtual void CreateShapes(int sceneId, Shapes& result);
 
 	// reimplemented (iqtgui::TGuiObserverWrap)
-	virtual void OnGuiModelAttached();
-	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
+	virtual void OnGuiModelAttached() override;
+	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet) override;
 
 	// reimplemented (iqtgui::IGuiObject)
-	virtual void OnGuiCreated();
-	virtual void OnGuiDestroyed();
+	virtual void OnGuiCreated() override;
+	virtual void OnGuiDestroyed() override;
 	virtual void OnGuiHidden();
 
 	// reimplemented (icomp::IComponentBase)
-	virtual void OnComponentDestroyed();
+	virtual void OnComponentDestroyed() override;
 
 private:
 	I_REF(iqtgui::IGuiObject, m_intermediateResultsGuiCompPtr);

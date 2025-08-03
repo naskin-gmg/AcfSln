@@ -68,7 +68,7 @@ protected:
 	void UpdateHoughSpace(const i2d::CVector2d& position, const i2d::CVector2d& direction, double radiusOffset);
 
 	// reimplemented (icomp::CComponentBase)
-	virtual void OnComponentCreated();
+	virtual void OnComponentCreated() override;
 
 private:
 	typedef TWeightedFeatureWrap<i2d::CLine2d> LineFeature;

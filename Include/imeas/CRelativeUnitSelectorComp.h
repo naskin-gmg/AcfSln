@@ -92,7 +92,7 @@ public:
 
 protected:
 	// reimplemented (ibase::CComponentBase)
-	virtual void OnComponentCreated();
+	virtual void OnComponentCreated() override;
 
 private:
 	I_ATTR(int, m_precisionAttrPtr);

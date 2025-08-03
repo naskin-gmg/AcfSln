@@ -65,7 +65,7 @@ protected:
 	virtual const imath::IUnitInfo* GetNumericValueUnitInfo(int index) const;
 
 	// reimplemented (icomp::CComponentBase)
-	virtual void OnComponentCreated();
+	virtual void OnComponentCreated() override;
 
 private:
 	I_REF(ILinearAdjustConstraints, m_constraintsCompPtr);

@@ -73,7 +73,7 @@ protected:
 				iimg::IBitmap& outputImage) const;
 
 	// reimplemented (icomp::CComponentBase)
-	virtual void OnComponentCreated();
+	virtual void OnComponentCreated() override;
 
 private:
 	// static template methods for subelement access

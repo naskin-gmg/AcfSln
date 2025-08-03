@@ -70,7 +70,7 @@ protected:
 	virtual bool IsOptionEnabled(int index) const;
 
 	// reimplemented (icomp::CComponentBase)
-	virtual void OnComponentCreated();
+	virtual void OnComponentCreated() override;
 
 private:
 	int m_triggerMode;

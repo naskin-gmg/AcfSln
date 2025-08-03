@@ -50,10 +50,10 @@ public:
 	CProcessorCommandComp();
 
 	// reimpemented (ibase::ICommandsProvider)
-	virtual const ibase::IHierarchicalCommand* GetCommands() const;
+	virtual const ibase::IHierarchicalCommand* GetCommands() const override;
 
 	// reimpemented (icomp::IComponent)
-	virtual void OnComponentCreated();
+	virtual void OnComponentCreated() override;
 
 private Q_SLOTS:
 	void OnCommandActivated();

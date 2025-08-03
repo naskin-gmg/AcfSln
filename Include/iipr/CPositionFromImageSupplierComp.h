@@ -56,7 +56,7 @@ protected:
 	virtual iinsp::ISupplier::WorkStatus ProduceObject(ProductType& result) const;
 
 	// reimplemented (icomp::CComponentBase)
-	virtual void OnComponentCreated();
+	virtual void OnComponentCreated() override;
 
 protected:
 	mutable istd::TDelPtr<const i2d::ICalibration2d> m_outputCalibrationPtr;

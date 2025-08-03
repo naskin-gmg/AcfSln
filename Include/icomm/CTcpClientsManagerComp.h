@@ -42,7 +42,7 @@ public Q_SLOTS:
 
 protected:
 	// reimplemented (icomp::CComponentBase)
-	virtual void OnComponentCreated();
+	virtual void OnComponentCreated() override;
 
 private:
 	QTcpServer m_tcpServer;

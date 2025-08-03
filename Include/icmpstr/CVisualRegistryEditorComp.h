@@ -121,7 +121,7 @@ public:
 	void SetAcceptedMimeTypes(const QStringList& mimeTypes);
 
 	// reimplemented (ibase::ICommandsProvider)
-	virtual const ibase::IHierarchicalCommand* GetCommands() const;
+	virtual const ibase::IHierarchicalCommand* GetCommands() const override;
 
 	// reimplemented (iqtgui::IDropConsumer)
 	virtual QStringList GetAcceptedMimeIds() const;

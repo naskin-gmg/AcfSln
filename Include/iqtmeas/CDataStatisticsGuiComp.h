@@ -31,7 +31,7 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemenented (iqtgui::TGuiObserverWrap)
-	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
+	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet) override;
 };
 
 

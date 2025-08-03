@@ -38,7 +38,7 @@ protected:
 	virtual bool eventFilter(QObject *obj, QEvent *event);
 
 	// reimplemented (iqtgui::CGuiComponentBase)
-	virtual void OnGuiCreated();
+	virtual void OnGuiCreated() override;
 
 protected Q_SLOTS:
 	virtual void on_LoginButton_clicked();

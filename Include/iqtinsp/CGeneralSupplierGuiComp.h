@@ -38,10 +38,10 @@ protected:
 	virtual void OnSupplierParamsChanged() override;
 
 	// reimplemented (iqtgui::TGuiObserverWrap)
-	virtual void OnGuiCreated();
-	virtual void OnGuiModelAttached();
+	virtual void OnGuiCreated() override;
+	virtual void OnGuiModelAttached() override;
 	virtual void OnGuiHidden();
-	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
+	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet) override;
 };
 
 

@@ -44,8 +44,8 @@ protected:
 	void UpdateButtonsState();
 
 	// reimplemented (iqtgui::CGuiComponentBase)
-	virtual void OnGuiCreated();
-	virtual void OnGuiDestroyed();
+	virtual void OnGuiCreated() override;
+	virtual void OnGuiDestroyed() override;
 
 protected Q_SLOTS:
 	void on_TeachModelButton_clicked();

@@ -40,15 +40,15 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (iipr::IBitmapAcquisition)
-	virtual istd::CIndex2d GetBitmapSize(const iprm::IParamsSet* paramsPtr) const;
+	virtual istd::CIndex2d GetBitmapSize(const iprm::IParamsSet* paramsPtr) const override;
 
 	// reimplemented (iproc::IProcessor)
 	virtual iproc::IProcessor::TaskState DoProcessing(
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,
 				istd::IChangeable* outputPtr,
-				ibase::IProgressManager* progressManagerPtr = NULL);
-	virtual void InitProcessor(const iprm::IParamsSet* paramsPtr);
+				ibase::IProgressManager* progressManagerPtr = NULL) override;
+	virtual void InitProcessor(const iprm::IParamsSet* paramsPtr) override;
 
 private:
 	const iprm::IParamsManager* GetCameraParamsManager(const iprm::IParamsSet* paramsPtr) const;

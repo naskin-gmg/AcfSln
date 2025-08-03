@@ -50,7 +50,7 @@ protected:
 	virtual bool SerializeParamSets(iser::IArchive& archive);
 
 	// reimplemented (icomp::CComponentBase)
-	virtual void OnComponentCreated();
+	virtual void OnComponentCreated() override;
 
 private:
 	I_ATTR(int, m_defaultPageIndexAttrPtr);

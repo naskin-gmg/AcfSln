@@ -41,7 +41,7 @@ protected:
 	virtual iinsp::ISupplier::WorkStatus ProduceObject(imeas::CGeneralDataSequence& result) const;
 
 	// reimplemented (icomp::CComponentBase)
-	virtual void OnComponentCreated();
+	virtual void OnComponentCreated() override;
 
 private:
 	I_REF(iimg::IBitmapProvider, m_bitmapProviderCompPtr);
