@@ -43,7 +43,7 @@ public:
 	// static methods
 	/**
 		Calculate complete convolution with all parameters as static function.
-		\param	valueRange			range of accepüted values, it should be in range [0, 1].
+		\param	valueRange			range of accepted values, it should be in range [0, 1].
 		\param	isRangeRelative		indicate if the \c valueRange is relative (will be adjusted to minimal and maximal values) or absolute.
 									Absolute value is normalized to range [0, 1], where 0 is black, 1 is white.
 		\param	filterParamsPtr		optional filter of considered blobs. If \c NULL no filter will be used.

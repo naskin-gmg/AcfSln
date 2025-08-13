@@ -30,7 +30,7 @@ void CDocumentProcessingManagerComp::DoDocumentProcessing(const istd::IChangeabl
 
 void CDocumentProcessingManagerComp::DoProcessingToOutput(const istd::IChangeable* inputDocumentPtr, const QByteArray& documentTypeId)
 {
-	istd::IChangeable* outputDocumentPtr = NULL;
+	istd::IChangeableSharedPtr outputDocumentPtr;
 	bool ignoredFlag = false;
 	if (!m_documentManagerCompPtr->InsertNewDocument(documentTypeId, false, "", &outputDocumentPtr, true, &ignoredFlag)){
 		if (!ignoredFlag){
@@ -40,14 +40,14 @@ void CDocumentProcessingManagerComp::DoProcessingToOutput(const istd::IChangeabl
 		return;
 	}
 
-	Q_ASSERT(outputDocumentPtr != NULL);
+	Q_ASSERT(outputDocumentPtr.IsValid());
 
 	int documentIndex = -1;
 
 	int documentCounts = m_documentManagerCompPtr->GetDocumentsCount();
 	for (int docIndex = 0; docIndex < documentCounts; docIndex++){
 		istd::IChangeable& document = m_documentManagerCompPtr->GetDocumentFromIndex(docIndex);
-		if (&document == outputDocumentPtr){
+		if (&document == outputDocumentPtr.GetPtr()){
 			documentIndex = docIndex;
 			break;
 		}
@@ -55,14 +55,14 @@ void CDocumentProcessingManagerComp::DoProcessingToOutput(const istd::IChangeabl
 
 	Q_ASSERT(documentIndex >= 0);
 
-	istd::CChangeNotifier changePtr(outputDocumentPtr);
+	istd::CChangeNotifier changePtr(outputDocumentPtr.GetPtr());
 
 	istd::CGeneralTimeStamp timer;
 
 	int retVal = m_processorCompPtr->DoProcessing(
 				m_paramsSetCompPtr.GetPtr(),
 				inputDocumentPtr,
-				outputDocumentPtr,
+				outputDocumentPtr.GetPtr(),
 				m_progressManagerCompPtr.GetPtr());
 
 	double processingTime = timer.GetElapsed();
