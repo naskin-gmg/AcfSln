@@ -163,6 +163,17 @@ void CDocumentProcessingManagerCompBase::OnDoProcessing()
 		documentTypeId = *m_documentTypeIdAttrPtr;
 	}
 
+	// Prepare/initialize processing parameters for the document:
+	if (m_paramsControllerCompPtr.IsValid() && (inputDocumentPtr != nullptr) && m_paramsSetCompPtr.IsValid()){
+		QString errorMessage;
+		bool success = m_paramsControllerCompPtr->ConfigureParametersForDocument(*inputDocumentPtr, *m_paramsSetCompPtr, &errorMessage);
+		if (!success){
+			QMessageBox::critical(nullptr, tr("Document Processing"), tr("Processing parameters could not be initialized. Operation canceled."));
+
+			return;
+		}
+	}
+
 	istd::TDelPtr<iqtgui::CGuiComponentDialog> dialogPtr;
 
 	if (m_paramsGuiCompPtr.IsValid()){
@@ -180,17 +191,6 @@ void CDocumentProcessingManagerCompBase::OnDoProcessing()
 
 	// Force model update:
 	dialogPtr.Reset();
-
-	// Prepare/initialize processing parameters for the document:
-	if (m_paramsControllerCompPtr.IsValid() && (inputDocumentPtr != nullptr) && m_paramsSetCompPtr.IsValid()){
-		QString errorMessage;
-		bool success = m_paramsControllerCompPtr->ConfigureParametersForDocument(*inputDocumentPtr, *m_paramsSetCompPtr, &errorMessage);
-		if (!success){
-			QMessageBox::critical(nullptr, tr("Document Processing"), tr("Processing parameters could not be initialized. Operation canceled."));
-
-			return;
-		}
-	}
 
 	// Process document:
 	DoDocumentProcessing(inputDocumentPtr, documentTypeId);
