@@ -2,9 +2,9 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="5352" Description="ACF"/>
-            <Version Id="1" Number="2237" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="393732" Description="Qt Framework"/>
+            <Version Id="0" Number="5405" Description="ACF"/>
+            <Version Id="1" Number="2250" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="395267" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description>Copy all source files (without compiled binaries) for installation during component instantiation</Description>
@@ -634,6 +634,7 @@
                                 <Value>*.qrc</Value>
                                 <Value>*.js</Value>
                                 <Value>qmldir</Value>
+                                <Value>*.json</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
