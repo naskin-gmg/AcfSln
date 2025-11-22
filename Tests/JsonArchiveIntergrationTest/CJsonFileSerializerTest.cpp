@@ -112,9 +112,9 @@ void CJsonFileSerializerTest::JsonArchiveParamsSerializeTest()
 		QVERIFY(typeSelectionConstraints != nullptr);
 
 		QByteArray paymentTypeId = "cash";
-		int indexOfType = iprm::FindOptionIndexById(paymentTypeId, *typeSelectionConstraints);
-		QVERIFY(indexOfType >= 0);
-		typeSelectionParamPtr->SetSelectedOptionIndex(indexOfType);
+		int paymentIndexOfType = iprm::FindOptionIndexById(paymentTypeId, *typeSelectionConstraints);
+		QVERIFY(paymentIndexOfType >= 0);
+		typeSelectionParamPtr->SetSelectedOptionIndex(paymentIndexOfType);
 
 		// sum
 		imeas::INumericValue* sumNumericParamPtr = dynamic_cast<imeas::INumericValue*>(paymentParamsPtr->GetEditableParameter("Sum"));
