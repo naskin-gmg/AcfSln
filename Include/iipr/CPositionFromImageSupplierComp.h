@@ -59,7 +59,7 @@ protected:
 	virtual void OnComponentCreated() override;
 
 protected:
-	mutable istd::TDelPtr<const i2d::ICalibration2d> m_outputCalibrationPtr;
+	mutable istd::TUniqueInterfacePtr<i2d::ICalibration2d> m_outputCalibrationPtr;
 
 private:
 	I_REF(iimg::IBitmapProvider, m_bitmapProviderCompPtr);

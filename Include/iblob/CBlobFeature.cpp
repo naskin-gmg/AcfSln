@@ -126,12 +126,12 @@ bool CBlobFeature::CopyFrom(const IChangeable& object, CompatibilityMode mode)
 }
 
 
-istd::IChangeable* CBlobFeature::CloneMe(CompatibilityMode mode) const
+istd::IChangeableUniquePtr CBlobFeature::CloneMe(CompatibilityMode mode) const
 {
-	istd::TDelPtr<CBlobFeature> retVal(new CBlobFeature);
+	istd::IChangeableUniquePtr retVal(new CBlobFeature);
 
 	if (retVal->CopyFrom(*this, mode)){
-		return retVal.PopPtr();
+		return retVal;
 	}
 
 	return NULL;

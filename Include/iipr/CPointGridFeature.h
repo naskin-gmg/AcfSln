@@ -24,7 +24,7 @@ public:
 	virtual imath::CVarVector GetComponentValue(ValueTypeId valueTypeId) const override;
 
 	// reimplemented (istd::IChangeable)
-	virtual istd::IChangeable* CloneMe(CompatibilityMode mode = CM_WITHOUT_REFS) const override;
+	virtual istd::IChangeableUniquePtr CloneMe(CompatibilityMode mode = CM_WITHOUT_REFS) const override;
 
 private:
 	std::vector<int> m_charucoIds;

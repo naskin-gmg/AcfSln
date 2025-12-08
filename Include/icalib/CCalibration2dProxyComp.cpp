@@ -62,17 +62,18 @@ const imath::IUnitInfo* CCalibration2dProxyComp::GetResultUnitInfo() const
 	return NULL;
 }
 
-const i2d::ICalibration2d* CCalibration2dProxyComp::CreateCombinedCalibration(const i2d::ITransformation2d& transformation) const
+
+istd::TUniqueInterfacePtr<i2d::ICalibration2d> CCalibration2dProxyComp::CreateCombinedCalibration(const i2d::ITransformation2d& transformation) const
 {
 	const i2d::ICalibration2d* calibrationPtr = GetCalibration();
 	if (calibrationPtr != NULL){
 		return calibrationPtr->CreateCombinedCalibration(transformation);
 	}
 
-	istd::TDelPtr<ICalibration2d> retVal;
-	retVal.SetCastedOrRemove(transformation.CloneMe());
+	istd::TUniqueInterfacePtr<ICalibration2d> retVal;
+	retVal.MoveCastedPtr(transformation.CloneMe());
 
-	return retVal.PopPtr();
+	return retVal;
 }
 
 
@@ -231,7 +232,7 @@ bool CCalibration2dProxyComp::Serialize(iser::IArchive& /*archive*/)
 
 // reimplemented (istd::IChangeable)
 
-istd::IChangeable* CCalibration2dProxyComp::CloneMe(CompatibilityMode mode) const
+istd::IChangeableUniquePtr CCalibration2dProxyComp::CloneMe(CompatibilityMode mode) const
 {
 	const i2d::ICalibration2d* calibrationPtr = GetCalibration();
 	if (calibrationPtr != NULL){

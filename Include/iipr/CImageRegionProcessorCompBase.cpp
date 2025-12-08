@@ -35,13 +35,13 @@ iproc::IProcessor::TaskState CImageRegionProcessorCompBase::DoProcessing(
 
 	i2d::CRectangle inputImageArea(inputBitmapPtr->GetImageSize());
 
-	istd::TDelPtr<i2d::IObject2d> transformedRegionPtr;
+	istd::TUniqueInterfacePtr<i2d::IObject2d> transformedRegionPtr;
 
 	iprm::TParamsPtr<i2d::IObject2d> aoiPtr(paramsPtr, m_aoiParamIdAttrPtr, m_defaultAoiCompPtr, false);
 	if (aoiPtr.IsValid()){
 		const i2d::ICalibration2d* logToPhysicalTransformPtr = aoiPtr->GetCalibration();
 		if (logToPhysicalTransformPtr != NULL){
-			transformedRegionPtr.SetCastedOrRemove<istd::IChangeable>(aoiPtr->CloneMe());
+			transformedRegionPtr.MoveCastedPtr<istd::IChangeable>(aoiPtr->CloneMe());
 			if (transformedRegionPtr.IsValid()){
 				transformedRegionPtr->Transform(*logToPhysicalTransformPtr);
 				transformedRegionPtr->SetCalibration(NULL);
@@ -62,10 +62,10 @@ iproc::IProcessor::TaskState CImageRegionProcessorCompBase::DoProcessing(
 	if (outputBitmapPtr != NULL){
 		const i2d::ICalibration2d* inputCalibrationPtr = inputBitmapPtr->GetCalibration();
 		if (inputCalibrationPtr != NULL){
-			istd::TDelPtr<i2d::ICalibration2d> outputCalibrationPtr;
-			outputCalibrationPtr.SetCastedOrRemove(inputCalibrationPtr->CloneMe());
+			istd::TUniqueInterfacePtr<i2d::ICalibration2d> outputCalibrationPtr;
+			outputCalibrationPtr.MoveCastedPtr(inputCalibrationPtr->CloneMe());
 
-			outputBitmapPtr->SetCalibration(outputCalibrationPtr.PopPtr(), true);
+			outputBitmapPtr->SetCalibration(outputCalibrationPtr.PopInterfacePtr(), true);
 		}
 	}
 

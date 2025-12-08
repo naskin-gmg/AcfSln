@@ -25,12 +25,12 @@ namespace icam
 	Creation of the resulting bitmap object and implementation of the low-level snap functionality should be done in the derrived class.
 */
 class CSnapBitmapSupplierCompBase:
-			public iinsp::TSupplierCompWrap< QPair<istd::TDelPtr<const i2d::ICalibration2d>, iimg::IBitmapSharedPtr > >,
+			public iinsp::TSupplierCompWrap< QPair<istd::TUniqueInterfacePtr<i2d::ICalibration2d>, iimg::IBitmapSharedPtr > >,
 			virtual public iimg::IBitmapProvider,
 			virtual public i2d::ICalibrationProvider
 {
 public:
-	typedef iinsp::TSupplierCompWrap< QPair<istd::TDelPtr<const i2d::ICalibration2d>,  iimg::IBitmapSharedPtr > > BaseClass;
+	typedef iinsp::TSupplierCompWrap< QPair<istd::TUniqueInterfacePtr<i2d::ICalibration2d>,  iimg::IBitmapSharedPtr > > BaseClass;
 
 	I_BEGIN_BASE_COMPONENT(CSnapBitmapSupplierCompBase);
 		I_REGISTER_INTERFACE(iimg::IBitmapProvider);

@@ -34,7 +34,7 @@ public:
 
     // reimplemented (iser::IChangeable)
     virtual bool CopyFrom(const istd::IChangeable& object, istd::IChangeable::CompatibilityMode mode = CM_STRICT) override;
-    virtual istd::IChangeable* CloneMe(istd::IChangeable::CompatibilityMode mode = CM_WITHOUT_REFS) const override;
+    virtual istd::IChangeableUniquePtr CloneMe(istd::IChangeable::CompatibilityMode mode = CM_WITHOUT_REFS) const override;
 
 private:
     istd::TRange<ValueType> m_errorRange;

@@ -66,10 +66,10 @@ iproc::IProcessor::TaskState CImageProcessorCompBase::DoProcessing(
 	if (*m_useInputCalibrationAttrPtr){
 		const i2d::ICalibration2d* inputCalibrationPtr = inputBitmapPtr->GetCalibration();
 		if (inputCalibrationPtr != NULL){
-			istd::TDelPtr<i2d::ICalibration2d> outputCalibrationPtr;
-			outputCalibrationPtr.SetCastedOrRemove(inputCalibrationPtr->CloneMe());
+			istd::TUniqueInterfacePtr<i2d::ICalibration2d> outputCalibrationPtr;
+			outputCalibrationPtr.MoveCastedPtr(inputCalibrationPtr->CloneMe());
 
-			outputBitmapPtr->SetCalibration(outputCalibrationPtr.PopPtr(), true);
+			outputBitmapPtr->SetCalibration(outputCalibrationPtr.PopInterfacePtr(), true);
 		}
 	}
 

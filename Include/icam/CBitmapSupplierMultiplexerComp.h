@@ -26,12 +26,12 @@ namespace icam
 	Implementation of bitmap supplier based on selection of the underlayed bitmap provider.
 */
 class CBitmapSupplierMultiplexerComp:
-			public iinsp::TSupplierCompWrap< QPair<istd::TDelPtr<const i2d::ICalibration2d>, iimg::IBitmapSharedPtr > >,
+			public iinsp::TSupplierCompWrap< QPair<istd::TUniqueInterfacePtr<i2d::ICalibration2d>, iimg::IBitmapSharedPtr > >,
 			virtual public iimg::IBitmapProvider,
 			virtual public i2d::ICalibrationProvider
 {
 public:
-	typedef iinsp::TSupplierCompWrap< QPair<istd::TDelPtr<const i2d::ICalibration2d>,  iimg::IBitmapSharedPtr > > BaseClass;
+	typedef iinsp::TSupplierCompWrap< QPair<istd::TUniqueInterfacePtr<i2d::ICalibration2d>,  iimg::IBitmapSharedPtr > > BaseClass;
 
 	I_BEGIN_COMPONENT(CBitmapSupplierMultiplexerComp);
 		I_REGISTER_INTERFACE(iimg::IBitmapProvider);

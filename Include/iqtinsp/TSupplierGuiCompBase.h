@@ -85,7 +85,7 @@ protected:
 	I_ATTR(bool, m_useVerticalSpacerAttrPtr);
 	I_ATTR(bool, m_showResultStatusFrameAttrPtr);
 
-	typedef QMap<const iqt2d::IViewProvider*, istd::TDelPtr<i2d::ICalibration2d> > ProviderToCalibrationMap;
+	typedef QMap<const iqt2d::IViewProvider*, istd::TSharedInterfacePtr<i2d::ICalibration2d> > ProviderToCalibrationMap;
 	ProviderToCalibrationMap m_providerToCalibrationMap;
 };
 
@@ -110,18 +110,18 @@ void TSupplierGuiCompBase<UI>::AddItemsToScene(iqt2d::IViewProvider* providerPtr
 			iview::CCalibratedViewBase* viewPtr = dynamic_cast<iview::CCalibratedViewBase*>(providerPtr->GetView());
 
 			if ((calibrationProviderPtr != NULL) && (viewPtr != NULL)){
-				istd::TDelPtr<i2d::ICalibration2d> calibrationCopyPtr;
+				istd::TUniqueInterfacePtr<i2d::ICalibration2d> calibrationCopyPtr;
 
 				const i2d::ICalibration2d* calibrationPtr = calibrationProviderPtr->GetCalibration();
 				if (calibrationPtr != NULL){
-					//calibrationCopyPtr.SetCastedOrRemove(calibrationPtr->CloneMe());
 					auto clonePtr = icalib::FactorizeFrom(calibrationPtr);
-					calibrationCopyPtr.SetCastedOrRemove(clonePtr);
+
+					calibrationCopyPtr.MoveCastedPtr(clonePtr);
 				}
 
 				viewPtr->SetDisplayCalibration(calibrationCopyPtr.GetPtr());
 
-				m_providerToCalibrationMap[providerPtr].TakeOver(calibrationCopyPtr);
+				m_providerToCalibrationMap[providerPtr].MoveCastedPtr(calibrationCopyPtr);
 			}
 		}
 	}
@@ -192,7 +192,7 @@ void TSupplierGuiCompBase<UI>::BeforeSupplierGuiUpdated()
 			iview::CCalibratedViewBase* viewPtr = dynamic_cast<iview::CCalibratedViewBase*>(providerPtr->GetView());
 
 			if ((calibrationProviderPtr != NULL) && (viewPtr != NULL)){
-				istd::TDelPtr<i2d::ICalibration2d> calibrationCopyPtr;
+				istd::TUniqueInterfacePtr<i2d::ICalibration2d> calibrationCopyPtr;
 
 				const i2d::ICalibration2d* calibrationPtr = calibrationProviderPtr->GetCalibration();
 				if (calibrationPtr != NULL){
@@ -202,12 +202,12 @@ void TSupplierGuiCompBase<UI>::BeforeSupplierGuiUpdated()
 						continue;
 					}
 
-					calibrationCopyPtr.SetCastedOrRemove(calibrationPtr->CloneMe());
+					calibrationCopyPtr.MoveCastedPtr(calibrationPtr->CloneMe());
 				}
 
 				viewPtr->SetDisplayCalibration(calibrationCopyPtr.GetPtr());
 
-				viewIter.value().TakeOver(calibrationCopyPtr);
+				viewIter.value().MoveCastedPtr(calibrationCopyPtr);
 			}
 		}
 	}

@@ -210,7 +210,7 @@ void CSupplierCompBase::AddMessage(const istd::IInformationProvider* messagePtr,
 	Q_ASSERT(messagePtr != NULL);
 
 	if (IsMessageContainerSupported(containerType)){
-		m_messageContainers[containerType].AddMessage(ilog::IMessageConsumer::MessagePtr(messagePtr));
+		m_messageContainers[containerType].AddMessage(ilog::IMessageConsumer::MessagePtr(const_cast<istd::IInformationProvider*>(messagePtr)));
 	}
 	else{
 		delete messagePtr;

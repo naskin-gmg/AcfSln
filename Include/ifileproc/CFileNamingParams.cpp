@@ -156,7 +156,7 @@ bool CFileNamingParams::IsEqual(const istd::IChangeable& object) const
 }
 
 
-istd::IChangeable* CFileNamingParams::CloneMe(istd::IChangeable::CompatibilityMode mode) const
+istd::IChangeableUniquePtr CFileNamingParams::CloneMe(istd::IChangeable::CompatibilityMode mode) const
 {
 	istd::TDelPtr<CFileNamingParams> objectPtr(new CFileNamingParams);
 	if (objectPtr->CopyFrom(*this, mode)){

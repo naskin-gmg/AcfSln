@@ -66,7 +66,7 @@ void CPatternTeachingControllerGuiComp::on_EditButton_clicked()
 
 	const iser::ISerializable* patternPtr = objectPtr->GetPatternObject();
 	if (patternPtr != NULL){
-		istd::TDelPtr<istd::IChangeable> workingPatternPtr(patternPtr->CloneMe());
+		istd::IChangeableUniquePtr workingPatternPtr(patternPtr->CloneMe());
 		imod::IModel* workingPatternModelPtr = dynamic_cast<imod::IModel*>(workingPatternPtr.GetPtr());
 		if (workingPatternModelPtr != NULL){
 			if (workingPatternModelPtr->AttachObserver(m_patternEditorObserverCompPtr.GetPtr())){

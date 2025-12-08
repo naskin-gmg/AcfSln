@@ -21,11 +21,11 @@ namespace iipr
 */
 
 class CMultiPointPosCorrSupplierComp:
-			public iinsp::TSupplierCompWrap< istd::TDelPtr<const i2d::ICalibration2d> >,
+			public iinsp::TSupplierCompWrap< istd::TUniqueInterfacePtr<i2d::ICalibration2d> >,
 			virtual public i2d::ICalibrationProvider
 {
 public:
-	typedef iinsp::TSupplierCompWrap< istd::TDelPtr<const i2d::ICalibration2d> > BaseClass;
+	typedef iinsp::TSupplierCompWrap< istd::TUniqueInterfacePtr<i2d::ICalibration2d> > BaseClass;
 	
 	I_BEGIN_COMPONENT(CMultiPointPosCorrSupplierComp);
 		I_REGISTER_INTERFACE(i2d::ICalibrationProvider);

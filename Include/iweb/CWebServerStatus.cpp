@@ -66,7 +66,7 @@ bool CWebServerStatus::IsEqual(const IChangeable & object) const
 }
 
 
-istd::IChangeable* CWebServerStatus::CloneMe(CompatibilityMode /*mode*/) const
+istd::IChangeableUniquePtr CWebServerStatus::CloneMe(CompatibilityMode /*mode*/) const
 {
 	istd::TDelPtr<CWebServerStatus> retVal(new CWebServerStatus);
 	if (retVal->CopyFrom(*this)){

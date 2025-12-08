@@ -37,11 +37,11 @@ QByteArray CGeometryMessage::GetFactoryId() const
 
 // reimplemented (iser::IChangeable)
 
-istd::IChangeable * CGeometryMessage::CloneMe(CompatibilityMode mode) const
+istd::IChangeableUniquePtr CGeometryMessage::CloneMe(CompatibilityMode mode) const
 {
-	istd::TDelPtr<CGeometryMessage> clonedPtr(new CGeometryMessage);
+	istd::IChangeableUniquePtr clonedPtr(new CGeometryMessage);
 	if (clonedPtr->CopyFrom(*this, mode)){
-		return clonedPtr.PopPtr();
+		return clonedPtr;
 	}
 
 	return NULL;

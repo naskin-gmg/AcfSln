@@ -149,7 +149,7 @@ void CPerspectiveCalibEditorComp::AfterUpdate(imod::IModel* modelPtr, const istd
 {
 	icalib::CPerspectiveCalibration2d* objectPtr = GetObservedObject();
 	if (objectPtr != NULL){
-		m_calibrationCopyPtr.SetCastedOrRemove(objectPtr->CloneMe());
+		m_calibrationCopyPtr.MoveCastedPtr(objectPtr->CloneMe());
 	}
 
 	if (BaseClass::IsGuiCreated() && !changeSet.ContainsExplicit(istd::IChangeable::CF_DESTROYING) && m_currentViewPtr != NULL){
@@ -170,7 +170,7 @@ void CPerspectiveCalibEditorComp::OnModelChanged(int /*modelId*/, const istd::IC
 	CalibrateButton->setEnabled(calibrationPtr != NULL);
 
 	if (calibrationPtr != NULL){
-		m_calibrationCopyPtr.SetCastedOrRemove(calibrationPtr->CloneMe());
+		m_calibrationCopyPtr.MoveCastedPtr(calibrationPtr->CloneMe());
 	}
 
 	if (m_currentViewPtr != NULL){

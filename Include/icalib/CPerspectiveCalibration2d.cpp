@@ -158,7 +158,7 @@ const imath::IUnitInfo* CPerspectiveCalibration2d::GetResultUnitInfo() const
 }
 
 
-const i2d::ICalibration2d* CPerspectiveCalibration2d::CreateCombinedCalibration(const i2d::ITransformation2d& /*transformation*/) const
+istd::TUniqueInterfacePtr<i2d::ICalibration2d> CPerspectiveCalibration2d::CreateCombinedCalibration(const i2d::ITransformation2d& /*transformation*/) const
 {
 	return NULL;
 }
@@ -399,7 +399,7 @@ bool CPerspectiveCalibration2d::IsEqual(const istd::IChangeable& object) const
 }
 
 
-istd::IChangeable* CPerspectiveCalibration2d::CloneMe(CompatibilityMode /*mode*/) const
+istd::IChangeableUniquePtr CPerspectiveCalibration2d::CloneMe(CompatibilityMode /*mode*/) const
 {
 	return new CPerspectiveCalibration2d(*this);
 }

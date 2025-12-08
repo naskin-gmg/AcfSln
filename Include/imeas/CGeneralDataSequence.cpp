@@ -363,12 +363,12 @@ bool CGeneralDataSequence::CopyFrom(const istd::IChangeable& object, Compatibili
 }
 
 
-istd::IChangeable* CGeneralDataSequence::CloneMe(CompatibilityMode mode) const
+istd::IChangeableUniquePtr CGeneralDataSequence::CloneMe(CompatibilityMode mode) const
 {
-	istd::TDelPtr<CGeneralDataSequence> clonePtr(new CGeneralDataSequence);
+	istd::IChangeableUniquePtr clonePtr(new CGeneralDataSequence);
 
 	if (clonePtr->CopyFrom(*this, mode)){
-		return clonePtr.PopPtr();
+		return clonePtr;
 	}
 
 	return NULL;

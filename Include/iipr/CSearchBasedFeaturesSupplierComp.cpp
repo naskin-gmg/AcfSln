@@ -273,18 +273,19 @@ iinsp::ISupplier::WorkStatus CSearchBasedFeaturesSupplierComp::LabelAndStoreResu
 
 		const_cast<iipr::CObjectFeature*>(objectFeaturePtr)->SetObjectId(objectId);
 
-		istd::IChangeable* featurePtr = objectFeaturePtr->CloneMe(CM_WITH_REFS);
-		if (featurePtr == NULL) {
+		istd::IChangeableUniquePtr featurePtr = objectFeaturePtr->CloneMe(CM_WITH_REFS);
+		if (!featurePtr.IsValid()) {
 			return WS_FAILED;
 		}
 		
-		imeas::INumericValue* valuePtr = dynamic_cast<imeas::INumericValue*>(featurePtr);
+		imeas::INumericValue* valuePtr = dynamic_cast<imeas::INumericValue*>(featurePtr.PopInterfacePtr());
 		if (valuePtr == NULL) {
 			return WS_FAILED;
 		}
 
 		toResult.AddFeature(valuePtr);
 	}
+
 	return WS_OK;
 }
 

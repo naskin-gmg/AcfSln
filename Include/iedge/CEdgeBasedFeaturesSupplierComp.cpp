@@ -230,8 +230,8 @@ iinsp::ISupplier::WorkStatus CEdgeBasedFeaturesSupplierComp::ProduceObject(Produ
 					// check feature type and set correct ID
 					int featuresCount = localFeatures.GetFeaturesCount();
 					for (int featureIndex = 0; featureIndex < featuresCount; featureIndex++){
-						istd::TDelPtr<iipr::CSearchFeature> clonedFeaturePtr;
-						clonedFeaturePtr.SetCastedOrRemove(dynamic_cast<iipr::CSearchFeature*>(localFeatures.GetFeature(featureIndex).CloneMe()));
+						istd::TUniqueInterfacePtr<iipr::CSearchFeature> clonedFeaturePtr;
+						clonedFeaturePtr.MoveCastedPtr(localFeatures.GetFeature(featureIndex).CloneMe());
 						if (!clonedFeaturePtr.IsValid()){
 							m_defaultInformationCategory = IC_CRITICAL;
 							searchResultText = QObject::tr("Wrong result type");
@@ -249,7 +249,7 @@ iinsp::ISupplier::WorkStatus CEdgeBasedFeaturesSupplierComp::ProduceObject(Produ
 							m_defaultInformationCategory = istd::IInformationProvider::IC_ERROR;
 						}
 
-						result.first.AddFeature(clonedFeaturePtr.PopPtr());
+						result.first.AddFeature(clonedFeaturePtr.PopInterfacePtr());
 					}
 
 					if ((nominalModelsCount > 0) && (featuresCount < nominalModelsCount)){
@@ -345,7 +345,7 @@ iinsp::ISupplier::WorkStatus CEdgeBasedFeaturesSupplierComp::ProduceObject(Produ
 				if (m_calibrationProviderCompPtr.IsValid()){
 					const i2d::ICalibration2d* calibrationPtr = m_calibrationProviderCompPtr->GetCalibration();
 					if (calibrationPtr != NULL){
-						istd::TDelPtr<const i2d::ICalibration2d> combinedPtr(calibrationPtr->CreateCombinedCalibration(transform));
+						istd::TUniqueInterfacePtr<i2d::ICalibration2d> combinedPtr = calibrationPtr->CreateCombinedCalibration(transform);
 						if (combinedPtr.IsValid()){
 							combinedPtr->GetLocalTransform(i2d::CVector2d(0, 0), transform.GetTransformationRef());
 						}

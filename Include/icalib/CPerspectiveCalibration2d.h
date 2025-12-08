@@ -50,7 +50,7 @@ public:
 	virtual const i2d::CRectangle* GetResultArea() const override;
 	virtual const imath::IUnitInfo* GetArgumentUnitInfo() const override;
 	virtual const imath::IUnitInfo* GetResultUnitInfo() const override;
-	virtual const ICalibration2d* CreateCombinedCalibration(const ITransformation2d& transformation) const override;
+	virtual istd::TUniqueInterfacePtr<i2d::ICalibration2d> CreateCombinedCalibration(const ITransformation2d& transformation) const override;
 
 	// reimplemented (i2d::ITransformation2d)
 	virtual int GetTransformationFlags() const override;
@@ -91,7 +91,7 @@ public:
 	virtual int GetSupportedOperations() const override;
 	virtual bool CopyFrom(const istd::IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS) override;
 	virtual bool IsEqual(const istd::IChangeable& object) const override;
-	virtual istd::IChangeable* CloneMe(CompatibilityMode mode = CM_WITHOUT_REFS) const override;
+	virtual istd::IChangeableUniquePtr CloneMe(CompatibilityMode mode = CM_WITHOUT_REFS) const override;
 	virtual bool ResetData(CompatibilityMode mode = CM_WITHOUT_REFS) override;
 
 protected:

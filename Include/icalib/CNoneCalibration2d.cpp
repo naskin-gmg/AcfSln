@@ -37,7 +37,7 @@ const imath::IUnitInfo* CNoneCalibration2d::GetResultUnitInfo() const
 }
 
 
-const i2d::ICalibration2d* CNoneCalibration2d::CreateCombinedCalibration(const i2d::ITransformation2d& /*transformation*/) const
+istd::TUniqueInterfacePtr<i2d::ICalibration2d> CNoneCalibration2d::CreateCombinedCalibration(const i2d::ITransformation2d& /*transformation*/) const
 {
 	return new CNoneCalibration2d();
 }

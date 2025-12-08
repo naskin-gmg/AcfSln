@@ -130,7 +130,7 @@ const imath::IUnitInfo* CSimpleLensCorrection::GetResultUnitInfo() const
 }
 
 
-const i2d::ICalibration2d* CSimpleLensCorrection::CreateCombinedCalibration(const ITransformation2d& /*transformation*/) const
+istd::TUniqueInterfacePtr<i2d::ICalibration2d> CSimpleLensCorrection::CreateCombinedCalibration(const ITransformation2d& /*transformation*/) const
 {
 	return NULL;
 }
@@ -367,7 +367,7 @@ bool CSimpleLensCorrection::IsEqual(const istd::IChangeable& object) const
 }
 
 
-istd::IChangeable* CSimpleLensCorrection::CloneMe(CompatibilityMode /*mode*/) const
+istd::IChangeableUniquePtr CSimpleLensCorrection::CloneMe(CompatibilityMode /*mode*/) const
 {
 	return new CSimpleLensCorrection(*this);
 }

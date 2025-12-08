@@ -32,7 +32,7 @@ public:
 
 	// reimplemented (istd::IChangable)
 	virtual bool CopyFrom(const istd::IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS) override;
-	virtual istd::IChangeable* CloneMe(CompatibilityMode mode = CM_WITHOUT_REFS) const override;
+	virtual istd::IChangeableUniquePtr CloneMe(CompatibilityMode mode = CM_WITHOUT_REFS) const override;
 
 private:
 	typedef QMap<imeas::INumericValue::ValueTypeId, imath::CVarVector> SupportMap;

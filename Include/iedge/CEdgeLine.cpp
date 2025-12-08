@@ -35,11 +35,11 @@ CEdgeLine::CEdgeLine(const CEdgeLine& edgeLine)
 
 	const i2d::ICalibration2d* calibrationPtr = edgeLine.GetCalibration();
 	if (calibrationPtr != NULL){
-		istd::TDelPtr<i2d::ICalibration2d> newCalibration;
-		newCalibration.SetCastedOrRemove(calibrationPtr->CloneMe());
+		istd::TUniqueInterfacePtr<i2d::ICalibration2d> newCalibration;
+		newCalibration.MoveCastedPtr(calibrationPtr->CloneMe());
 
 		if (newCalibration.IsValid()){
-			SetCalibration(newCalibration.PopPtr(), true);
+			SetCalibration(newCalibration.PopInterfacePtr(), true);
 		}
 	}
 }

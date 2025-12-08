@@ -84,7 +84,7 @@ bool CSearchFeature::CopyFrom(const IChangeable& object, CompatibilityMode mode)
 	return false;
 }
 
-istd::IChangeable* CSearchFeature::CloneMe(CompatibilityMode mode) const
+istd::IChangeableUniquePtr CSearchFeature::CloneMe(CompatibilityMode mode) const
 {
 	istd::TDelPtr<CSearchFeature> retVal(new CSearchFeature);
 

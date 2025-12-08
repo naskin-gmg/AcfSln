@@ -21,7 +21,7 @@ public:
 	virtual const i2d::CRectangle* GetResultArea() const override;
 	virtual const imath::IUnitInfo* GetArgumentUnitInfo() const override;
 	virtual const imath::IUnitInfo* GetResultUnitInfo() const override;
-	virtual const ICalibration2d* CreateCombinedCalibration(const ITransformation2d& transformation) const override;
+	virtual istd::TUniqueInterfacePtr<i2d::ICalibration2d> CreateCombinedCalibration(const ITransformation2d& transformation) const override;
 
 	// reimplemented (i2d::ITransformation2d)
 	virtual int GetTransformationFlags() const override;

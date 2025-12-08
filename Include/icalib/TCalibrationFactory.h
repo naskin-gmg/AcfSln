@@ -15,7 +15,7 @@ namespace icalib
 // a simple header-only calibration factory for known classes
 // to avoid cloning of whole compositums because of memory leaks and dangling pointers upon destruction
 
-inline istd::IChangeable* FactorizeFrom(const istd::IChangeable* calibPtr)
+inline istd::IChangeableUniquePtr FactorizeFrom(const istd::IChangeable* calibPtr)
 {
 	if (!calibPtr)
 		return nullptr;

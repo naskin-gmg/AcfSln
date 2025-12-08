@@ -36,49 +36,49 @@ public:
 	CCalibration2dProxyComp();
 
 	// reimplemented (i2d::ICalibration2d)
-	virtual const i2d::CRectangle* GetArgumentArea() const;
-	virtual const i2d::CRectangle* GetResultArea() const;
-	virtual const imath::IUnitInfo* GetArgumentUnitInfo() const;
-	virtual const imath::IUnitInfo* GetResultUnitInfo() const;
-	virtual const ICalibration2d* CreateCombinedCalibration(const ITransformation2d& transformation) const;
+	virtual const i2d::CRectangle* GetArgumentArea() const override;
+	virtual const i2d::CRectangle* GetResultArea() const override;
+	virtual const imath::IUnitInfo* GetArgumentUnitInfo() const override;
+	virtual const imath::IUnitInfo* GetResultUnitInfo() const override;
+	virtual istd::TUniqueInterfacePtr<i2d::ICalibration2d> CreateCombinedCalibration(const ITransformation2d& transformation) const override;
 
 	// reimplemented (i2d::ITransformation2d)
-	virtual int GetTransformationFlags() const;
+	virtual int GetTransformationFlags() const override;
 	virtual bool GetDistance(
 				const i2d::CVector2d& origPos1,
 				const i2d::CVector2d& origPos2,
 				double& result,
-				ExactnessMode mode = EM_NONE) const;
+				ExactnessMode mode = EM_NONE) const override;
 	virtual bool GetPositionAt(
 				const i2d::CVector2d& origPosition,
 				i2d::CVector2d& result,
-				ExactnessMode mode = EM_NONE) const;
+				ExactnessMode mode = EM_NONE) const override;
 	virtual bool GetInvPositionAt(
 				const i2d::CVector2d& transfPosition,
 				i2d::CVector2d& result,
-				ExactnessMode mode = EM_NONE) const;
+				ExactnessMode mode = EM_NONE) const override;
 	virtual bool GetLocalTransform(
 				const i2d::CVector2d& origPosition,
 				i2d::CAffine2d& result,
-				ExactnessMode mode = EM_NONE) const;
+				ExactnessMode mode = EM_NONE) const override;
 	virtual bool GetLocalInvTransform(
 				const i2d::CVector2d& transfPosition,
 				i2d::CAffine2d& result,
-				ExactnessMode mode = EM_NONE) const;
+				ExactnessMode mode = EM_NONE) const override;
 
 	// reimplemented (imath::TISurjectFunction<i2d::CVector2d, i2d::CVector2d>)
-	virtual bool GetInvValueAt(const i2d::CVector2d& argument, i2d::CVector2d& result) const;
-	virtual i2d::CVector2d GetInvValueAt(const i2d::CVector2d& argument) const;
+	virtual bool GetInvValueAt(const i2d::CVector2d& argument, i2d::CVector2d& result) const override;
+	virtual i2d::CVector2d GetInvValueAt(const i2d::CVector2d& argument) const override;
 
 	// reimplemented (imath::TIMathFunction<i2d::CVector2d, i2d::CVector2d>)
-	virtual bool GetValueAt(const i2d::CVector2d& argument, i2d::CVector2d& result) const;
-	virtual i2d::CVector2d GetValueAt(const i2d::CVector2d& argument) const;
+	virtual bool GetValueAt(const i2d::CVector2d& argument, i2d::CVector2d& result) const override;
+	virtual i2d::CVector2d GetValueAt(const i2d::CVector2d& argument) const override;
 
 	// reimplemented (iser::ISerializable)
-	virtual bool Serialize(iser::IArchive& archive);
+	virtual bool Serialize(iser::IArchive& archive) override;
 
 	// reimplemented (istd::IChangeable)
-	virtual istd::IChangeable* CloneMe(CompatibilityMode mode = CM_WITHOUT_REFS) const;
+	virtual istd::IChangeableUniquePtr CloneMe(CompatibilityMode mode = CM_WITHOUT_REFS) const;
 
 protected:
 	// reimplemented (icomp::CComponentBase)

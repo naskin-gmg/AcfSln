@@ -106,7 +106,7 @@ iinsp::ISupplier::WorkStatus CBitmapSupplierMultiplexerComp::ProduceObject(Produ
 				}
 
 				if (calibrationPtr != NULL){
-					result.first.SetCastedOrRemove(calibrationPtr->CloneMe());
+					result.first.MoveCastedPtr(calibrationPtr->CloneMe());
 				}
 	
 				return WS_OK;

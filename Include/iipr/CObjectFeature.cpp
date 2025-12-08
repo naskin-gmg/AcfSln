@@ -213,7 +213,7 @@ bool CObjectFeature::CopyFrom(const IChangeable& object, CompatibilityMode mode)
 }
 
 
-istd::IChangeable* CObjectFeature::CloneMe(CompatibilityMode mode) const
+istd::IChangeableUniquePtr CObjectFeature::CloneMe(CompatibilityMode mode) const
 {
 	istd::TDelPtr<CObjectFeature> retVal(new CObjectFeature);
 

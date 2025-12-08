@@ -157,10 +157,10 @@ bool CFastEdgesExtractorComp::DoContourExtraction(
 	// copy calibration from bitmap
 	const i2d::ICalibration2d* bitmapCalibrationPtr = bitmap.GetCalibration();
 	if (bitmapCalibrationPtr != NULL){
-		istd::TDelPtr<i2d::ICalibration2d> newCalibration;
-		newCalibration.SetCastedOrRemove(bitmapCalibrationPtr->CloneMe());
+		istd::TUniqueInterfacePtr<i2d::ICalibration2d> newCalibration;
+		newCalibration.MoveCastedPtr(bitmapCalibrationPtr->CloneMe());
 
-		result.SetCalibration(newCalibration.PopPtr(), true);
+		result.SetCalibration(newCalibration.PopInterfacePtr(), true);
 	}
 	else{
 		result.SetCalibration(NULL);

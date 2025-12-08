@@ -30,7 +30,7 @@ bool CBitmapProviderCacheComp::CopyFrom(const IChangeable& object, Compatibility
 		m_bitmapPtr.Reset();
 		const iimg::IBitmap* bitmapPtr = providerPtr->GetBitmap();
 		if (bitmapPtr != NULL){
-			m_bitmapPtr.SetCastedOrRemove(bitmapPtr->CloneMe(mode));
+			m_bitmapPtr.MoveCastedPtr(bitmapPtr->CloneMe(mode));
 		}
 
 		m_transformPtr.Reset();
@@ -39,7 +39,7 @@ bool CBitmapProviderCacheComp::CopyFrom(const IChangeable& object, Compatibility
 		if (calibrationProviderPtr != NULL){
 			const i2d::ICalibration2d* transformPtr = calibrationProviderPtr->GetCalibration();
 			if (transformPtr != NULL){
-				m_transformPtr.SetCastedOrRemove(transformPtr->CloneMe(mode));
+				m_transformPtr.MoveCastedPtr(transformPtr->CloneMe(mode));
 			}
 		}
 

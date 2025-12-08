@@ -153,7 +153,7 @@ bool CGeneralNumericValue::CopyFrom(const istd::IChangeable& object, Compatibili
 	return false;
 }
 
-istd::IChangeable* CGeneralNumericValue::CloneMe(CompatibilityMode mode) const
+istd::IChangeableUniquePtr CGeneralNumericValue::CloneMe(CompatibilityMode mode) const
 {
 	CGeneralNumericValue* value = new CGeneralNumericValue();
 

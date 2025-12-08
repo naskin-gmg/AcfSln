@@ -48,12 +48,12 @@ iinsp::ISupplier::WorkStatus CExtractedEdgeLinesSupplierComp::ProduceObject(CEdg
 				const i2d::ICalibration2d* calibrationPtr = m_calibrationProviderCompPtr->GetCalibration();
 
 				if (calibrationPtr != NULL){
-					istd::TDelPtr<i2d::ICalibration2d> calibCopyPtr;
-					calibCopyPtr.SetCastedOrRemove(calibrationPtr->CloneMe());
+					istd::TUniqueInterfacePtr<i2d::ICalibration2d> calibCopyPtr;
+					calibCopyPtr.MoveCastedPtr(calibrationPtr->CloneMe());
 
 					if (calibCopyPtr.IsValid()){
 						result.InvTransform(*calibrationPtr);
-						result.SetCalibration(calibCopyPtr.PopPtr(), true);
+						result.SetCalibration(calibCopyPtr.PopInterfacePtr(), true);
 					}
 				}
 			}

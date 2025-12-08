@@ -60,7 +60,7 @@ private:
 	I_REF(i2d::ICalibrationProvider, m_calibProviderCompPtr);
 	I_REF(imod::IModel, m_calibProviderModelCompPtr);
 
-	istd::TDelPtr<i2d::ICalibration2d> m_calibrationCopyPtr;
+	istd::TUniqueInterfacePtr<i2d::ICalibration2d> m_calibrationCopyPtr;
 	iview::CCalibratedViewBase* m_currentViewPtr;
 };
 

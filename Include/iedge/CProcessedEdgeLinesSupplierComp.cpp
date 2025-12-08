@@ -70,15 +70,15 @@ iinsp::ISupplier::WorkStatus CProcessedEdgeLinesSupplierComp::ProduceObject(CEdg
 		Q_UNUSED(performanceTimer);
 
 		if (m_edgesProcessorCompPtr->DoLinesProcessing(GetModelParametersSet(), *containerPtr, result)){
-			istd::TDelPtr<i2d::ICalibration2d> newCalibration;
+			istd::TUniqueInterfacePtr<i2d::ICalibration2d> newCalibration;
 
 			// copy calibration from original
 			const i2d::ICalibration2d* calibrationPtr = containerPtr->GetCalibration();
 			if (calibrationPtr != NULL){
-				newCalibration.SetCastedOrRemove(calibrationPtr->CloneMe());
+				newCalibration.MoveCastedPtr(calibrationPtr->CloneMe());
 			}
 
-			result.SetCalibration(newCalibration.PopPtr(), true);
+			result.SetCalibration(newCalibration.PopInterfacePtr(), true);
 
 			return WS_OK;
 		}

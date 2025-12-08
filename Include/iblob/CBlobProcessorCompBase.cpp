@@ -28,11 +28,11 @@ iproc::IProcessor::TaskState CBlobProcessorCompBase::DoExtractFeatures(
 
 	iprm::TParamsPtr<i2d::IObject2d> aoiPtr(paramsPtr, m_aoiParamIdAttrPtr, m_defaultAoiCompPtr);
 
-	istd::TDelPtr<i2d::IObject2d> transformedRegionPtr;
+	istd::TUniqueInterfacePtr<i2d::IObject2d> transformedRegionPtr;
 	if (aoiPtr.IsValid()){
 		const i2d::ICalibration2d* logToPhysicalTransformPtr = aoiPtr->GetCalibration();
 		if (logToPhysicalTransformPtr != NULL){
-			transformedRegionPtr.SetCastedOrRemove<istd::IChangeable>(aoiPtr->CloneMe());
+			transformedRegionPtr.MoveCastedPtr(aoiPtr->CloneMe());
 			if (transformedRegionPtr.IsValid()){
 				transformedRegionPtr->SetCalibration(nullptr);
 				transformedRegionPtr->Transform(*logToPhysicalTransformPtr);

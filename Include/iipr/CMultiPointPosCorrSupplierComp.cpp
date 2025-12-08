@@ -150,10 +150,10 @@ iinsp::ISupplier::WorkStatus CMultiPointPosCorrSupplierComp::ProduceObject(Produ
 		
 		if (finder.FindPerspCalib(destPoints.constData(), foundPoints.constData(), destPoints.size(), localCalib, false)){
 			if (inputCalibrationPtr != NULL){
-				result.SetPtr(inputCalibrationPtr->CreateCombinedCalibration(localCalib));
+				result = inputCalibrationPtr->CreateCombinedCalibration(localCalib);
 			}
 			else{
-				result.SetPtr(new icalib::CPerspectiveCalibration2d(localCalib));
+				result = new icalib::CPerspectiveCalibration2d(localCalib);
 			}
 
 			ilog::CMessage* resultMessagePtr = new ilog::CMessage(
@@ -185,7 +185,7 @@ iinsp::ISupplier::WorkStatus CMultiPointPosCorrSupplierComp::ProduceObject(Produ
 	AddMessage(resultMessagePtr);
 
 	if (inputCalibrationPtr != NULL){
-		result.SetCastedOrRemove(inputCalibrationPtr->CloneMe());
+		result.MoveCastedPtr(inputCalibrationPtr->CloneMe());
 	}
 	else{
 		result.Reset();

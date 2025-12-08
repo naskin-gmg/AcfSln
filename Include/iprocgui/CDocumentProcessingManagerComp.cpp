@@ -99,7 +99,7 @@ void CDocumentProcessingManagerComp::DoInPlaceProcessing(istd::IChangeable* inpu
 
 	istd::CChangeNotifier changePtr(inputDocumentPtr);
 
-	istd::TDelPtr<istd::IChangeable> outputDocumentPtr(inputDocumentPtr->CloneMe());
+	istd::IChangeableUniquePtr outputDocumentPtr(inputDocumentPtr->CloneMe());
 	if (!outputDocumentPtr.IsValid()){
 		SendErrorMessage(0, "Result object could not be created", "Document processing manager");
 		

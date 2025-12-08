@@ -1,5 +1,4 @@
-#ifndef iipr_CBitmapProviderCacheComp_included
-#define iipr_CBitmapProviderCacheComp_included
+#pragma once
 
 
 // ACF includes
@@ -44,14 +43,11 @@ public:
 	virtual bool ResetData(CompatibilityMode mode = CM_WITHOUT_REFS);
 
 private:
-	istd::TDelPtr<iimg::IBitmap> m_bitmapPtr;
-	istd::TDelPtr<i2d::ICalibration2d> m_transformPtr;
+	istd::TUniqueInterfacePtr<iimg::IBitmap> m_bitmapPtr;
+	istd::TUniqueInterfacePtr<i2d::ICalibration2d> m_transformPtr;
 };
 
 
 } // namespace iipr
-
-
-#endif // !iipr_CBitmapProviderCacheComp_included
 
 

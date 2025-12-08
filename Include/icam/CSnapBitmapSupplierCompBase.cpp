@@ -97,7 +97,7 @@ iinsp::ISupplier::WorkStatus CSnapBitmapSupplierCompBase::ProduceObject(ProductT
 				iprm::TParamsPtr<i2d::ICalibration2d> calibrationPtr(GetModelParametersSet(), m_calibrationIdAttrPtr, m_defaultCalibrationCompPtr, false);
 				if (calibrationPtr.IsValid()){
 					//result.first.SetCastedOrRemove(calibrationPtr->CloneMe());
-					result.first.SetCastedOrRemove(icalib::FactorizeFrom(calibrationPtr.GetPtr()));
+					result.first.MoveCastedPtr(icalib::FactorizeFrom(calibrationPtr.GetPtr()));
 				}
 				else{
 					if (scale != i2d::CVector2d(1, 1)){
@@ -108,7 +108,7 @@ iinsp::ISupplier::WorkStatus CSnapBitmapSupplierCompBase::ProduceObject(ProductT
 					}
 					else if (auto bitmapCalibPtr = result.second->GetCalibration()) {
 						//result.first.SetCastedOrRemove(result.second->GetCalibration()->CloneMe());
-						result.first.SetCastedOrRemove(icalib::FactorizeFrom(bitmapCalibPtr));
+						result.first.MoveCastedPtr(icalib::FactorizeFrom(bitmapCalibPtr));
 					}
 					else{
 						result.first.Reset();

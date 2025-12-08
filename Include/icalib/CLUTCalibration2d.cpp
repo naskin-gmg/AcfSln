@@ -138,10 +138,11 @@ const imath::IUnitInfo* CLUTCalibration2d::GetResultUnitInfo() const
 }
 
 
-const i2d::ICalibration2d* CLUTCalibration2d::CreateCombinedCalibration(const i2d::ITransformation2d& /*transformation*/) const
+istd::TUniqueInterfacePtr<i2d::ICalibration2d> CLUTCalibration2d::CreateCombinedCalibration(const i2d::ITransformation2d& /*transformation*/) const
 {
-	return NULL;
+	return nullptr;
 }
+
 
 // reimplemented (i2d::ITransformation2d)
 
@@ -150,10 +151,12 @@ int CLUTCalibration2d::GetTransformationFlags() const
 	return TF_FORWARD | TF_INVERTED;
 }
 
+
 bool CLUTCalibration2d::GetDistance(const i2d::CVector2d& /*origPos1*/, const i2d::CVector2d& /*origPos2*/, double& /*result*/, ExactnessMode /*mode*/) const
 {
 	return false;
 }
+
 
 bool CLUTCalibration2d::GetPositionAt(const i2d::CVector2d& origPosition, i2d::CVector2d& result, ExactnessMode /*mode*/) const
 {
@@ -243,6 +246,7 @@ bool CLUTCalibration2d::GetPositionAt(const i2d::CVector2d& origPosition, i2d::C
 	return true;
 }
 
+
 bool CLUTCalibration2d::GetInvPositionAt(const i2d::CVector2d& transfPosition, i2d::CVector2d& result, ExactnessMode /*mode*/) const
 {
 	if (m_lut.GetPixelFormat() != iimg::IBitmap::PF_XY32) {
@@ -309,20 +313,24 @@ bool CLUTCalibration2d::GetInvPositionAt(const i2d::CVector2d& transfPosition, i
 	return true;
 }
 
+
 bool CLUTCalibration2d::GetLocalTransform(const i2d::CVector2d& /*origPosition*/, i2d::CAffine2d& /*result*/, ExactnessMode /*mode*/) const
 {
 	return false;
 }
+
 
 bool CLUTCalibration2d::GetLocalInvTransform(const i2d::CVector2d& /*transfPosition*/, i2d::CAffine2d& /*result*/, ExactnessMode /*mode*/) const
 {
 	return false;
 }
 
+
 bool CLUTCalibration2d::GetInvValueAt(const i2d::CVector2d& argument, i2d::CVector2d& result) const
 {
 	return GetInvPositionAt(argument, result);
 }
+
 
 i2d::CVector2d CLUTCalibration2d::GetInvValueAt(const i2d::CVector2d& argument) const
 {
@@ -335,10 +343,12 @@ i2d::CVector2d CLUTCalibration2d::GetInvValueAt(const i2d::CVector2d& argument) 
 	return i2d::CVector2d();
 }
 
+
 bool CLUTCalibration2d::GetValueAt(const i2d::CVector2d& argument, i2d::CVector2d& result) const
 {
 	return GetPositionAt(argument, result);
 }
+
 
 i2d::CVector2d CLUTCalibration2d::GetValueAt(const i2d::CVector2d& argument) const
 {
@@ -364,7 +374,6 @@ bool CLUTCalibration2d::CopyFrom(const istd::IChangeable& object, CompatibilityM
 {
 	const CLUTCalibration2d* calibrationPtr = dynamic_cast<const CLUTCalibration2d*>(&object);
 	if (calibrationPtr != NULL){
-
 		istd::CChangeNotifier notifier(this);
 		
 		SetLut(calibrationPtr->GetLut());
@@ -387,7 +396,7 @@ bool CLUTCalibration2d::CopyFrom(const istd::IChangeable& object, CompatibilityM
 }
 
 
-istd::IChangeable* CLUTCalibration2d::CloneMe(CompatibilityMode /*mode*/) const
+istd::IChangeableUniquePtr CLUTCalibration2d::CloneMe(CompatibilityMode /*mode*/) const
 {
 	CLUTCalibration2d* result = new CLUTCalibration2d();
 	result->SetArgumentArea(m_argumentAreaPtr);
@@ -395,6 +404,7 @@ istd::IChangeable* CLUTCalibration2d::CloneMe(CompatibilityMode /*mode*/) const
 	result->SetResultArea(m_argumentAreaPtr);
 	result->SetResultUnitInfo(m_argumentUnitInfoPtr);
 	result->SetLut(m_lut);
+
 	return result;
 }
 
