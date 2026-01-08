@@ -1,7 +1,7 @@
 TARGET = Compositor
 
-include($(ACFCONFIGDIR)/QMake/ApplicationConfig.pri)
-include($(ACFCONFIGDIR)/QMake/QtBaseConfig.pri)
+include(../../../../Acf/Config/QMake/ApplicationConfig.pri)
+include(../../../../Acf/Config/QMake/QtBaseConfig.pri)
 
 INCLUDEPATH += ../../../Include
 INCLUDEPATH += ../../../Impl
@@ -22,7 +22,7 @@ win32-msvc*{
 	QMAKE_CXXFLAGS += /wd4264
 
 	# copying all Qt DLLs to destination directory
-	greaterThan(QT_MAJOR_VERSION, 4): QMAKE_POST_LINK = $(QTDIR)\bin\windeployqt $$DESTDIR
+	greaterThan(QT_MAJOR_VERSION, 4): QMAKE_POST_LINK = $(QTDIR)\bin\windeployqt $$DESTDIR/$${TARGET}.exe
 }
 
 !macx-ios*{
@@ -56,9 +56,9 @@ ACFSLNDIRBUILD = $$(ACFSLNDIR_BUILD)
 	INCLUDEPATH += $$(ACFSLNDIR_BUILD)/$$AUXINCLUDEDIR
 }
 
-include($(ACFCONFIGDIR)/QMake/AcfQt.pri)
-include($(ACFCONFIGDIR)/QMake/AcfStd.pri)
-include($(ACFCONFIGDIR)/QMake/CustomBuild.pri)
+include(../../../../Acf/Config/QMake/AcfQt.pri)
+include(../../../../Acf/Config/QMake/AcfStd.pri)
+include(../../../../Acf/Config/QMake/CustomBuild.pri)
 
 # For iOS build generates qmake a XCode project without applying of enivronment variables.
 # This causes build problems in case of shadow build. Following solution is a workaround for this problem.

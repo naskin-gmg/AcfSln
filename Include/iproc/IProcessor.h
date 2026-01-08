@@ -190,7 +190,8 @@ public:
 };
 
 
-typedef istd::TUniqueInterfacePtr<iproc::IProcessor> IProcessorPtr;
+typedef istd::TUniqueInterfacePtr<iproc::IProcessor> IProcessorUniquePtr;
+typedef istd::TSharedInterfacePtr<iproc::IProcessor> IProcessorSharedPtr;
 
 
 } // namespace iproc

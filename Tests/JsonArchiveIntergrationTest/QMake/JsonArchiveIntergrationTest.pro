@@ -17,6 +17,8 @@ ARXC_CONFIG = $$PWD/../../../Config/AcfSlnTestConfig.awc
 ARXC_FILES += $$files($$_PRO_FILE_PWD_/../*.acc, false)
 ARXC_OUTDIR = $$OUT_PWD/$$AUXINCLUDEPATH/GeneratedFiles/$$TARGET
 
+INCLUDEPATH += $$OUT_PWD/$$AUXINCLUDEPATH
+
 include($(ACFCONFIGDIR)/QMake/AcfQt.pri)
 include($(ACFCONFIGDIR)/QMake/AcfStd.pri)
 include($(ACFCONFIGDIR)/QMake/CustomBuild.pri)

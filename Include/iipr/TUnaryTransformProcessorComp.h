@@ -18,7 +18,12 @@ namespace iipr
 	
 
 template <typename ArgumentType>
+#if _MSC_VER < 1900
+class InvertFunction: public std::unary_function<ArgumentType, ArgumentType>
+#else
+//Unary function is deprecated in VS2017
 class InvertFunction
+#endif
 {
 public:
 	InvertFunction()

@@ -137,7 +137,7 @@ void CPerspectiveCalibrationShape::Draw(QPainter& drawContext) const
 					else
 						viewScale = 1 / viewScale;
 
-					bounds = i2d::CRectangle(-1000 * viewScale, -1000 * viewScale, 10000 * viewScale, 10000 * viewScale);
+					bounds = i2d::CRectangle(-5000 * viewScale, -5000 * viewScale, 10000 * viewScale, 10000 * viewScale);
 				}
 
 				i2d::CVector2d viewLeftCenter;
