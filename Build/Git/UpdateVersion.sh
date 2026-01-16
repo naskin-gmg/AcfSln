@@ -15,8 +15,7 @@ if [ -z "$REV" ]; then
     exit 1
 fi
 
-git diff-index --quiet HEAD --
-if [ $? -eq 0 ]; then
+if git diff-index --quiet HEAD --; then
     DIRTY=0
 else
     DIRTY=1
