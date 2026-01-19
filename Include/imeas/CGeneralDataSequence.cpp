@@ -156,7 +156,7 @@ bool CGeneralDataSequence::CreateFunction(double* dataPtr, const ArgumentType& s
 
 		m_samples.resize(elementsCount);
 
-		std::memcpy(&m_samples[0], dataPtr, elementsCount * sizeof(double));
+		std::memcpy(m_samples.data(), dataPtr, elementsCount * sizeof(double));
 
 		return true;
 	}
