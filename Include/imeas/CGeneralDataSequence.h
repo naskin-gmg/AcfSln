@@ -79,13 +79,13 @@ private:
 
 inline const double* CGeneralDataSequence::GetSamplesBuffer() const
 {
-	return &m_samples[0];
+	return m_samples.data();
 }
 
 
 inline double* CGeneralDataSequence::GetSamplesBuffer()
 {
-	return &m_samples[0];
+	return m_samples.data();
 }
 
 
