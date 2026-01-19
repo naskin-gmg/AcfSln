@@ -156,7 +156,7 @@ bool CGeneralDataSequence::CreateFunction(double* dataPtr, const ArgumentType& s
 
 		m_samples.resize(elementsCount);
 
-		std::memcpy(&m_samples[0], dataPtr, elementsCount * sizeof(double));
+		std::memcpy(m_samples.data(), dataPtr, elementsCount * sizeof(double));
 
 		return true;
 	}
@@ -215,6 +215,12 @@ istd::CRange CGeneralDataSequence::GetLogicalRange(int dimensionIndex) const
 istd::CRange CGeneralDataSequence::GetResultValueRange(int /*dimensionIndex*/, int /*resultDimension*/) const
 {
 	return istd::CRange::GetInvalid();
+}
+
+
+std::vector<double> CGeneralDataSequence::GetSamples() const
+{
+	return m_samples;
 }
 
 
