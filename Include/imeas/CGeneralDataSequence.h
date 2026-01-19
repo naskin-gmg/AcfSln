@@ -51,7 +51,7 @@ public:
 	virtual double GetSampleAt(const SampleIndex& index) const override;
 	virtual istd::CRange GetLogicalRange(int dimensionIndex) const override;
 	virtual istd::CRange GetResultValueRange(int dimensionIndex, int resultDimension = -1) const override;
-	virtual const double* GetSamples() const override;
+	virtual std::vector<double> GetSamples() const override;
 
 	// reimplemented (imath::TIMathFunction)
 	virtual bool GetValueAt(const ArgumentType& argument, ResultType& result) const override;

@@ -218,9 +218,9 @@ istd::CRange CGeneralDataSequence::GetResultValueRange(int /*dimensionIndex*/, i
 }
 
 
-const double* CGeneralDataSequence::GetSamples() const
+std::vector<double> CGeneralDataSequence::GetSamples() const
 {
-	return m_samples.data();
+	return m_samples;
 }
 
 
