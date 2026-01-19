@@ -218,6 +218,17 @@ istd::CRange CGeneralDataSequence::GetResultValueRange(int /*dimensionIndex*/, i
 }
 
 
+const double* CGeneralDataSequence::GetSamples() const
+{
+	if (!m_samples.empty()){
+		return &m_samples[0];
+	}
+	else{
+		return NULL;
+	}
+}
+
+
 // reimplemented (imath::TIMathFunction)
 
 bool CGeneralDataSequence::GetValueAt(const ArgumentType& argument, ResultType& result) const
