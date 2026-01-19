@@ -220,12 +220,7 @@ istd::CRange CGeneralDataSequence::GetResultValueRange(int /*dimensionIndex*/, i
 
 const double* CGeneralDataSequence::GetSamples() const
 {
-	if (!m_samples.empty()){
-		return &m_samples[0];
-	}
-	else{
-		return NULL;
-	}
+	return m_samples.data();
 }
 
 
