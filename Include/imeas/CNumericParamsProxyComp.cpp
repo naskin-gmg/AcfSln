@@ -1,4 +1,4 @@
-﻿#include "CNumericParamsProxyComp.h"
+#include "CNumericParamsProxyComp.h"
 
 
 namespace imeas
