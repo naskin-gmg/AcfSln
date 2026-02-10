@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: LGPL-2.1-or-later OR GPL-2.0-or-later OR GPL-3.0-or-later OR LicenseRef-ACF-Commercial
 #ifndef iqtmeas_CNumericValueWidget_included
 #define iqtmeas_CNumericValueWidget_included
 
