@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: LGPL-2.1-or-later OR GPL-2.0-or-later OR GPL-3.0-or-later OR LicenseRef-ACF-Commercial
 #ifndef icmpstr_CComponentHelpFileProviderComp_included
 #define icmpstr_CComponentHelpFileProviderComp_included
 

@@ -1,0 +1,128 @@
+{
+  "spdxVersion": "SPDX-2.3",
+  "dataLicense": "CC0-1.0",
+  "SPDXID": "SPDXRef-DOCUMENT",
+  "name": "ACF-Solutions SBOM",
+  "documentNamespace": "https://github.com/ImagingTools/AcfSln/sbom-2026-02-10-uuid-3e4f5a6b-7c8d-9e0f-1a2b-3c4d5e6f7a8b",
+  "creationInfo": {
+    "created": "2026-02-10T11:30:00Z",
+    "creators": [
+      "Tool: ACF-Solutions-SBOM-Generator-1.0.0",
+      "Organization: ImagingTools GmbH"
+    ],
+    "licenseListVersion": "3.21"
+  },
+  "packages": [
+    {
+      "SPDXID": "SPDXRef-Package-ACF-Solutions",
+      "name": "ACF-Solutions",
+      "versionInfo": "1.0.0-dev",
+      "downloadLocation": "https://github.com/ImagingTools/AcfSln",
+      "filesAnalyzed": false,
+      "homepage": "https://github.com/ImagingTools/AcfSln",
+      "licenseConcluded": "LGPL-2.1-or-later",
+      "licenseDeclared": "LGPL-2.1-or-later",
+      "copyrightText": "Copyright (C) 2007-2014 Witold Gantzke & Kirill Lepskiy",
+      "summary": "Solutions for ACF Toolkit - A collection of components and utilities built on the Application Component Framework",
+      "description": "ACF-Solutions provides a comprehensive set of components, tools, and utilities built on top of the Application Component Framework (ACF). It includes image processing, measurement, GUI, and file processing components.",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:github/ImagingTools/AcfSln@1.0.0-dev"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-ACF",
+      "name": "ACF",
+      "versionInfo": "latest",
+      "downloadLocation": "https://github.com/ImagingTools/Acf",
+      "filesAnalyzed": false,
+      "homepage": "https://imagingtools.github.io/Acf/",
+      "licenseConcluded": "LGPL-2.1-or-later",
+      "licenseDeclared": "LGPL-2.1-or-later",
+      "copyrightText": "Copyright (C) ImagingTools GmbH",
+      "summary": "Application Component Framework - Base framework for component-based applications",
+      "description": "ACF is a flexible and extensible framework for building component-based applications with support for dependency injection, parameter management, and GUI components.",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:github/ImagingTools/Acf"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-Qt",
+      "name": "Qt",
+      "versionInfo": "5.x-6.x",
+      "downloadLocation": "https://www.qt.io/",
+      "filesAnalyzed": false,
+      "homepage": "https://www.qt.io/",
+      "licenseConcluded": "LGPL-3.0-only",
+      "licenseDeclared": "LGPL-3.0-only",
+      "copyrightText": "Copyright (C) The Qt Company Ltd",
+      "summary": "Cross-platform application framework",
+      "description": "Qt is a cross-platform application development framework for desktop, embedded and mobile. It provides tools and libraries for building applications with modern user interfaces.",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:generic/qt"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-StdCpp",
+      "name": "Standard C++ Library",
+      "versionInfo": "compiler-dependent",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "summary": "C++ Standard Library implementation",
+      "description": "Standard C++ Library provides fundamental functionality for C++ programs. The specific implementation depends on the compiler and platform.",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:generic/stdcpp"
+        }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "spdxElementId": "SPDXRef-DOCUMENT",
+      "relationshipType": "DESCRIBES",
+      "relatedSpdxElement": "SPDXRef-Package-ACF-Solutions"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-ACF-Solutions",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-Package-ACF"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-ACF-Solutions",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-Package-Qt"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-ACF-Solutions",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-Package-StdCpp"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-ACF",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-Package-Qt"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-ACF",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-Package-StdCpp"
+    }
+  ]
+}
