@@ -10,6 +10,7 @@
 #include <istd/TDelPtr.h>
 #include <QtCore/QString>
 #include <iprm/IParamsManager.h>
+#include <iprm/IParamsInfoProvider.h>
 
 // ACF-Solutions include
 #include <icam/CCameraDelegatorComp.h>
@@ -70,6 +71,7 @@ protected:
 		virtual Ids GetParamIds(bool editableOnly = false) const override;
 		virtual const iser::ISerializable* GetParameter(const QByteArray& id) const override;
 		virtual iser::ISerializable* GetEditableParameter(const QByteArray& id) override;
+		virtual const iprm::IParamsInfoProvider* GetParamsInfoProvider() const override;
 
 		// reimplemented (iser::IObject)
 		virtual QByteArray GetFactoryId() const override;

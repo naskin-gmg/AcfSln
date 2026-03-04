@@ -15,6 +15,7 @@
 #include <imod/CMultiModelObserverBase.h>
 #include <ilog/CMessageContainer.h>
 #include <ilog/TLoggerCompWrap.h>
+#include <iprm/IParamsInfoProvider.h>
 
 // ACF-Solutions includes
 #include <iinsp/IInspectionTask.h>
@@ -147,6 +148,7 @@ protected:
 		virtual Ids GetParamIds(bool editableOnly = false) const override;
 		virtual const iser::ISerializable* GetParameter(const QByteArray& id) const override;
 		virtual iser::ISerializable* GetEditableParameter(const QByteArray& id) override;
+		virtual const iprm::IParamsInfoProvider* GetParamsInfoProvider() const override;
 
 		// reimplemented (iser::ISerializable)
 		virtual bool Serialize(iser::IArchive& archive) override;
