@@ -208,6 +208,12 @@ iser::ISerializable* CSelectionParamCameraComp::JoinParamsSet::GetEditableParame
 }
 
 
+const iprm::IParamsInfoProvider* CSelectionParamCameraComp::JoinParamsSet::GetParamsInfoProvider() const
+{
+	return nullptr;
+}
+
+
 // reimplemented (iser::IObject)
 
 QByteArray CSelectionParamCameraComp::JoinParamsSet::GetFactoryId() const
