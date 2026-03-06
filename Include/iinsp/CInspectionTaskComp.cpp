@@ -692,6 +692,12 @@ iser::ISerializable* CInspectionTaskComp::Parameters::GetEditableParameter(const
 }
 
 
+const iprm::IParamsInfoProvider* CInspectionTaskComp::Parameters::GetParamsInfoProvider() const
+{
+	return nullptr;
+}
+
+
 // reimplemented (iser::ISerializable)
 
 bool CInspectionTaskComp::Parameters::Serialize(iser::IArchive& archive)
