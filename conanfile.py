@@ -127,6 +127,13 @@ class AcfSlnConan(ConanFile):
         with open(presetsPath, 'w') as f:
             json.dump(data, f, indent=2)
 
+    def _update_version(self):
+        script_name = "UpdateVersion.bat" if self.settings.os == "Windows" else "UpdateVersion.sh"
+        script_path = os.path.join(self.source_folder, "Build", "Git", script_name)
+        template = os.path.join(self.source_folder, "Partitura", "AcfSlnVoce.arp", "VersionInfo.acc.xtrsvn")
+
+        self.run(f"{script_path} {template}", cwd=self.source_folder)
+
     def generate(self):
         qt_major = self._get_qt_version().split(".")[0]
 
@@ -158,6 +165,8 @@ class AcfSlnConan(ConanFile):
         self._write_env_to_presets({
             var: val for var, val in env.items()
             if var.startswith('ACFSLN')})
+
+        self._update_version()
 
     def build(self):
         cmake = CMake(self)
